@@ -124,7 +124,7 @@ export default function Contact() {
           >
             <div className="relative h-64 w-full min-h-[280px] sm:h-72 lg:h-full lg:min-h-[320px]">
               <Image
-                src="/images/hero-illustration.svg"
+                src="/images/hero-illustration.png"
                 alt="Accompagnement des PME et indépendants par Sphorix France"
                 fill
                 className="object-cover"
