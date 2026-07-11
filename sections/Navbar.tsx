@@ -1,95 +1,128 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleOpenContactForm = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    window.dispatchEvent(new CustomEvent("open-contact-form"));
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur">
+    <header className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+      scrolled
+        ? "border-b border-slate-200/50 bg-white/95 shadow-lg shadow-blue-500/5 backdrop-blur-xl"
+        : "border-b border-slate-200/30 bg-white/80 backdrop-blur-md"
+    }`}>
       
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2 sm:px-5 sm:py-3 lg:px-8 lg:py-4">
         
         {/* LOGO */}
-        <div className="flex items-center gap-3">
-          <Image
-            src="/logo/logo.png"
-            alt="Sphorix France"
-            width={42}
-            height={42}
-            className="rounded-lg transition hover:scale-105"
-          />
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3 group cursor-pointer shrink-0 pr-2 sm:pr-3 lg:pr-4">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-orange-500 rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+            <div className="logo-highlight">
+              <div className="logo-inner">
+                <Image
+                  src="/logo/logo.png"
+                  alt="Sphorix France"
+                  width={48}
+                  height={48}
+                  className="relative rounded-md transition-transform duration-300 hover:scale-110 sm:h-[52px] sm:w-[52px] md:h-[64px] md:w-[64px]"
+                />
+              </div>
+            </div>
+          </div>
 
-          <h1 className="text-2xl font-bold text-slate-900">
-            Sphorix
-            <span className="text-orange-500"> France</span>
-          </h1>
+          <div className="min-w-0">
+            <h1 className="text-[0.95rem] font-extrabold tracking-tight text-slate-900 sm:text-xl md:text-2xl lg:text-3xl">
+              <span className="text-blue-900">Sphorix</span>{" "}
+              <span className="text-orange-500">France</span>
+            </h1>
+            <p className="hidden max-w-[22rem] text-sm font-medium text-slate-500 sm:block md:text-base">
+              Assistant de gestion & Transformation digitale des PME et indépendants
+            </p>
+          </div>
         </div>
 
         {/* MENU DESKTOP */}
-        <nav className="hidden gap-8 md:flex">
-          <a href="#about" className="transition hover:text-orange-500">
-            À propos
-          </a>
-
-          <a href="#services" className="transition hover:text-orange-500">
-            Services
-          </a>
-
-          <a href="#projects" className="transition hover:text-orange-500">
-            Projets
-          </a>
-
-          <a href="#contact" className="transition hover:text-orange-500">
-            Contact
-          </a>
+        <nav className="hidden flex-1 justify-end gap-0 md:flex">
+          {[
+            { label: "À propos", href: "#about" },
+            { label: "Nos Services", href: "#services" },
+            { label: "Notre Approche", href: "#projects" },
+            { label: "Contact", href: "#contact" },
+          ].map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="px-2.5 py-2 rounded-lg text-slate-700 font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-50 relative group"
+            >
+              {item.label}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-900 to-orange-500 rounded-full group-hover:w-full transition-all duration-300"></span>
+            </a>
+          ))}
         </nav>
 
         {/* CTA */}
         <a
-          href="#contact"
-          className="hidden rounded-full bg-orange-500 px-5 py-2 text-white transition hover:bg-orange-600 md:block"
+          href="#contact-form"
+          onClick={handleOpenContactForm}
+          className="hidden md:flex items-center gap-2 rounded-lg bg-blue-900 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:shadow-lg whitespace-nowrap ml-1"
         >
-          Consultation
+        Consultation
         </a>
 
         {/* MENU MOBILE */}
         <button
-          className="md:hidden"
+          className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
           onClick={() => setOpen(!open)}
+          aria-label="Menu"
         >
-          {open ? <X /> : <Menu />}
+          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* MOBILE MENU */}
       {open && (
-        <div className="border-t border-slate-200 bg-white p-6 md:hidden">
+        <div className="border-t border-slate-200 bg-white/95 backdrop-blur-xl p-4 text-sm sm:p-6 md:hidden animate-fade-in-down">
           
-          <div className="flex flex-col gap-5">
-            
-            <a href="#about" onClick={() => setOpen(false)}>
-              À propos
-            </a>
-
-            <a href="#services" onClick={() => setOpen(false)}>
-              Services
-            </a>
-
-            <a href="#projects" onClick={() => setOpen(false)}>
-              Projets
-            </a>
-
-            <a href="#contact" onClick={() => setOpen(false)}>
-              Contact
-            </a>
+        <div className="flex flex-col gap-4 sm:gap-5">
+            {[
+              { label: "À propos", href: "#about" },
+              { label: "Nos Services", href: "#services" },
+              { label: "Notre Approche", href: "#projects" },
+              { label: "Contact", href: "#contact" },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="px-4 py-2 rounded-lg text-slate-900 font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-50"
+              >
+                {item.label}
+              </a>
+            ))}
 
             <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="rounded-full bg-orange-500 px-5 py-3 text-center text-white transition hover:bg-orange-600"
+              href="#contact-form"
+              onClick={handleOpenContactForm}
+              className="rounded-full bg-gradient-to-r from-blue-900 to-orange-500 px-4 py-2 text-center text-sm font-semibold text-white transition-all duration-300 hover:shadow-lg sm:px-5 sm:py-3"
             >
               Consultation
             </a>
