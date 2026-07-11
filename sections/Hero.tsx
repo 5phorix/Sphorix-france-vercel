@@ -39,7 +39,7 @@ export default function Hero() {
           </p>
 
           <div className="mb-6">
-            <h3 className="mb-3 text-base font-semibold sm:text-lg">Ce que tu fais</h3>
+            <h3 className="mb-3 text-base font-semibold sm:text-lg">Solutions proposées</h3>
             <ul className="space-y-2 text-slate-200">
               <li className="flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 text-orange-400 mt-1" />
