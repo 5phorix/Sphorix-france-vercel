@@ -11,9 +11,9 @@ const quickLinks = [
 ];
 
 const contactLinks = [
-  { label: "contact@sphorixfrance.fr", href: "mailto:contact@sphorixfrance.fr" },
+  { label: "contact@sphorix.fr", href: "mailto:contact@sphorix.fr" },
   { label: "WhatsApp", href: "https://wa.me/+33781525393", external: true },
-  { label: "LinkedIn", href: "#", external: true },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/sphorix?utm_source=share_via&utm_content=profile&utm_medium=member_android", external: true },
 ];
 
 export default function Footer() {
