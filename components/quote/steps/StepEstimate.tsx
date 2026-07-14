@@ -169,38 +169,31 @@ export default function StepEstimate({
         urgency,
         objective,
 
-        estimation: {
-          minPrice,
-          maxPrice,
-          minDays,
-          maxDays,
-        },
+        minPrice,
+        maxPrice,
+        minDays,
+        maxDays,
       };
-
 
 
       const response = await fetch("/api/quote", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify(data),
-
       });
 
+      const result = await response.json();
 
+      console.log("Status :", response.status);
+      console.log("Réponse API :", result);
 
       if (!response.ok) {
-
         throw new Error(
-          "Erreur lors de l'envoi de votre demande."
+          result.error || "Erreur lors de l'envoi de votre demande."
         );
-
       }
-
-
 
       // =========================
       // NETTOYAGE FORMULAIRE
@@ -223,7 +216,8 @@ export default function StepEstimate({
 
     } catch (error) {
 
-      console.error(error);
+    console.error("Erreur :", error);
+    alert(error instanceof Error ? error.message : "Erreur inconnue");
 
     } finally {
 
