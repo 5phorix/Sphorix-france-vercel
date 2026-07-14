@@ -30,7 +30,7 @@ export default function Navbar() {
         : "border-b border-slate-200/30 bg-white/80 backdrop-blur-md"
     }`}>
       
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2 sm:px-5 sm:py-3 lg:px-8 lg:py-4">
+   <div className="flex w-full items-center justify-between gap-2 px-4 py-2 sm:px-6 sm:py-3 lg:px-10 lg:py-4 xl:px-14">
         
         {/* LOGO */}
         <div className="flex min-w-0 items-center gap-2 sm:gap-3 group cursor-pointer shrink-0 pr-2 sm:pr-3 lg:pr-4">
@@ -61,7 +61,7 @@ export default function Navbar() {
         </div>
 
         {/* MENU DESKTOP */}
-        <nav className="hidden flex-1 justify-end gap-0 md:flex">
+        <nav className="hidden flex-1 justify-center gap-6 md:flex">
           {[
             { label: "À propos", href: "#about" },
             { label: "Nos Services", href: "#services" },
@@ -71,7 +71,7 @@ export default function Navbar() {
             <a
               key={item.label}
               href={item.href}
-              className="px-2.5 py-2 rounded-lg text-slate-700 font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-50 relative group"
+              className="px-4 py-2 rounded-lg text-slate-700 font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-50 relative group"
             >
               {item.label}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-900 to-orange-500 rounded-full group-hover:w-full transition-all duration-300"></span>
@@ -81,13 +81,11 @@ export default function Navbar() {
 
         {/* CTA */}
         <a
-          href="#contact-form"
-          onClick={handleOpenContactForm}
-          className="hidden md:flex items-center gap-2 rounded-lg bg-blue-900 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:shadow-lg whitespace-nowrap ml-1"
+          href="/demande-devis"
+          className="hidden shrink-0 md:flex items-center gap-2 rounded-lg bg-blue-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:shadow-lg whitespace-nowrap"
         >
-        Consultation
+          Demander un devis
         </a>
-
         {/* MENU MOBILE */}
         <button
           className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
@@ -132,3 +130,4 @@ export default function Navbar() {
     </header>
   );
 }
+

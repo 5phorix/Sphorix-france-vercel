@@ -19,17 +19,29 @@ export default function Hero() {
       
 <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-yellow-200/10 to-orange-500/20"></div>
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="relative grid w-full items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-10 xl:px-14">
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-        <p className="mb-4 text-orange-300 uppercase tracking-[0.2em] text-lg font-bold">
-          Gestion • Finance • Transformation digitale
-        </p>
-
+          <div className="pt-6 overflow-hidden">
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: "-100%" }}
+              transition={{
+                duration: 30,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="whitespace-nowrap"
+            >
+              <p className="mb-4 text-orange-300 uppercase tracking-[0.2em] text-lg font-bold">
+                Pilotez votre entreprise avec des outils de gestion simples, des tableaux de bord clairs et une vision financière fiable.
+              </p>
+            </motion.div>
+          </div>
           <h1 className="mb-4 text-[clamp(1.75rem,3vw,3.3rem)] font-extrabold leading-[1.08] sm:mb-5 lg:text-[clamp(2.3rem,4vw,3.8rem)]">
             Assistant de gestion & transformation digitale pour PME et indépendants en France
           </h1>
