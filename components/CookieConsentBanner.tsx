@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type ConsentSettings = {
@@ -109,6 +110,7 @@ function saveConsent(analytics: boolean) {
 }
 
 export default function CookieConsentBanner() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(() => {
     const consent = readConsent();
     return !consent || consent.version !== CONSENT_VERSION;
@@ -123,7 +125,7 @@ export default function CookieConsentBanner() {
     };
   }, []);
 
-  if (!visible) {
+  if (!visible || pathname === "/politique-confidentialite") {
     return null;
   }
 
