@@ -152,14 +152,19 @@ export async function POST(request: Request) {
       success: true,
       message: "Votre demande a été envoyée avec succès.",
     });
-  } catch (error: any) {
+    } catch (error: unknown) {
     console.error("========== API QUOTE ==========");
     console.error(error);
+
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Erreur interne du serveur.";
 
     return NextResponse.json(
       {
         success: false,
-        error: error.message ?? "Erreur interne du serveur.",
+          error: message,
       },
       {
         status: 500,

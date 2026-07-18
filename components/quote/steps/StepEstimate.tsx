@@ -236,7 +236,7 @@ export default function StepEstimate({
 
       <p className="mt-3 text-slate-300">
         Cette première estimation est calculée selon votre activité,
-        vos besoins et la charge d'accompagnement nécessaire.
+          vos besoins et la charge d&apos;accompagnement nécessaire.
       </p>
 
 
@@ -246,7 +246,7 @@ export default function StepEstimate({
       <div className="mt-8 rounded-3xl border border-orange-400/50 bg-blue-950/70 p-6">
 
         <p className="text-sm text-slate-300">
-          Estimation indicative de l'accompagnement
+            Estimation indicative de l&apos;accompagnement
         </p>
 
 
@@ -261,7 +261,7 @@ export default function StepEstimate({
         <p className="mt-4 text-sm text-slate-300">
 
           Soit environ {minDays} à {maxDays} jour(s)
-          d'accompagnement selon le périmètre retenu.
+            d&apos;accompagnement selon le périmètre retenu.
 
         </p>
 
@@ -445,7 +445,7 @@ export default function StepEstimate({
 
         <p className="text-sm leading-relaxed text-slate-300">
 
-          Cette estimation est indicative et permet d'obtenir
+            Cette estimation est indicative et permet d&apos;obtenir
           une première visibilité budgétaire.
           Le périmètre définitif sera confirmé après un échange
           sur vos objectifs, vos contraintes et vos attentes.

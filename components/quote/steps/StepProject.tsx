@@ -57,7 +57,7 @@ export default function StepProject({
 
 
       <p className="mt-3 text-slate-300">
-        Ces informations nous permettent d'adapter notre estimation.
+          Ces informations nous permettent d&apos;adapter notre estimation.
       </p>
 
 

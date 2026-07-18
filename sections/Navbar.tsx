@@ -55,7 +55,7 @@ export default function Navbar() {
               <span className="text-orange-500">France</span>
             </h1>
             <p className="hidden max-w-[22rem] text-sm font-medium text-slate-500 sm:block md:text-base">
-              Assistant de gestion & Transformation digitale des PME et indépendants
+             Gestion | Tableaux de bord | Digitalisation
             </p>
           </div>
         </div>

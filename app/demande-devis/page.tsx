@@ -15,7 +15,7 @@ export default function DemandeDevisPage() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-slate-300">
-            Répondez à quelques questions afin d'obtenir une première
+              Répondez à quelques questions afin d&apos;obtenir une première
             estimation personnalisée de votre besoin.
           </p>
         </div>

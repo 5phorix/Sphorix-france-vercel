@@ -266,13 +266,13 @@ body {
   @apply mb-4 font-extrabold tracking-tight text-slate-900;
 }
 
-@screen sm {
+@media (min-width: 640px) {
   .page-title {
     @apply text-3xl;
   }
 }
 
-@screen md {
+@media (min-width: 768px) {
   .page-title {
     @apply text-4xl;
   }

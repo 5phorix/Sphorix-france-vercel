@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   BarChart3,
+  Brush,
+  Code2,
   MonitorSmartphone,
-  ShieldCheck,
   SlidersHorizontal,
 } from "lucide-react";
 
@@ -25,17 +27,27 @@ export default function Services() {
     },
 
     {
-      title: "Transformation digitale",
+      title: "Création de site internet",
       description:
-        "Automatisation des processus et outils numériques adaptés aux PME et indépendants.",
+        "Conception de sites vitrine et pages de conversion rapides, clairs et optimisés SEO.",
       icon: MonitorSmartphone,
+      href: "/services/creation-site-internet",
     },
 
     {
-      title: "Accompagnement opérationnel",
+      title: "Design web & UI/UX",
       description:
-        "Conseil stratégique, optimisation des coûts et aide à la décision.",
-      icon: ShieldCheck,
+        "Création d'interfaces modernes, parcours utilisateurs fluides et identité visuelle cohérente.",
+      icon: Brush,
+      href: "/services/design-web-ui-ux",
+    },
+
+    {
+      title: "Applications sur mesure",
+      description:
+        "Développement d'outils web adaptés à vos process: CRM, automatisations et tableaux de suivi.",
+      icon: Code2,
+      href: "/services/applications-web-sur-mesure",
     },
   ];
 
@@ -53,11 +65,11 @@ export default function Services() {
           </p>
 
           <h2 className="page-title">
-            Services stratégiques pour PME et indépendants
+            Création de sites internet, design web et applications sur mesure
           </h2>
 
           <p className="mx-auto max-w-3xl text-base text-slate-600 sm:text-lg">
-            Sphorix France propose un accompagnement concret en gestion, finance et transformation digitale pour améliorer vos résultats partout en France, avec une présence renforcée à Paris, Orléans et Vierzon.
+            Sphorix France accompagne les PME et indépendants en création de site internet, design UI/UX, applications web sur mesure et pilotage de performance partout en France.
           </p>
         </div>
 
@@ -84,8 +96,26 @@ export default function Services() {
               <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
                 {service.description}
               </p>
+
+              {service.href && (
+                <Link
+                  href={service.href}
+                  className="mt-5 inline-flex text-sm font-semibold text-blue-900 transition hover:text-orange-500"
+                >
+                  Voir le service
+                </Link>
+              )}
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Link
+            href="/services"
+            className="inline-flex rounded-full bg-blue-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-800"
+          >
+            Explorer toutes les offres web
+          </Link>
         </div>
       </div>
     </section>

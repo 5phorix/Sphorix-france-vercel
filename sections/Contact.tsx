@@ -8,10 +8,18 @@ import ContactInfo from "./ContactInfo";
 import ContactForm from "./ContactForm";
 
 export default function Contact() {
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(
+    () => typeof window !== "undefined" && window.location.hash === "#contact-form"
+  );
 
   const openContactForm = useCallback(() => {
     setIsFormVisible(true);
+  }, []);
+
+  const openIfHashTargetsForm = useCallback(() => {
+    if (window.location.hash === "#contact-form") {
+      setIsFormVisible(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -23,6 +31,14 @@ export default function Contact() {
       window.removeEventListener("open-contact-form", listener);
     };
   }, [openContactForm]);
+
+  useEffect(() => {
+    window.addEventListener("hashchange", openIfHashTargetsForm);
+
+    return () => {
+      window.removeEventListener("hashchange", openIfHashTargetsForm);
+    };
+  }, [openIfHashTargetsForm]);
 
   useEffect(() => {
     if (!isFormVisible) return;
@@ -67,6 +83,7 @@ export default function Contact() {
                 src="/images/hero-illustration.png"
                 alt="Accompagnement des PME et indépendants par Sphorix France"
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 40vw"
                 className="object-cover"
               />
             </div>

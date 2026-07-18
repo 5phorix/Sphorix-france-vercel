@@ -5,6 +5,12 @@ import Image from "next/image";
 
 const quickLinks = [
   { label: "Nos services", href: "#services" },
+  { label: "Gestion d'entreprise", href: "/services/gestion-entreprise" },
+  { label: "Tableaux de bord et suivi d'activité", href: "/services/tableaux-de-bord-suivi-activite" },
+  { label: "Activités comptables", href: "/services/activites-comptables" },
+  { label: "Services web", href: "/services" },
+  { label: "Création site internet", href: "/services/creation-site-internet" },
+  { label: "Design web", href: "/services/design-web-ui-ux" },
   { label: "Notre approche", href: "#projects" },
   { label: "À propos", href: "#about" },
   { label: "Prendre contact", href: "#contact" },
@@ -16,10 +22,32 @@ const contactLinks = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/sphorix?utm_source=share_via&utm_content=profile&utm_medium=member_android", external: true },
 ];
 
+const activityHighlights = [
+  "Saisie de factures",
+  "Déclaration TVA",
+  "Calcul des coûts",
+  "Conception de site web",
+  "Tableaux de bord",
+  "Suivi d'activité",
+  "Facturation",
+  "Relance client",
+  "Organisation comptable",
+  "Rapprochements bancaires",
+  "Comptabilité fournisseurs",
+  "Comptabilité clients",
+  "Gestion des KPI",
+  "Suivi de trésorerie",
+];
+
 export default function Footer() {
+  const openCookiePreferences = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    window.dispatchEvent(new Event("open-cookie-preferences"));
+  };
+
   return (
     <footer className="border-t border-blue-900/40 bg-blue-950 px-4 py-10 text-white sm:px-6 sm:py-12 lg:px-8 lg:py-14">
-      <div className="mx-auto flex max-w-7xl flex-col gap-10">
+      <div className="flex w-full flex-col gap-10">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.7fr_0.7fr_0.8fr]">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
@@ -29,11 +57,12 @@ export default function Footer() {
             className="max-w-xl"
           >
             <div className="mb-5 flex items-center">
-              <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-slate-100/95 p-2 shadow-sm sm:h-16 sm:w-16 lg:h-20 lg:w-20">
+              <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-slate-100/95 p-2 shadow-sm sm:h-14 sm:w-14 lg:h-16 lg:w-16">
                 <Image
                   src="/logo/logo.png"
                   alt="Sphorix France"
                   fill
+                  sizes="(max-width: 640px) 48px, (max-width: 1024px) 56px, 64px"
                   className="object-contain grayscale brightness-95 contrast-105"
                   priority
                 />
@@ -106,6 +135,18 @@ export default function Footer() {
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
               Accompagnement sur mesure pour les PME et indépendants en France.
             </p>
+
+            <div className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
+              {activityHighlights.map((activity) => (
+                <div
+                  key={activity}
+                  className="flex items-start gap-2 text-sm leading-relaxed text-slate-200"
+                >
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400" />
+                  <span>{activity}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -128,6 +169,16 @@ export default function Footer() {
             <a href="#services" className="transition hover:text-orange-400">
               Services
             </a>
+            <a href="/politique-confidentialite" className="transition hover:text-orange-400">
+              Politique de confidentialité
+            </a>
+            <button
+              type="button"
+              onClick={openCookiePreferences}
+              className="transition hover:text-orange-400"
+            >
+              Paramétrer les cookies
+            </button>
           </div>
         </div>
       </div>

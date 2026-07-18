@@ -58,7 +58,7 @@ export default function Projects() {
           </h2>
 
           <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            Nous plaçons l'écoute et l'analyse au cœur de notre démarche afin de proposer des solutions adaptées à chaque organisation.
+              Nous plaçons l&apos;écoute et l&apos;analyse au cœur de notre démarche afin de proposer des solutions adaptées à chaque organisation.
           </p>
         </div>
 
