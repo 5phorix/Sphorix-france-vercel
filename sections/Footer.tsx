@@ -94,9 +94,12 @@ export default function Footer() {
           </motion.div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">
-              Navigation
-            </h3>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-gradient-to-r from-orange-400 to-transparent" />
+              <h3 className="text-base font-bold uppercase tracking-[0.18em] text-white">
+                Navigation
+              </h3>
+            </div>
             <ul className="mt-4 space-y-3 text-sm text-slate-300">
               {quickLinks.map((link) => (
                 <li key={link.label}>
@@ -109,9 +112,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">
-              Contact
-            </h3>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-gradient-to-r from-orange-400 to-transparent" />
+              <h3 className="text-base font-bold uppercase tracking-[0.18em] text-white">
+                Contact
+              </h3>
+            </div>
             <ul className="mt-4 space-y-3 text-sm text-slate-300">
               {contactLinks.map((link) => (
                 <li key={link.label}>
@@ -129,9 +135,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-400">
-              Zone d’intervention
-            </h3>
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-gradient-to-r from-orange-400 to-transparent" />
+              <h3 className="text-base font-bold uppercase tracking-[0.18em] text-white">
+                Zone d’intervention
+              </h3>
+            </div>
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
               Accompagnement sur mesure pour les PME et indépendants en France.
             </p>

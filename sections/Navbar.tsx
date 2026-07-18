@@ -33,29 +33,29 @@ export default function Navbar() {
    <div className="flex w-full items-center justify-between gap-2 px-4 py-2 sm:px-6 sm:py-3 lg:px-10 lg:py-4 xl:px-14">
         
         {/* LOGO */}
-        <div className="flex min-w-0 items-center gap-2 sm:gap-3 group cursor-pointer shrink-0 pr-2 sm:pr-3 lg:pr-4">
+        <div className="group flex min-w-0 shrink-0 items-center gap-2 px-0 py-0 pr-2 sm:gap-3 sm:pr-3 lg:pr-4">
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-orange-500 rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-300"></div>
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 to-orange-500 blur opacity-0 transition duration-300 group-hover:opacity-60"></div>
             <div className="logo-highlight">
               <div className="logo-inner">
                 <Image
                   src="/logo/logo.png"
                   alt="Sphorix France"
-                  width={48}
-                  height={48}
-                  className="relative rounded-md transition-transform duration-300 hover:scale-110 sm:h-[52px] sm:w-[52px] md:h-[64px] md:w-[64px]"
+                  width={42}
+                  height={42}
+                  className="relative rounded-md transition-transform duration-300 group-hover:scale-105 sm:h-[46px] sm:w-[46px] md:h-[54px] md:w-[54px]"
                 />
               </div>
             </div>
           </div>
 
           <div className="min-w-0">
-            <h1 className="text-[0.95rem] font-extrabold tracking-tight text-slate-900 sm:text-xl md:text-2xl lg:text-3xl">
+            <h1 className="text-[1rem] font-extrabold tracking-tight text-slate-900 drop-shadow-[0_1px_0_rgba(255,255,255,0.65)] sm:text-[1.3rem] md:text-[1.65rem] lg:text-[2.1rem]">
               <span className="text-blue-900">Sphorix</span>{" "}
               <span className="text-orange-500">France</span>
             </h1>
-            <p className="hidden max-w-[22rem] text-sm font-medium text-slate-500 sm:block md:text-base">
-             Gestion | Tableaux de bord | Digitalisation
+            <p className="hidden max-w-[22rem] text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 sm:block md:text-sm">
+             Gestion | Pilotage | Digitalisation
             </p>
           </div>
         </div>
