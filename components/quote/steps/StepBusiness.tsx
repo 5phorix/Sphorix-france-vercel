@@ -10,13 +10,13 @@ interface StepBusinessProps {
 const profiles = [
   {
     id: "tpe-pme",
-    title: "TPE / PME",
-    description: "Entreprise souhaitant structurer ou améliorer sa gestion.",
+    title: "Entreprise",
+    description: "Structure souhaitant mieux organiser son activité.",
   },
   {
     id: "independant",
-    title: "Indépendant",
-    description: "Professionnel souhaitant optimiser son organisation.",
+    title: "Professionnel",
+    description: "Activité souhaitant clarifier ses méthodes de travail.",
   },
   {
     id: "commerce",
@@ -26,7 +26,7 @@ const profiles = [
   {
     id: "association",
     title: "Association",
-    description: "Structure ayant besoin d'un meilleur pilotage.",
+    description: "Structure ayant besoin d'un meilleur suivi.",
   },
   {
     id: "autre",
@@ -48,7 +48,7 @@ export default function StepBusiness({
       </h2>
 
       <p className="mt-3 text-slate-300">
-        Choisissez la situation qui correspond le mieux à votre activité.
+        Choisissez la situation qui correspond le mieux à votre besoin.
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">

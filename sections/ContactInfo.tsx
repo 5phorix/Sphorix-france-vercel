@@ -24,16 +24,13 @@ export default function ContactInfo({ onOpenForm }: ContactInfoProps) {
       </h2>
 
       <p className="mb-8 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-        Vous souhaitez améliorer votre organisation, optimiser votre gestion
-        ou faire évoluer vos outils numériques ? Échangeons sur vos objectifs
-        et identifions ensemble les solutions adaptées à votre activité,
-        partout en France, y compris à Paris, Orléans et Vierzon.
+        Vous souhaitez améliorer votre organisation ou faire évoluer vos outils numériques ? Échangeons sur vos objectifs et identifions ensemble les solutions adaptées à votre activité, partout en France, y compris à Paris, Orléans et Vierzon.
       </p>
 
       <div className="mb-8 grid gap-4 text-sm text-slate-300 sm:grid-cols-2">
         <div className="rounded-xl border border-blue-800/50 bg-blue-950/40 p-5">
           <h3 className="mb-2 font-semibold text-white">
-            Gestion & organisation
+            Organisation
           </h3>
 
           <p className="leading-relaxed">
@@ -44,7 +41,7 @@ export default function ContactInfo({ onOpenForm }: ContactInfoProps) {
 
         <div className="rounded-xl border border-blue-800/50 bg-blue-950/40 p-5">
           <h3 className="mb-2 font-semibold text-white">
-            Transformation digitale
+            Outils numériques
           </h3>
 
           <p className="leading-relaxed">

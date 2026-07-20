@@ -11,9 +11,9 @@ import Contact from "@/sections/Contact";
 import Footer from "@/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Création de site internet, design web et applications sur mesure en France",
+  title: "Sites internet, design web et applications sur mesure en France",
   description:
-    "Sphorix France accompagne les PME et indépendants en création de site internet, design web UI/UX, applications sur mesure et optimisation de la performance commerciale.",
+    "Sphorix France conçoit des sites internet, du design web et des applications sur mesure pour clarifier votre présence en ligne et votre suivi.",
   alternates: {
     canonical: "/",
   },
@@ -26,10 +26,10 @@ export default function Home() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "Proposez-vous la création de site internet pour PME ?",
+        name: "Proposez-vous la création de site internet ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Oui, nous créons des sites internet vitrine et conversion pour PME et indépendants avec une structure optimisée SEO.",
+          text: "Oui, nous créons des sites internet vitrine et de conversion avec une structure claire et optimisée SEO.",
         },
       },
       {
@@ -37,15 +37,15 @@ export default function Home() {
         name: "Pouvez-vous concevoir un design web sur mesure ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Oui, nous concevons des interfaces UI/UX sur mesure pour améliorer l'expérience utilisateur et le taux de conversion.",
+          text: "Oui, nous concevons des interfaces UI/UX sur mesure pour rendre l'expérience plus fluide et plus lisible.",
         },
       },
       {
         "@type": "Question",
-        name: "Developpez-vous des applications web sur mesure ?",
+        name: "Développez-vous des applications web sur mesure ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Oui, nous développons des applications web sur mesure adaptées à vos processus métier: automatisations, tableaux de bord et outils internes.",
+          text: "Oui, nous développons des applications web sur mesure adaptées à vos besoins: automatisations, tableaux de bord et outils internes.",
         },
       },
     ],
@@ -68,7 +68,7 @@ export default function Home() {
       <section className="bg-slate-50 px-4 pb-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
           <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">
-            Pages services les plus recherchées
+            Pages les plus consultées
           </h2>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link

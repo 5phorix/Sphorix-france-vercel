@@ -40,11 +40,6 @@ const activityHighlights = [
 ];
 
 export default function Footer() {
-  const openCookiePreferences = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    window.dispatchEvent(new Event("open-cookie-preferences"));
-  };
-
   return (
     <footer className="border-t border-blue-900/40 bg-blue-950 px-4 py-10 text-white sm:px-6 sm:py-12 lg:px-8 lg:py-14">
       <div className="flex w-full flex-col gap-10">
@@ -70,11 +65,11 @@ export default function Footer() {
             </div>
 
             <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Assistant de gestion & transformation digitale
+              Sites internet, outils métier et suivi d’activité
             </h2>
 
             <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-              Nous accompagnons les PME et indépendants à Paris, Orléans, Vierzon et partout en France pour structurer leur gestion, clarifier leurs indicateurs et améliorer leur efficacité avec des solutions simples, fiables et concrètes.
+              Nous aidons les entreprises à Paris, Orléans, Vierzon et partout en France à clarifier leur présence en ligne, leurs outils et leur suivi avec des solutions simples, fiables et concrètes.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -142,7 +137,7 @@ export default function Footer() {
               </h3>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              Accompagnement sur mesure pour les PME et indépendants en France.
+              Services web, organisation et suivi pour les entreprises en France.
             </p>
 
             <div className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
@@ -181,13 +176,6 @@ export default function Footer() {
             <a href="/politique-confidentialite" className="transition hover:text-orange-400">
               Politique de confidentialité
             </a>
-            <button
-              type="button"
-              onClick={openCookiePreferences}
-              className="transition hover:text-orange-400"
-            >
-              Paramétrer les cookies
-            </button>
           </div>
         </div>
       </div>

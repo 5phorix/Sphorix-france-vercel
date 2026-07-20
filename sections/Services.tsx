@@ -13,23 +13,9 @@ import {
 export default function Services() {
   const services = [
     {
-      title: "Pilotage financier",
-      description:
-        "Suivi de trésorerie, prévisions et reporting pour garder le contrôle de votre cashflow.",
-      icon: BarChart3,
-    },
-
-    {
-      title: "Tableaux de bord & KPI",
-      description:
-        "Mise en place d’indicateurs clairs pour mesurer la rentabilité et la performance.",
-      icon: SlidersHorizontal,
-    },
-
-    {
       title: "Création de site internet",
       description:
-        "Conception de sites vitrine et pages de conversion rapides, clairs et optimisés SEO.",
+        "Sites vitrine et pages d'accueil conçus pour être rapides, clairs et efficaces.",
       icon: MonitorSmartphone,
       href: "/services/creation-site-internet",
     },
@@ -37,7 +23,7 @@ export default function Services() {
     {
       title: "Design web & UI/UX",
       description:
-        "Création d'interfaces modernes, parcours utilisateurs fluides et identité visuelle cohérente.",
+        "Interfaces lisibles, parcours fluides et identité visuelle cohérente.",
       icon: Brush,
       href: "/services/design-web-ui-ux",
     },
@@ -45,9 +31,25 @@ export default function Services() {
     {
       title: "Applications sur mesure",
       description:
-        "Développement d'outils web adaptés à vos process: CRM, automatisations et tableaux de suivi.",
+        "Outils web adaptés à vos besoins: CRM, automatisations et interfaces de suivi.",
       icon: Code2,
       href: "/services/applications-web-sur-mesure",
+    },
+
+    {
+      title: "Tableaux de bord",
+      description:
+        "Indicateurs lisibles pour suivre l'activité et prendre des décisions plus vite.",
+      icon: SlidersHorizontal,
+      href: "/services/tableaux-de-bord-suivi-activite",
+    },
+
+    {
+      title: "Organisation d'entreprise",
+      description:
+        "Mise en ordre des priorités, des process et du suivi interne.",
+      icon: BarChart3,
+      href: "/services/gestion-entreprise",
     },
   ];
 
@@ -65,11 +67,11 @@ export default function Services() {
           </p>
 
           <h2 className="page-title">
-            Création de sites internet, design web et applications sur mesure
+            Conçus pour votre façon de travailler.
           </h2>
 
           <p className="mx-auto max-w-3xl text-base text-slate-600 sm:text-lg">
-            Sphorix France accompagne les PME et indépendants en création de site internet, design UI/UX, applications web sur mesure et pilotage de performance partout en France.
+            Chaque entreprise est différente. C'est pourquoi nous développons des outils qui s'adaptent à votre organisation.
           </p>
         </div>
 
@@ -114,7 +116,7 @@ export default function Services() {
             href="/services"
             className="inline-flex rounded-full bg-blue-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-800"
           >
-            Explorer toutes les offres web
+            Voir toutes les offres
           </Link>
         </div>
       </div>

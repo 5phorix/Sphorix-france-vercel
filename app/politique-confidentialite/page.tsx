@@ -72,9 +72,8 @@ export default function PolitiqueConfidentialitePage() {
               nous contactez pour une demande d information, un projet ou un devis.
             </li>
             <li>
-              <strong>Votre consentement</strong>, lorsque celui-ci est nécessaire,
-              notamment pour l utilisation de certains cookies ou outils de mesure
-              d audience non essentiels.
+              <strong>Votre consentement</strong>, pour l envoi de vos informations via les
+              formulaires et le traitement de votre demande.
             </li>
           </ul>
 
@@ -89,19 +88,15 @@ export default function PolitiqueConfidentialitePage() {
             de manière sécurisée.
           </p>
 
-          <h2 className="text-lg font-semibold text-white">Cookies et mesure d audience</h2>
+          <h2 className="text-lg font-semibold text-white">Cookies</h2>
           <p>
-            Le site utilise des cookies nécessaires à son fonctionnement et à la
-            sécurité des services proposés.
+            Le site n utilise pas de cookies optionnels de mesure d audience,
+            de personnalisation ou de publicité.
           </p>
           <p>
-            Les cookies liés à la mesure d audience ou aux services tiers sont
-            activés uniquement après obtention de votre consentement via notre
-            bandeau de gestion des cookies.
-          </p>
-          <p>
-            Vous pouvez modifier vos préférences à tout moment depuis les paramètres
-            de cookies disponibles sur le site.
+            Seuls des mécanismes techniques strictement nécessaires à la sécurité
+            et au bon fonctionnement des formulaires peuvent être utilisés côté
+            serveur, sans dépôt de cookie de suivi marketing.
           </p>
 
           <h2 className="text-lg font-semibold text-white">Vos droits</h2>

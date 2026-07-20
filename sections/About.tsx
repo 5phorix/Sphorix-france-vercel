@@ -1,19 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const expertiseCards = [
   {
-    title: "Gestion financière",
-    description: "Pilotage de trésorerie, bilan prévisionnel et maîtrise des marges.",
+    title: "Suivi financier",
+    description: "Trésorerie, vision prévisionnelle et lecture des marges.",
   },
   {
     title: "Tableaux de bord",
-    description: "KPI personnalisés et reporting clair pour suivre l’essentiel.",
+    description: "Indicateurs personnalisés et reporting clair pour suivre l’essentiel.",
   },
   {
-    title: "Transformation digitale",
-    description: "Outils numériques adaptés, automatisation et performance opérationnelle.",
+    title: "Outils numériques",
+    description: "Automatisation et organisation plus fluide au quotidien.",
   },
 ];
 
@@ -32,14 +33,14 @@ export default function About() {
         >
           <p className="mb-3 font-semibold text-orange-500">À PROPOS</p>
 
-          <h2 className="page-title">Assistant de gestion pour PME et indépendants</h2>
+          <h2 className="page-title">Solutions pour mieux structurer votre activité</h2>
 
           <p className="mb-6 text-base leading-relaxed text-slate-600 sm:text-lg">
-            Sphorix France aide les dirigeants à structurer leur gestion, maîtriser leur trésorerie et piloter leur activité avec des outils performants, que vous soyez à Paris, à Orléans, à Vierzon ou ailleurs en France.
+            Sphorix France aide les dirigeants à structurer leur organisation, clarifier leur trésorerie et suivre leur activité avec des outils simples, que vous soyez à Paris, à Orléans, à Vierzon ou ailleurs en France.
           </p>
 
           <p className="text-base leading-relaxed text-slate-600 sm:text-lg">
-            Nous intervenons sur le management financier, la digitalisation des processus et l’aide à la décision pour une gestion plus sereine, mieux contrôlée et plus performante.
+            Nous intervenons sur le suivi financier, l'organisation et les outils numériques pour une activité plus lisible et plus fluide.
           </p>
         </motion.div>
 
@@ -48,9 +49,26 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.7 }}
-          className="rounded-2xl bg-slate-100 p-6 shadow-lg sm:rounded-3xl sm:p-8 lg:p-10"
+          className="rounded-2xl bg-slate-100 p-4 shadow-lg sm:rounded-3xl sm:p-5 lg:p-6"
         >
-          
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-white">
+            <Image
+              src="/photos/2.png"
+              alt="Doua Konate en tenue professionnelle"
+              fill
+              sizes="(max-width: 640px) 100vw, 420px"
+              className="object-contain p-3"
+            />
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.7, delay: 0.16 }}
+          className="mt-6 rounded-2xl bg-slate-100 p-6 shadow-lg sm:rounded-3xl sm:p-8 lg:p-10"
+        >
           <h3 className="mb-8 text-xl font-bold text-slate-900 sm:text-2xl">
             Domaines de compétences
           </h3>

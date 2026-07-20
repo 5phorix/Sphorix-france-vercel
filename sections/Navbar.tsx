@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -33,7 +34,12 @@ export default function Navbar() {
    <div className="flex w-full items-center justify-between gap-2 px-4 py-2 sm:px-6 sm:py-3 lg:px-10 lg:py-4 xl:px-14">
         
         {/* LOGO */}
-        <div className="group flex min-w-0 shrink-0 items-center gap-2 px-0 py-0 pr-2 sm:gap-3 sm:pr-3 lg:pr-4">
+        <Link
+          href="/"
+          onClick={() => setOpen(false)}
+          className="group flex min-w-0 shrink-0 items-center gap-2 px-0 py-0 pr-2 sm:gap-3 sm:pr-3 lg:pr-4"
+          aria-label="Retour à l'accueil"
+        >
           <div className="relative">
             <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 to-orange-500 blur opacity-0 transition duration-300 group-hover:opacity-60"></div>
             <div className="logo-highlight">
@@ -55,10 +61,10 @@ export default function Navbar() {
               <span className="text-orange-500">France</span>
             </h1>
             <p className="hidden max-w-[22rem] text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 sm:block md:text-sm">
-             Gestion | Pilotage | Digitalisation
+             Solutions digitales & gestion
             </p>
           </div>
-        </div>
+        </Link>
 
         {/* MENU DESKTOP */}
         <nav className="hidden flex-1 justify-center gap-6 md:flex">

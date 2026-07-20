@@ -8,14 +8,14 @@ interface StepNeedProps {
 const needs = [
   {
     id: "organisation",
-    title: "Organisation & processus",
+    title: "Organisation & méthode",
     description:
       "Structurer les activités, améliorer les méthodes de travail et gagner en efficacité.",
     icon: "⚙️",
   },
   {
     id: "kpi",
-    title: "Pilotage & KPI",
+    title: "Indicateurs & KPI",
     description:
       "Mettre en place des tableaux de bord et des indicateurs pour mieux décider.",
     icon: "📊",
@@ -29,7 +29,7 @@ const needs = [
   },
   {
     id: "digital",
-    title: "Transformation digitale",
+    title: "Outils numériques",
     description:
       "Choisir et intégrer des outils numériques adaptés à votre activité.",
     icon: "💻",

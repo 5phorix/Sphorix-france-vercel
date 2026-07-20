@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import ServiceDetailPage from "@/components/services/ServiceDetailPage";
 
 export const metadata: Metadata = {
-  title: "Activités comptables administratives pour PME et indépendants",
+  title: "Activités comptables | Accompagnement administratif comptable fiable",
   description:
-    "Organisation et suivi des activités comptables administratives: pièces, rapprochements, préparation et coordination, sans mission d'expertise comptable.",
+    "Accompagnement administratif comptable pour structurer le suivi quotidien, faciliter les échanges avec votre expert-comptable et mieux maîtriser vos opérations.",
   alternates: {
     canonical: "/services/activites-comptables",
   },
   openGraph: {
     title: "Activités comptables | Sphorix France",
     description:
-      "Un accompagnement sur les activités comptables administratives, sans mission d'expertise comptable.",
+      "Un appui sur les activités comptables administratives, sans mission d'expertise comptable.",
     url: "/services/activites-comptables",
     type: "article",
   },
@@ -19,48 +19,85 @@ export const metadata: Metadata = {
 
 export default function ActivitesComptablesPage() {
   return (
-    <main className="min-h-screen bg-slate-100 px-4 py-14 sm:px-6 lg:px-8">
-      <article className="mx-auto max-w-4xl rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 lg:p-10">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-orange-500">
-          Activités comptables
-        </p>
-        <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-          Un appui administratif comptable clair, sans mission d&apos;expertise comptable
-        </h1>
-        <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
-          Sphorix France vous accompagne sur les tâches administratives comptables
-          nécessaires au suivi quotidien de votre activité, sans se substituer à
-          un expert-comptable.
-        </p>
-
-        <h2 className="mt-8 text-xl font-bold text-slate-900">Exemples d&apos;activités accompagnées</h2>
-        <ul className="mt-4 space-y-2 text-slate-700">
-          <li>Organisation des pièces et des justificatifs</li>
-          <li>Préparation des éléments pour transmission</li>
-          <li>Suivi des factures, règlements et relances</li>
-          <li>Rapprochements et contrôles administratifs courants</li>
-        </ul>
-
-        <p className="mt-6 text-sm leading-relaxed text-slate-500">
-          Cet accompagnement ne constitue pas une mission d&apos;expertise comptable,
-          d&apos;attestation ou de certification.
-        </p>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/#contact-form"
-            className="rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-400"
-          >
-            Demander un échange
-          </Link>
-          <Link
-            href="/services"
-            className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-orange-400 hover:text-orange-500"
-          >
-            Voir tous les services
-          </Link>
-        </div>
-      </article>
-    </main>
+    <ServiceDetailPage
+      eyebrow="Activités comptables"
+      title="Un accompagnement administratif comptable fiable pour mieux suivre votre activité"
+      description="La gestion quotidienne des documents comptables demande du temps, de la rigueur et une organisation efficace. Sphorix France vous accompagne dans vos tâches administratives comptables afin de structurer votre suivi, faciliter vos échanges avec votre expert-comptable et vous permettre de garder une meilleure maîtrise de vos opérations courantes."
+      highlightsTitle="Un soutien adapté à vos besoins administratifs"
+      highlights={[
+        {
+          title: "Organisation des pièces et justificatifs",
+          description:
+            "Classez et structurez vos documents pour simplifier leur consultation et leur transmission.",
+        },
+        {
+          title: "Préparation des éléments comptables",
+          description:
+            "Rassemblez les informations nécessaires afin de faciliter le travail de votre expert-comptable.",
+        },
+        {
+          title: "Suivi des factures et des règlements",
+          description:
+            "Gardez une meilleure visibilité sur vos échéances, vos paiements et vos relances administratives.",
+        },
+        {
+          title: "Contrôles et rapprochements administratifs courants",
+          description:
+            "Vérifiez la cohérence de vos informations et identifiez plus facilement les éventuels écarts.",
+        },
+      ]}
+      extraSections={[
+        {
+          title: "Les bénéfices pour votre entreprise",
+          paragraphs: [
+            "Une gestion administrative plus organisée et plus sereine.",
+            "Un suivi comptable administratif bien structuré vous permet de gagner du temps, de limiter les oublis et de disposer d'informations plus fiables pour piloter votre activité.",
+            "Vous restez concentré sur votre métier tout en conservant une meilleure visibilité sur vos opérations quotidiennes.",
+          ],
+        },
+        {
+          title: "Un accompagnement complémentaire à votre expert-comptable",
+          paragraphs: [
+            "Notre intervention concerne uniquement les tâches administratives et organisationnelles liées au suivi comptable.",
+            "Elle ne constitue pas une mission d'expertise comptable, d'attestation, de certification ou toute autre prestation relevant du périmètre réglementé de l'expertise comptable.",
+          ],
+        },
+      ]}
+      primaryCtaLabel="Demander un échange"
+      primaryHref="/demande-devis"
+      secondaryCtaLabel="Voir tous les services"
+      secondaryHref="/services"
+      resultEyebrow="Résultat attendu"
+      resultTitle="Une gestion administrative plus claire et mieux sécurisée"
+      resultDescription="Des tâches comptables administratives mieux organisées, un suivi plus fiable et des échanges facilités avec votre expert-comptable."
+      resultPoints={[
+        {
+          label: "Organisation",
+          text: "Documents et informations plus faciles à retrouver et à transmettre.",
+        },
+        {
+          label: "Fiabilité",
+          text: "Moins d'oublis et plus de cohérence dans le suivi courant.",
+        },
+        {
+          label: "Sérénité",
+          text: "Meilleure visibilité sur vos opérations pour vous concentrer sur votre métier.",
+        },
+      ]}
+      ctaLead="Vous souhaitez mieux organiser vos tâches administratives comptables et gagner en efficacité ?"
+      ctaEmphasis="Échangeons sur vos besoins d'accompagnement."
+      note="Cette intervention reste strictement administrative et ne remplace pas une mission réglementée d'expertise comptable."
+      theme={{
+        pageAccent: "from-rose-500/15 via-pink-500/8",
+        orbLeft: "bg-rose-500/15",
+        orbRight: "bg-pink-400/15",
+        heroGradient: "from-slate-950 via-rose-950 to-pink-950",
+        eyebrowClassName: "text-rose-200",
+        highlightDot: "bg-rose-500",
+        asideGradient: "from-rose-950 to-pink-950",
+        asideBorder: "border-rose-100/20",
+        noteClassName: "border border-rose-200 bg-rose-50 text-rose-950",
+      }}
+    />
   );
 }

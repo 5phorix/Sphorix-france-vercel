@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
@@ -23,10 +22,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sphorixfrance.fr"),
-  title: "Sphorix France | Création de site internet, design web et applications sur mesure",
+  title: "Sphorix France | sites internet, outils métier et organisation",
   description:
-    "Création de site internet, design UI/UX, applications web sur mesure, accompagnement en gestion et transformation digitale pour PME et indépendants en France.",
-  keywords: ["création site internet", "agence web", "création site vitrine", "création site e-commerce", "design web", "design ui ux", "application sur mesure", "développement application web", "assistant de gestion", "gestion financière", "tableaux de bord", "transformation digitale", "PME", "indépendants", "KPI", "rentabilité", "Paris", "Orléans", "Vierzon", "France"],
+    "Sites internet, design web, applications sur mesure, organisation et tableaux de bord pour les entreprises en France.",
+  keywords: ["création site internet", "site vitrine", "design web", "ui ux", "application sur mesure", "développement web", "tableaux de bord", "suivi d'activité", "organisation", "KPI", "rentabilité", "Paris", "Orléans", "Vierzon", "France"],
   authors: [{ name: "Sphorix France" }],
   creator: "Sphorix France",
   publisher: "Sphorix France",
@@ -43,8 +42,8 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://sphorixfrance.fr",
     siteName: "Sphorix France",
-    title: "Sphorix France | Création de site internet, design web et applications sur mesure",
-    description: "Création de site internet, design web et applications sur mesure pour PME et indépendants partout en France.",
+    title: "Sphorix France | sites internet, outils métier et organisation",
+    description: "Sites internet, design web et applications sur mesure pour structurer une activité plus claire partout en France.",
     images: [
       {
         url: "/og-image.png",
@@ -56,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sphorix France | Création de site internet et apps sur mesure",
-    description: "Design web, création de sites internet et applications sur mesure pour PME et indépendants.",
+    title: "Sphorix France | sites internet, outils métier et organisation",
+    description: "Design web, création de sites internet et applications sur mesure pour structurer une activité plus claire.",
     images: ["/og-image.png"],
   },
   verification: {
@@ -75,7 +74,7 @@ export default function RootLayout({
     "@type": "ProfessionalService",
     name: "Sphorix France",
     description:
-      "Création de site internet, design web, applications sur mesure et accompagnement en gestion pour PME et indépendants en France",
+      "Sites internet, design web, applications sur mesure et outils de suivi pour les entreprises en France",
     url: "https://sphorixfrance.fr",
     telephone: "+33781525393",
     areaServed: "FR",
@@ -86,7 +85,7 @@ export default function RootLayout({
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Services digitaux et gestion",
+      name: "Services web et organisation",
       itemListElement: [
         {
           "@type": "Offer",
@@ -155,7 +154,6 @@ export default function RootLayout({
       <body className="min-h-full bg-slate-100 text-slate-900">
         <ThemeProvider>
           {children}
-          <CookieConsentBanner />
         </ThemeProvider>
       </body>
     </html>
