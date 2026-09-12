@@ -38,32 +38,28 @@ export default function Navbar() {
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="group flex min-w-0 shrink-0 items-center gap-2 px-0 py-0 pr-2 sm:gap-3 sm:pr-3 lg:pr-4"
-          aria-label="Retour à l'accueil"
+          className="group flex min-w-0 shrink-0 items-center gap-3 py-1 text-left transition"
+          aria-label="Sphorix France - Accueil"
         >
-          <div className="relative">
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-900 to-orange-500 blur opacity-0 transition duration-300 group-hover:opacity-60"></div>
-            <div className="logo-highlight">
-              <div className="logo-inner">
-                <Image
-                  src="/logo/logo.png"
-                  alt="Sphorix France"
-                  width={42}
-                  height={42}
-                  className="relative rounded-md transition-transform duration-300 group-hover:scale-105 sm:h-[46px] sm:w-[46px] md:h-[54px] md:w-[54px]"
-                />
-              </div>
-            </div>
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200/80 bg-white p-1.5 shadow-sm transition-all duration-300 group-hover:border-orange-400/60 group-hover:shadow-md sm:h-11 sm:w-11 md:h-12 md:w-12">
+            <Image
+              src="/logo/logo.png"
+              alt="Logo Sphorix France"
+              width={48}
+              height={48}
+              className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+              priority
+            />
           </div>
 
           <div className="min-w-0">
-            <h1 className="text-[1rem] font-extrabold tracking-tight text-slate-900 drop-shadow-[0_1px_0_rgba(255,255,255,0.65)] sm:text-[1.3rem] md:text-[1.65rem] lg:text-[2.1rem]">
-              <span className="text-blue-900">Sphorix</span>{" "}
+            <span className="block text-lg font-bold leading-tight tracking-tight text-slate-950 sm:text-xl md:text-2xl">
+              <span className="text-blue-950">Sphorix</span>{" "}
               <span className="text-orange-500">France</span>
-            </h1>
-            <p className="hidden max-w-[22rem] text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 sm:block md:text-sm">
-             Solutions digitales & gestion
-            </p>
+            </span>
+            <span className="hidden text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500 sm:block md:text-xs">
+              Solutions digitales &amp; gestion
+            </span>
           </div>
         </Link>
 

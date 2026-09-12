@@ -51,16 +51,24 @@ export default function Footer() {
             transition={{ duration: 0.45 }}
             className="max-w-xl"
           >
-            <div className="mb-5 flex items-center">
-              <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-slate-100/95 p-2 shadow-sm sm:h-14 sm:w-14 lg:h-16 lg:w-16">
+            <div className="mb-6 flex items-center gap-3">
+              <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white p-2 shadow-md sm:h-14 sm:w-14">
                 <Image
                   src="/logo/logo.png"
-                  alt="Sphorix France"
-                  fill
-                  sizes="(max-width: 640px) 48px, (max-width: 1024px) 56px, 64px"
-                  className="object-contain grayscale brightness-95 contrast-105"
+                  alt="Logo Sphorix France"
+                  width={56}
+                  height={56}
+                  className="h-full w-full object-contain"
                   priority
                 />
+              </div>
+              <div>
+                <span className="block text-xl font-bold tracking-tight text-white sm:text-2xl">
+                  Sphorix <span className="text-orange-400">France</span>
+                </span>
+                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+                  Solutions digitales &amp; gestion
+                </span>
               </div>
             </div>
 
