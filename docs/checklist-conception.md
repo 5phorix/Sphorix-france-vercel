@@ -27,13 +27,13 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 - [x] Création de site internet
 - [x] Outils de gestion personnalisés
 - [x] Tableaux de bord et suivi d'activité
-- [ ] Accompagnement
+- [x] Accompagnement
 - [x] Boutique
 - [x] Catégories boutique
 - [x] Fiche produit
 - [x] Panier
-- [ ] Paiement
-- [ ] Confirmation de commande
+- [x] Paiement
+- [x] Confirmation de commande
 - [x] À propos
 - [x] Contact
 - [x] Demande de devis
@@ -42,8 +42,8 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 - [x] Commandes et téléchargements
 - [x] Mentions légales
 - [x] Politique de confidentialité
-- [ ] Conditions générales de vente
-- [ ] Politique de remboursement et produits numériques
+- [x] Conditions générales de vente
+- [x] Politique de remboursement et produits numériques
 
 ## 3. Parcours utilisateurs
 
@@ -66,27 +66,27 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 ### Boutique
 
 - [x] Parcourir les catégories.
-- [ ] Rechercher un produit.
-- [ ] Filtrer par type, prix et besoin.
+- [x] Rechercher un produit.
+- [x] Filtrer par type, prix et besoin.
 - [x] Consulter une fiche produit complète.
 - [x] Ajouter au panier.
 - [x] Modifier ou supprimer une ligne.
 - [x] Voir le total avant paiement.
-- [ ] Se connecter ou créer un compte au bon moment.
-- [ ] Payer sans friction.
-- [ ] Recevoir une confirmation.
-- [ ] Télécharger le produit acheté.
+- [x] Se connecter ou créer un compte au bon moment.
+- [x] Payer sans friction.
+- [x] Recevoir une confirmation.
+- [x] Télécharger le produit acheté.
 
 ### Compte client
 
-- [ ] Créer un compte par email.
-- [ ] Confirmer l’adresse email.
+- [x] Créer un compte par email.
+- [x] Confirmer l’adresse email.
 - [x] Se connecter et se déconnecter.
-- [ ] Réinitialiser le mot de passe.
-- [ ] Modifier ses informations.
-- [ ] Voir ses commandes.
-- [ ] Retrouver ses fichiers.
-- [ ] Régénérer un lien de téléchargement sécurisé.
+- [x] Réinitialiser le mot de passe.
+- [x] Modifier ses informations.
+- [x] Voir ses commandes.
+- [x] Retrouver ses fichiers.
+- [x] Régénérer un lien de téléchargement sécurisé.
 
 ## 4. Design premium
 
@@ -116,11 +116,11 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 - [x] Lignes de commande.
 - [x] Téléchargements.
 - [x] RLS de base.
-- [ ] Ajouter les champs SEO des produits et catégories.
+- [x] Ajouter les champs SEO des produits et catégories.
 - [ ] Ajouter les statuts de publication et d’archivage détaillés.
 - [ ] Ajouter les coupons ou promotions si nécessaire.
-- [ ] Ajouter la traçabilité des événements de paiement.
-- [ ] Définir les règles de conservation et suppression des leads.
+- [x] Ajouter la traçabilité des événements de paiement.
+- [x] Définir les règles de conservation et suppression des leads.
 - [ ] Remplacer progressivement SQLite pour les leads et le rate limiting.
 
 ## 6. Catalogue et administration
@@ -129,13 +129,13 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 - [x] Rédiger les descriptions courtes et longues.
 - [x] Définir les fonctionnalités et éléments inclus.
 - [x] Définir les formats, versions et conditions d’utilisation.
-- [ ] Préparer les captures et aperçus.
-- [ ] Définir les prix TTC et règles de TVA.
+- [x] Préparer les captures et aperçus.
+- [x] Définir les prix TTC et règles de TVA.
 - [x] Définir le pack Gestion essentielle et son prix indicatif.
 - [ ] Définir le rôle administrateur.
 - [ ] Créer l’interface de gestion des produits.
 - [ ] Créer l’interface de gestion des catégories.
-- [ ] Gérer les fichiers privés sans les exposer publiquement.
+- [x] Gérer les fichiers privés sans les exposer publiquement.
 - [ ] Prévoir publication, brouillon, archivage et suppression contrôlée.
 - [ ] Prévoir journal des modifications sensibles.
 
@@ -157,15 +157,15 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 
 ## 8. Téléchargements numériques
 
-- [ ] Créer un bucket privé Supabase Storage.
-- [ ] Stocker les fichiers hors du dossier public Next.js.
-- [ ] Vérifier l’utilisateur et la commande payée avant chaque accès.
-- [ ] Générer des URLs signées à durée limitée.
-- [ ] Limiter éventuellement le nombre de téléchargements.
-- [ ] Enregistrer la date et le nombre de téléchargements.
-- [ ] Ne jamais exposer le chemin de stockage brut.
+- [x] Créer un bucket privé Supabase Storage.
+- [x] Stocker les fichiers hors du dossier public Next.js.
+- [x] Vérifier l’utilisateur et la commande payée avant chaque accès.
+- [x] Générer des URLs signées à durée limitée.
+- [x] Limiter éventuellement le nombre de téléchargements.
+- [x] Enregistrer la date et le nombre de téléchargements.
+- [x] Ne jamais exposer le chemin de stockage brut.
 - [ ] Prévoir le remplacement d’un fichier sans casser les commandes existantes.
-- [ ] Tester les accès directs, expirés, anonymes et non autorisés.
+- [x] Tester les accès directs, expirés, anonymes et non autorisés.
 
 ## 9. Authentification et autorisations
 
@@ -188,8 +188,8 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 - [x] Ajouter des messages accessibles avec `aria-live`.
 - [x] Ajouter validation et erreurs par champ.
 - [x] Ajouter confirmation anti-spam robuste.
-- [ ] Ajouter notification email interne.
-- [ ] Ajouter accusé de réception client.
+- [x] Ajouter notification email interne.
+- [x] Ajouter accusé de réception client.
 - [ ] Prévoir export ou consultation des leads pour l’administration.
 
 ## 11. Intégrations externes
@@ -239,16 +239,16 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 
 ## 14. SEO et contenu
 
-- [ ] Définir les titres et descriptions de chaque page.
-- [ ] Ajouter les données structurées pertinentes.
-- [ ] Créer les métadonnées produit.
-- [ ] Ajouter canonical, Open Graph et images sociales.
-- [ ] Vérifier sitemap et robots.
-- [ ] Ajouter des liens internes entre services et produits.
-- [ ] Préparer les contenus FAQ.
-- [ ] Optimiser les images et aperçus.
-- [ ] Vérifier les pages 404 et les redirections.
-- [ ] Éviter les promesses commerciales non démontrées.
+- [x] Définir les titres et descriptions de chaque page.
+- [x] Ajouter les données structurées pertinentes.
+- [x] Créer les métadonnées produit.
+- [x] Ajouter canonical, Open Graph et images sociales.
+- [x] Vérifier sitemap et robots.
+- [x] Ajouter des liens internes entre services et produits.
+- [x] Préparer les contenus FAQ.
+- [x] Optimiser les images et aperçus.
+- [x] Vérifier les pages 404 et les redirections.
+- [x] Éviter les promesses commerciales non démontrées.
 
 ## 15. Tests et qualité
 
@@ -269,32 +269,32 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 
 ### Version 1 : plateforme vitrine renforcée
 
-- [ ] Refonte premium de l’accueil.
-- [ ] Services, À propos, Contact et devis.
-- [ ] Orientation vers une solution.
-- [ ] Contenus légaux complets.
+- [x] Refonte premium de l’accueil.
+- [x] Services, À propos, Contact et devis.
+- [x] Orientation vers une solution.
+- [x] Contenus légaux complets.
 
 ### Version 2 : boutique catalogue
 
-- [ ] Catégories.
-- [ ] Produits et packs.
-- [ ] Fiches produit.
-- [ ] Recherche et filtres.
-- [ ] Panier local.
+- [x] Catégories.
+- [x] Produits et packs.
+- [x] Fiches produit.
+- [x] Recherche et filtres.
+- [x] Panier local.
 
 ### Version 3 : vente
 
-- [ ] Stripe Checkout.
-- [ ] Webhooks.
-- [ ] Commandes.
-- [ ] Emails de confirmation.
+- [x] Stripe Checkout.
+- [x] Webhooks.
+- [x] Commandes.
+- [x] Emails de confirmation.
 
 ### Version 4 : espace client
 
-- [ ] Authentification.
-- [ ] Historique des commandes.
-- [ ] Téléchargements sécurisés.
-- [ ] Gestion du profil.
+- [x] Authentification.
+- [x] Historique des commandes.
+- [x] Téléchargements sécurisés.
+- [x] Gestion du profil.
 
 ### Version 5 : administration et croissance
 
