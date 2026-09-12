@@ -248,7 +248,7 @@ export default function ServiceDetailPage({
             </p>
 
             <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-200">Tendance d'activité</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-200">Tendance d&apos;activité</p>
               <svg viewBox="0 0 260 88" className="mt-3 h-20 w-full" role="img" aria-label="Graphe de progression">
                 <polyline
                   points="8,70 52,56 95,60 138,42 181,47 224,24 252,18"

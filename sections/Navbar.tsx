@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import CartButton from "@/components/cart/CartButton";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -71,7 +72,8 @@ export default function Navbar() {
           {[
             { label: "À propos", href: "#about" },
             { label: "Nos Services", href: "#services" },
-            { label: "Notre Approche", href: "#projects" },
+            { label: "La boutique", href: "#boutique" },
+            { label: "Notre approche", href: "#projects" },
             { label: "Contact", href: "#contact" },
           ].map((item) => (
             <a
@@ -85,13 +87,21 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA */}
-        <a
-          href="/demande-devis"
-          className="hidden shrink-0 md:flex items-center gap-2 rounded-lg bg-blue-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:shadow-lg whitespace-nowrap"
-        >
-          Demander un devis
-        </a>
+        <div className="flex shrink-0 items-center gap-2">
+          <CartButton />
+          <a
+            href="/compte"
+            className="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-orange-400 hover:text-orange-700 lg:inline-flex"
+          >
+            Espace client
+          </a>
+          <a
+            href="/demande-devis"
+            className="hidden shrink-0 items-center gap-2 rounded-lg bg-blue-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:shadow-lg whitespace-nowrap md:flex"
+          >
+            Demander un devis
+          </a>
+        </div>
         {/* MENU MOBILE */}
         <button
           className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
@@ -110,7 +120,8 @@ export default function Navbar() {
             {[
               { label: "À propos", href: "#about" },
               { label: "Nos Services", href: "#services" },
-              { label: "Notre Approche", href: "#projects" },
+              { label: "La boutique", href: "#boutique" },
+              { label: "Notre approche", href: "#projects" },
               { label: "Contact", href: "#contact" },
             ].map((item) => (
               <a

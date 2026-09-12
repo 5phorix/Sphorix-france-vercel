@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-import { insertContactLead } from "@/lib/contact-leads-db";
+import { consumeRateLimit, insertContactLead } from "@/lib/contact-leads-db";
 
 export const runtime = "nodejs";
 
@@ -26,7 +26,6 @@ interface ContactPayload {
   startedAt?: number;
 }
 
-const rateLimitStore = new Map<string, { count: number; windowStart: number }>();
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 6;
 const MIN_FORM_COMPLETION_MS = 2500;
@@ -38,21 +37,6 @@ function getClientIp(request: NextRequest): string {
   }
 
   return request.headers.get("x-real-ip") || "unknown";
-}
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const current = rateLimitStore.get(ip);
-
-  if (!current || now - current.windowStart > RATE_LIMIT_WINDOW_MS) {
-    rateLimitStore.set(ip, { count: 1, windowStart: now });
-    return false;
-  }
-
-  current.count += 1;
-  rateLimitStore.set(ip, current);
-
-  return current.count > RATE_LIMIT_MAX_REQUESTS;
 }
 
 function sanitizeText(value: string, maxLength: number): string {
@@ -167,7 +151,7 @@ export async function POST(request: NextRequest) {
   try {
     const clientIp = getClientIp(request);
 
-    if (isRateLimited(clientIp)) {
+    if (!consumeRateLimit(`contact:${clientIp}`, RATE_LIMIT_MAX_REQUESTS, RATE_LIMIT_WINDOW_MS)) {
       return NextResponse.json(
         {
           success: false,
@@ -199,18 +183,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = Number(process.env.SMTP_PORT);
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
-    const smtpTo = process.env.SMTP_TO || smtpUser;
+    const smtpHost = process.env.SMTP_HOST || process.env.EMAIL_HOST || process.env.MAIL_HOST;
+    const smtpPortRaw = process.env.SMTP_PORT || process.env.EMAIL_PORT || process.env.MAIL_PORT;
+    const smtpPort = Number(smtpPortRaw);
+    const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER || process.env.MAIL_USER;
+    const smtpPass = process.env.SMTP_PASS || process.env.EMAIL_PASSWORD || process.env.MAIL_PASSWORD;
+    const smtpTo = process.env.SMTP_TO || process.env.EMAIL_TO || process.env.MAIL_TO || smtpUser;
 
-    if (!smtpHost || !smtpPort || !smtpUser || !smtpPass || !smtpTo) {
-      console.error("Configuration SMTP incomplète.");
+    const missingConfig: string[] = [];
+    if (!smtpHost) missingConfig.push("SMTP_HOST|EMAIL_HOST|MAIL_HOST");
+    if (!smtpPortRaw || !Number.isFinite(smtpPort)) {
+      missingConfig.push("SMTP_PORT|EMAIL_PORT|MAIL_PORT (nombre)");
+    }
+    if (!smtpUser) missingConfig.push("SMTP_USER|EMAIL_USER|MAIL_USER");
+    if (!smtpPass) missingConfig.push("SMTP_PASS|EMAIL_PASSWORD|MAIL_PASSWORD");
+    if (!smtpTo) missingConfig.push("SMTP_TO|EMAIL_TO|MAIL_TO");
+
+    if (missingConfig.length > 0) {
+      console.error("Configuration SMTP incomplète:", missingConfig.join(", "));
       return NextResponse.json(
         {
           success: false,
-          error: "Le service de contact est temporairement indisponible.",
+          error:
+            process.env.NODE_ENV === "production"
+              ? "Le service de contact est temporairement indisponible."
+              : `Configuration SMTP incomplète: ${missingConfig.join(", ")}`,
         },
         {
           status: 500,
@@ -324,36 +321,48 @@ Sphorix France`,
       console.warn("Échec accusé de réception client :", ackError);
     }
 
-    const leadId = insertContactLead({
-      contactType: payload.contactType,
-      fullName: payload.fullName,
-      email: payload.email,
-      phone: payload.phone || "",
-      subject: payload.subject,
-      message: payload.message,
-      companyName: payload.companyName || "",
-      companyRole: payload.companyRole || "",
-      siret: payload.siret || "",
-      activity: payload.activity || "",
-      consent: payload.consent,
-      marketingConsent: payload.marketingConsent === true,
-      retentionMonths: payload.retentionMonths || 24,
-      policyVersion: payload.policyVersion || "unknown",
-      sourceIp: clientIp,
-      userAgent: request.headers.get("user-agent") || "",
-      adminEmailSent: true,
-      acknowledgementSent,
-    });
+    let leadId: number | null = null;
+
+    try {
+      leadId = insertContactLead({
+        contactType: payload.contactType,
+        fullName: payload.fullName,
+        email: payload.email,
+        phone: payload.phone || "",
+        subject: payload.subject,
+        message: payload.message,
+        companyName: payload.companyName || "",
+        companyRole: payload.companyRole || "",
+        siret: payload.siret || "",
+        activity: payload.activity || "",
+        consent: payload.consent,
+        marketingConsent: payload.marketingConsent === true,
+        retentionMonths: payload.retentionMonths || 24,
+        policyVersion: payload.policyVersion || "unknown",
+        sourceIp: clientIp,
+        userAgent: request.headers.get("user-agent") || "",
+        adminEmailSent: true,
+        acknowledgementSent,
+      });
+    } catch (dbError) {
+      // L'échec d'archivage local ne doit pas empêcher la réception du message.
+      console.warn("Échec de persistance du lead contact :", dbError);
+    }
 
     return NextResponse.json({ success: true, leadId });
 
   } catch (error) {
     console.error("Erreur API contact :", error);
 
+    const technicalMessage = error instanceof Error ? error.message : "Erreur interne";
+
     return NextResponse.json(
       {
         success: false,
-        error: "Une erreur est survenue. Veuillez réessayer plus tard.",
+        error:
+          process.env.NODE_ENV === "production"
+            ? "Une erreur est survenue. Veuillez réessayer plus tard."
+            : `Erreur API contact: ${technicalMessage}`,
       },
       {
         status: 500,

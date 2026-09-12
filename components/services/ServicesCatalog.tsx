@@ -93,7 +93,7 @@ export default function ServicesCatalog() {
               transition={{ duration: 0.5, delay: 0.08 }}
               className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl"
             >
-              Web, outils sur mesure, organisation et comptabilité
+              Gestion, données et outils numériques sur mesure
             </motion.h1>
 
             <motion.p
@@ -102,7 +102,7 @@ export default function ServicesCatalog() {
               transition={{ duration: 0.5, delay: 0.12 }}
               className="mt-4 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg"
             >
-              Une offre structurée autour de quatre besoins: présence en ligne, outils adaptés, organisation interne et suivi comptable.
+              Des solutions pour structurer vos données, automatiser votre gestion, suivre vos indicateurs et mieux comprendre votre activité.
             </motion.p>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
@@ -135,7 +135,7 @@ export default function ServicesCatalog() {
                 href="/"
                 className="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-slate-900"
               >
-                Retour à l'accueil
+                Retour à l&apos;accueil
               </Link>
             </div>
           </div>

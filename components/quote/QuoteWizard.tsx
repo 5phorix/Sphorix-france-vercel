@@ -81,6 +81,7 @@ export default function QuoteWizard() {
             companySize={companySize}
             urgency={urgency}
             objective={objective}
+            details={details}
           />
         )}
 

@@ -170,11 +170,17 @@ export default function Footer() {
             >
               Planifier un échange
             </a>
-            <a href="#services" className="transition hover:text-orange-400">
-              Services
+            <a href="/boutique" className="transition hover:text-orange-400">
+              Boutique
+            </a>
+            <a href="/cgv" className="transition hover:text-orange-400">
+              Conditions générales
+            </a>
+            <a href="/politique-remboursement" className="transition hover:text-orange-400">
+              Remboursement
             </a>
             <a href="/politique-confidentialite" className="transition hover:text-orange-400">
-              Politique de confidentialité
+              Confidentialité
             </a>
           </div>
         </div>

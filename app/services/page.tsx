@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import ServicesCatalog from "@/components/services/ServicesCatalog";
 
 export const metadata: Metadata = {
-  title: "Services Sphorix France | web, outils sur mesure et organisation",
+  title: "Services de gestion et outils numériques | Sphorix France",
   description:
-    "Découvrez des services clairs pour le web, les outils sur mesure, l'organisation et les activités comptables.",
+    "Découvrez les solutions Sphorix pour structurer vos données, suivre vos indicateurs et concevoir des outils de gestion sur mesure.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Services Sphorix France | web, outils sur mesure et organisation",
+    title: "Services de gestion et outils numériques | Sphorix France",
     description:
-      "Sites internet, design web, applications sur mesure, organisation et activités comptables.",
+      "Outils numériques, tableaux de bord et applications de gestion comptable, analytique, budgétaire et financière.",
     url: "/services",
     type: "website",
   },

@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { CartProvider } from "@/components/cart/CartProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,10 +23,27 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sphorixfrance.fr"),
-  title: "Sphorix France | sites internet, outils métier et organisation",
+  title: "Sphorix France | outils de gestion et tableaux de bord sur mesure",
   description:
-    "Sites internet, design web, applications sur mesure, organisation et tableaux de bord pour les entreprises en France.",
-  keywords: ["création site internet", "site vitrine", "design web", "ui ux", "application sur mesure", "développement web", "tableaux de bord", "suivi d'activité", "organisation", "KPI", "rentabilité", "Paris", "Orléans", "Vierzon", "France"],
+    "Outils numériques, tableaux de bord et applications de gestion comptable, analytique, budgétaire et financière pour les artisans et les PME.",
+  keywords: [
+    "outil de gestion sur mesure",
+    "tableau de bord financier",
+    "suivi budgétaire",
+    "suivi de trésorerie",
+    "gestion analytique",
+    "application de gestion",
+    "développement d'outil métier",
+    "tableaux de bord",
+    "suivi d'activité",
+    "organisation des données",
+    "KPI",
+    "rentabilité",
+    "Paris",
+    "Orléans",
+    "Vierzon",
+    "France",
+  ],
   authors: [{ name: "Sphorix France" }],
   creator: "Sphorix France",
   publisher: "Sphorix France",
@@ -42,8 +60,8 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://sphorixfrance.fr",
     siteName: "Sphorix France",
-    title: "Sphorix France | sites internet, outils métier et organisation",
-    description: "Sites internet, design web et applications sur mesure pour structurer une activité plus claire partout en France.",
+    title: "Sphorix France | outils de gestion et tableaux de bord sur mesure",
+    description: "Des outils numériques pour structurer les données, suivre l'activité et prendre de meilleures décisions.",
     images: [
       {
         url: "/og-image.png",
@@ -55,8 +73,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sphorix France | sites internet, outils métier et organisation",
-    description: "Design web, création de sites internet et applications sur mesure pour structurer une activité plus claire.",
+    title: "Sphorix France | outils de gestion et tableaux de bord sur mesure",
+    description: "Applications de gestion, tableaux de bord et outils numériques adaptés aux artisans et aux PME.",
     images: ["/og-image.png"],
   },
   verification: {
@@ -74,59 +92,45 @@ export default function RootLayout({
     "@type": "ProfessionalService",
     name: "Sphorix France",
     description:
-      "Sites internet, design web, applications sur mesure et outils de suivi pour les entreprises en France",
+      "Outils numériques, tableaux de bord et applications de gestion sur mesure pour les artisans et les PME",
     url: "https://sphorixfrance.fr",
     telephone: "+33781525393",
     areaServed: "FR",
     priceRange: "$$",
     serviceArea: {
-      "@type": "Country",
+      "@type": "AdministrativeArea",
       name: "France",
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Services web et organisation",
+      name: "Outils de gestion et solutions numériques",
       itemListElement: [
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-              name: "Création de site internet",
+            name: "Outils de gestion sur mesure",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Design web et UI/UX",
+            name: "Tableaux de bord financiers",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Applications web sur mesure",
+            name: "Applications de gestion",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Gestion d'entreprise",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Tableaux de bord et suivi d'activité",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Activités comptables administratives",
+            name: "Suivi comptable et budgétaire",
           },
         },
       ],
@@ -153,7 +157,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full bg-slate-100 text-slate-900">
         <ThemeProvider>
-          {children}
+          <CartProvider>{children}</CartProvider>
         </ThemeProvider>
       </body>
     </html>

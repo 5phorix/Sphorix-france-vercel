@@ -5,16 +5,16 @@ import Image from "next/image";
 
 const expertiseCards = [
   {
-    title: "Suivi financier",
-    description: "Trésorerie, vision prévisionnelle et lecture des marges.",
+    title: "Gestion financière",
+    description: "Trésorerie, budget, chiffre d’affaires et lecture des marges.",
   },
   {
-    title: "Tableaux de bord",
-    description: "Indicateurs personnalisés et reporting clair pour suivre l’essentiel.",
+    title: "Analyse et indicateurs",
+    description: "Données structurées, indicateurs clés et tableaux de bord lisibles.",
   },
   {
-    title: "Outils numériques",
-    description: "Automatisation et organisation plus fluide au quotidien.",
+    title: "Outils sur mesure",
+    description: "Applications et automatisations adaptées à votre gestion quotidienne.",
   },
 ];
 
@@ -33,14 +33,14 @@ export default function About() {
         >
           <p className="mb-3 font-semibold text-orange-500">À PROPOS</p>
 
-          <h2 className="page-title">Solutions pour mieux structurer votre activité</h2>
+          <h2 className="page-title">Des outils de gestion conçus autour de votre activité</h2>
 
           <p className="mb-6 text-base leading-relaxed text-slate-600 sm:text-lg">
-            Sphorix France aide les dirigeants à structurer leur organisation, clarifier leur trésorerie et suivre leur activité avec des outils simples, que vous soyez à Paris, à Orléans, à Vierzon ou ailleurs en France.
+            Sphorix France conçoit des outils numériques, tableaux de bord et applications de gestion sur mesure, spécialisés dans la gestion comptable, analytique, budgétaire et financière des artisans et des PME.
           </p>
 
           <p className="text-base leading-relaxed text-slate-600 sm:text-lg">
-            Nous intervenons sur le suivi financier, l'organisation et les outils numériques pour une activité plus lisible et plus fluide.
+            Nous vous aidons à structurer vos données, automatiser votre gestion et mieux comprendre votre activité pour prendre des décisions plus éclairées.
           </p>
         </motion.div>
 

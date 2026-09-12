@@ -13,6 +13,30 @@ import {
 export default function Services() {
   const services = [
     {
+      title: "Applications de gestion",
+      description:
+        "Outils numériques sur mesure pour structurer les opérations, automatiser les tâches et fiabiliser les données.",
+      icon: Code2,
+      href: "/services/applications-web-sur-mesure",
+    },
+
+    {
+      title: "Tableaux de bord et suivi",
+      description:
+        "Indicateurs lisibles pour suivre les ventes, dépenses, budgets et résultats plus sereinement.",
+      icon: SlidersHorizontal,
+      href: "/services/tableaux-de-bord-suivi-activite",
+    },
+
+    {
+      title: "Gestion comptable et financière",
+      description:
+        "Organisation des données comptables, suivi administratif et lecture financière adaptés aux petites structures.",
+      icon: BarChart3,
+      href: "/services/activites-comptables",
+    },
+
+    {
       title: "Création de site internet",
       description:
         "Sites vitrine et pages d'accueil conçus pour être rapides, clairs et efficaces.",
@@ -28,29 +52,6 @@ export default function Services() {
       href: "/services/design-web-ui-ux",
     },
 
-    {
-      title: "Applications sur mesure",
-      description:
-        "Outils web adaptés à vos besoins: CRM, automatisations et interfaces de suivi.",
-      icon: Code2,
-      href: "/services/applications-web-sur-mesure",
-    },
-
-    {
-      title: "Tableaux de bord",
-      description:
-        "Indicateurs lisibles pour suivre l'activité et prendre des décisions plus vite.",
-      icon: SlidersHorizontal,
-      href: "/services/tableaux-de-bord-suivi-activite",
-    },
-
-    {
-      title: "Organisation d'entreprise",
-      description:
-        "Mise en ordre des priorités, des process et du suivi interne.",
-      icon: BarChart3,
-      href: "/services/gestion-entreprise",
-    },
   ];
 
   return (
@@ -67,11 +68,11 @@ export default function Services() {
           </p>
 
           <h2 className="page-title">
-            Conçus pour votre façon de travailler.
+            Deux expertises, une même exigence de clarté.
           </h2>
 
           <p className="mx-auto max-w-3xl text-base text-slate-600 sm:text-lg">
-            Chaque entreprise est différente. C'est pourquoi nous développons des outils qui s'adaptent à votre organisation.
+            Une présence en ligne qui inspire confiance et des outils qui rendent les décisions plus simples au quotidien.
           </p>
         </div>
 

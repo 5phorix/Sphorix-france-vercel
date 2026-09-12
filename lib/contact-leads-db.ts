@@ -31,6 +31,11 @@ type ContactDb = Database.Database;
 let dbInstance: ContactDb | null = null;
 
 function getDatabasePath(): string {
+  const configuredPath = process.env.CONTACT_DB_PATH;
+  if (configuredPath) {
+    return configuredPath;
+  }
+
   const dataDir = path.join(process.cwd(), "data");
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });
@@ -78,10 +83,46 @@ function getDb(): ContactDb {
 
     CREATE INDEX IF NOT EXISTS idx_contact_leads_email
       ON contact_leads(email);
+
+    CREATE TABLE IF NOT EXISTS rate_limit_entries (
+      key TEXT PRIMARY KEY,
+      count INTEGER NOT NULL,
+      window_start INTEGER NOT NULL
+    );
   `);
 
   dbInstance = db;
   return db;
+}
+
+export function consumeRateLimit(
+  key: string,
+  maxRequests: number,
+  windowMs: number
+): boolean {
+  const db = getDb();
+  const now = Date.now();
+  const current = db
+    .prepare("SELECT count, window_start FROM rate_limit_entries WHERE key = ?")
+    .get(key) as { count: number; window_start: number } | undefined;
+
+  if (!current || now - current.window_start >= windowMs) {
+    db.prepare(
+      `INSERT INTO rate_limit_entries (key, count, window_start)
+       VALUES (?, 1, ?)
+       ON CONFLICT(key) DO UPDATE SET count = 1, window_start = excluded.window_start`
+    ).run(key, now);
+    return true;
+  }
+
+  if (current.count >= maxRequests) {
+    return false;
+  }
+
+  db.prepare(
+    "UPDATE rate_limit_entries SET count = count + 1 WHERE key = ?"
+  ).run(key);
+  return true;
 }
 
 export function insertContactLead(record: ContactLeadRecord): number {

@@ -8,6 +8,7 @@ interface StepEstimateProps {
   companySize: string;
   urgency: string;
   objective: string;
+  details: string;
 }
 
 export default function StepEstimate({
@@ -16,6 +17,7 @@ export default function StepEstimate({
   companySize,
   urgency,
   objective,
+  details,
 }: StepEstimateProps) {
 
   const dailyRate = 200;
@@ -168,6 +170,7 @@ export default function StepEstimate({
         companySize,
         urgency,
         objective,
+        details,
 
         minPrice,
         maxPrice,
