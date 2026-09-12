@@ -19,14 +19,17 @@ export default function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl items-end gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         <div>
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45 }}
-            className="mb-5 text-xs font-bold uppercase tracking-[0.24em] text-orange-600 sm:text-sm"
+            className="mb-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/10 px-4 py-2 text-sm font-medium text-slate-800 shadow-sm backdrop-blur-sm sm:px-5 sm:text-base"
           >
-            Sphorix France · Outils numériques et gestion financière
-          </motion.p>
+            <span className="h-2 w-2 rounded-full bg-orange-500 animate-pulse shrink-0" />
+            <span className="font-extrabold text-blue-900">Sphorix France</span>
+            <span className="text-orange-400 font-bold">•</span>
+            <span className="font-semibold text-slate-700">Outils numériques &amp; gestion financière</span>
+          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
