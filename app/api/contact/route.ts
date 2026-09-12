@@ -183,6 +183,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    let adminEmailSent = false;
+    let acknowledgementSent = false;
+
     const smtpHost = process.env.SMTP_HOST || process.env.EMAIL_HOST || process.env.MAIL_HOST;
     const smtpPortRaw = process.env.SMTP_PORT || process.env.EMAIL_PORT || process.env.MAIL_PORT;
     const smtpPort = Number(smtpPortRaw);
@@ -190,62 +193,41 @@ export async function POST(request: NextRequest) {
     const smtpPass = process.env.SMTP_PASS || process.env.EMAIL_PASSWORD || process.env.MAIL_PASSWORD;
     const smtpTo = process.env.SMTP_TO || process.env.EMAIL_TO || process.env.MAIL_TO || smtpUser;
 
-    const missingConfig: string[] = [];
-    if (!smtpHost) missingConfig.push("SMTP_HOST|EMAIL_HOST|MAIL_HOST");
-    if (!smtpPortRaw || !Number.isFinite(smtpPort)) {
-      missingConfig.push("SMTP_PORT|EMAIL_PORT|MAIL_PORT (nombre)");
-    }
-    if (!smtpUser) missingConfig.push("SMTP_USER|EMAIL_USER|MAIL_USER");
-    if (!smtpPass) missingConfig.push("SMTP_PASS|EMAIL_PASSWORD|MAIL_PASSWORD");
-    if (!smtpTo) missingConfig.push("SMTP_TO|EMAIL_TO|MAIL_TO");
+    const isSmtpConfigured = Boolean(smtpHost && smtpPortRaw && Number.isFinite(smtpPort) && smtpUser && smtpPass && smtpTo);
 
-    if (missingConfig.length > 0) {
-      console.error("Configuration SMTP incomplète:", missingConfig.join(", "));
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            process.env.NODE_ENV === "production"
-              ? "Le service de contact est temporairement indisponible."
-              : `Configuration SMTP incomplète: ${missingConfig.join(", ")}`,
-        },
-        {
-          status: 500,
-        }
-      );
-    }
+    if (isSmtpConfigured) {
+      try {
+        const transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: smtpPort,
+          secure: smtpPort === 465,
+          auth: {
+            user: smtpUser,
+            pass: smtpPass,
+          },
+        });
 
-    const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: smtpPort === 465,
-      auth: {
-        user: smtpUser,
-        pass: smtpPass,
-      },
-    });
+        const safe = {
+          contactType: escapeHtml(payload.contactType),
+          fullName: escapeHtml(payload.fullName),
+          email: escapeHtml(payload.email),
+          phone: escapeHtml(payload.phone || "Non renseigné"),
+          subject: escapeHtml(payload.subject),
+          message: escapeHtml(payload.message).replace(/\n/g, "<br/>"),
+          companyName: escapeHtml(payload.companyName || "Non renseignée"),
+          companyRole: escapeHtml(payload.companyRole || "Non renseignée"),
+          siret: escapeHtml(payload.siret || "Non renseigné"),
+          activity: escapeHtml(payload.activity || "Non renseigné"),
+          retentionMonths: String(payload.retentionMonths || 0),
+          policyVersion: escapeHtml(payload.policyVersion || "N/A"),
+        };
 
-    const safe = {
-      contactType: escapeHtml(payload.contactType),
-      fullName: escapeHtml(payload.fullName),
-      email: escapeHtml(payload.email),
-      phone: escapeHtml(payload.phone || "Non renseigné"),
-      subject: escapeHtml(payload.subject),
-      message: escapeHtml(payload.message).replace(/\n/g, "<br/>"),
-      companyName: escapeHtml(payload.companyName || "Non renseignée"),
-      companyRole: escapeHtml(payload.companyRole || "Non renseignée"),
-      siret: escapeHtml(payload.siret || "Non renseigné"),
-      activity: escapeHtml(payload.activity || "Non renseigné"),
-      retentionMonths: String(payload.retentionMonths || 0),
-      policyVersion: escapeHtml(payload.policyVersion || "N/A"),
-    };
-
-    await transporter.sendMail({
-      from: `"Site Sphorix" <${smtpUser}>`,
-      to: smtpTo,
-      replyTo: payload.email,
-      subject: `[Contact] ${payload.subject}`,
-      text: `
+        await transporter.sendMail({
+          from: `"Site Sphorix" <${smtpUser}>`,
+          to: smtpTo,
+          replyTo: payload.email,
+          subject: `[Contact] ${payload.subject}`,
+          text: `
 Type de contact : ${payload.contactType}
 Nom complet : ${payload.fullName}
 Email : ${payload.email}
@@ -261,38 +243,38 @@ Secteur d'activité : ${payload.activity || "Non renseigné"}
 
 Message :
 ${payload.message}
-      `,
-      html: `
-        <div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#1f2937;">
-          <h2 style="margin:0 0 12px;color:#0f3d91;">Nouveau message de contact</h2>
-          <p><strong>Type de contact :</strong> ${safe.contactType}</p>
-          <p><strong>Nom complet :</strong> ${safe.fullName}</p>
-          <p><strong>Email :</strong> ${safe.email}</p>
-          <p><strong>Téléphone :</strong> ${safe.phone}</p>
-          <p><strong>Objet :</strong> ${safe.subject}</p>
-          <hr style="border:0;border-top:1px solid #e5e7eb;margin:16px 0;"/>
-          <p><strong>Entreprise :</strong> ${safe.companyName}</p>
-          <p><strong>Fonction :</strong> ${safe.companyRole}</p>
-          <p><strong>SIRET :</strong> ${safe.siret}</p>
-          <p><strong>Secteur d'activité :</strong> ${safe.activity}</p>
-            <p><strong>Durée de conservation :</strong> ${safe.retentionMonths} mois</p>
-            <p><strong>Version politique :</strong> ${safe.policyVersion}</p>
-            <p><strong>Consentement marketing :</strong> ${payload.marketingConsent ? "Oui" : "Non"}</p>
-          <hr style="border:0;border-top:1px solid #e5e7eb;margin:16px 0;"/>
-          <p><strong>Message :</strong></p>
-          <p>${safe.message}</p>
-        </div>
-      `,
-    });
+          `,
+          html: `
+            <div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#1f2937;">
+              <h2 style="margin:0 0 12px;color:#0f3d91;">Nouveau message de contact</h2>
+              <p><strong>Type de contact :</strong> ${safe.contactType}</p>
+              <p><strong>Nom complet :</strong> ${safe.fullName}</p>
+              <p><strong>Email :</strong> ${safe.email}</p>
+              <p><strong>Téléphone :</strong> ${safe.phone}</p>
+              <p><strong>Objet :</strong> ${safe.subject}</p>
+              <hr style="border:0;border-top:1px solid #e5e7eb;margin:16px 0;"/>
+              <p><strong>Entreprise :</strong> ${safe.companyName}</p>
+              <p><strong>Fonction :</strong> ${safe.companyRole}</p>
+              <p><strong>SIRET :</strong> ${safe.siret}</p>
+              <p><strong>Secteur d'activité :</strong> ${safe.activity}</p>
+              <p><strong>Durée de conservation :</strong> ${safe.retentionMonths} mois</p>
+              <p><strong>Version politique :</strong> ${safe.policyVersion}</p>
+              <p><strong>Consentement marketing :</strong> ${payload.marketingConsent ? "Oui" : "Non"}</p>
+              <hr style="border:0;border-top:1px solid #e5e7eb;margin:16px 0;"/>
+              <p><strong>Message :</strong></p>
+              <p>${safe.message}</p>
+            </div>
+          `,
+        });
 
-    let acknowledgementSent = false;
+        adminEmailSent = true;
 
-    try {
-      await transporter.sendMail({
-        from: `"Sphorix France" <${smtpUser}>`,
-        to: payload.email,
-        subject: "Nous avons bien reçu votre message",
-        text: `Bonjour ${payload.fullName},
+        try {
+          await transporter.sendMail({
+            from: `"Sphorix France" <${smtpUser}>`,
+            to: payload.email,
+            subject: "Nous avons bien reçu votre message",
+            text: `Bonjour ${payload.fullName},
 
 Merci pour votre message. Votre demande a bien été reçue par Sphorix France.
 
@@ -304,21 +286,27 @@ Récapitulatif:
 
 Cordialement,
 Sphorix France`,
-        html: `
-          <div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#1f2937;">
-            <h2 style="margin:0 0 12px;color:#0f3d91;">Accusé de réception</h2>
-            <p>Bonjour ${safe.fullName},</p>
-            <p>Merci pour votre message. Votre demande a bien été reçue par Sphorix France.</p>
-            <p>Nous revenons vers vous rapidement avec une première réponse.</p>
-            <p><strong>Objet :</strong> ${safe.subject}</p>
-            <p style="margin-top:20px;">Cordialement,<br/>Sphorix France</p>
-          </div>
-        `,
-      });
+            html: `
+              <div style="font-family:Arial,sans-serif;font-size:14px;line-height:1.6;color:#1f2937;">
+                <h2 style="margin:0 0 12px;color:#0f3d91;">Accusé de réception</h2>
+                <p>Bonjour ${safe.fullName},</p>
+                <p>Merci pour votre message. Votre demande a bien été reçue par Sphorix France.</p>
+                <p>Nous revenons vers vous rapidement avec une première réponse.</p>
+                <p><strong>Objet :</strong> ${safe.subject}</p>
+                <p style="margin-top:20px;">Cordialement,<br/>Sphorix France</p>
+              </div>
+            `,
+          });
 
-      acknowledgementSent = true;
-    } catch (ackError) {
-      console.warn("Échec accusé de réception client :", ackError);
+          acknowledgementSent = true;
+        } catch (ackError) {
+          console.warn("Échec accusé de réception client :", ackError);
+        }
+      } catch (smtpErr) {
+        console.warn("Échec d'envoi SMTP :", smtpErr);
+      }
+    } else {
+      console.warn("SMTP non configuré : le message de contact est enregistré en base sans envoi d'email.");
     }
 
     let leadId: number | null = null;
@@ -338,14 +326,13 @@ Sphorix France`,
         consent: payload.consent,
         marketingConsent: payload.marketingConsent === true,
         retentionMonths: payload.retentionMonths || 24,
-        policyVersion: payload.policyVersion || "unknown",
+        policyVersion: payload.policyVersion || "2026-07",
         sourceIp: clientIp,
         userAgent: request.headers.get("user-agent") || "",
-        adminEmailSent: true,
+        adminEmailSent,
         acknowledgementSent,
       });
     } catch (dbError) {
-      // L'échec d'archivage local ne doit pas empêcher la réception du message.
       console.warn("Échec de persistance du lead contact :", dbError);
     }
 

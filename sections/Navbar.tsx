@@ -70,37 +70,37 @@ export default function Navbar() {
         {/* MENU DESKTOP */}
         <nav className="hidden flex-1 justify-center gap-6 md:flex">
           {[
-            { label: "À propos", href: "#about" },
-            { label: "Nos Services", href: "#services" },
-            { label: "La boutique", href: "#boutique" },
-            { label: "Notre approche", href: "#projects" },
-            { label: "Contact", href: "#contact" },
+            { label: "À propos", href: "/#about" },
+            { label: "Nos Services", href: "/services" },
+            { label: "La boutique", href: "/boutique" },
+            { label: "Notre approche", href: "/#projects" },
+            { label: "Contact", href: "/#contact" },
           ].map((item) => (
-            <a
+            <Link
               key={item.label}
               href={item.href}
               className="px-4 py-2 rounded-lg text-slate-700 font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-50 relative group"
             >
               {item.label}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-900 to-orange-500 rounded-full group-hover:w-full transition-all duration-300"></span>
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
           <CartButton />
-          <a
+          <Link
             href="/compte"
             className="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-orange-400 hover:text-orange-700 lg:inline-flex"
           >
             Espace client
-          </a>
-          <a
+          </Link>
+          <Link
             href="/demande-devis"
             className="hidden shrink-0 items-center gap-2 rounded-lg bg-blue-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:shadow-lg whitespace-nowrap md:flex"
           >
             Demander un devis
-          </a>
+          </Link>
         </div>
         {/* MENU MOBILE */}
         <button
@@ -118,20 +118,22 @@ export default function Navbar() {
           
         <div className="flex flex-col gap-4 sm:gap-5">
             {[
-              { label: "À propos", href: "#about" },
-              { label: "Nos Services", href: "#services" },
-              { label: "La boutique", href: "#boutique" },
-              { label: "Notre approche", href: "#projects" },
-              { label: "Contact", href: "#contact" },
+              { label: "À propos", href: "/#about" },
+              { label: "Nos Services", href: "/services" },
+              { label: "La boutique", href: "/boutique" },
+              { label: "Notre approche", href: "/#projects" },
+              { label: "Contact", href: "/#contact" },
+              { label: "Espace client", href: "/compte" },
+              { label: "Demander un devis", href: "/demande-devis" },
             ].map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className="px-4 py-2 rounded-lg text-slate-900 font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-50"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
 
             <a

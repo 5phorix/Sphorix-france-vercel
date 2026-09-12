@@ -39,6 +39,10 @@ yarn-error.log*
 # Supabase local runtime artifacts
 /supabase/.temp
 
+# local databases
+/data/
+*.sqlite
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -4,16 +4,16 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const quickLinks = [
-  { label: "Nos services", href: "#services" },
+  { label: "Nos services", href: "/services" },
   { label: "Gestion d'entreprise", href: "/services/gestion-entreprise" },
   { label: "Tableaux de bord et suivi d'activité", href: "/services/tableaux-de-bord-suivi-activite" },
   { label: "Activités comptables", href: "/services/activites-comptables" },
-  { label: "Services web", href: "/services" },
+  { label: "La boutique", href: "/boutique" },
   { label: "Création site internet", href: "/services/creation-site-internet" },
   { label: "Design web", href: "/services/design-web-ui-ux" },
-  { label: "Notre approche", href: "#projects" },
-  { label: "À propos", href: "#about" },
-  { label: "Prendre contact", href: "#contact" },
+  { label: "Notre approche", href: "/#projects" },
+  { label: "À propos", href: "/a-propos" },
+  { label: "Prendre contact", href: "/contact" },
 ];
 
 const contactLinks = [

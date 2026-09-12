@@ -1,16 +1,24 @@
 import Link from "next/link";
-import { ArrowRight, BarChart3, FileSpreadsheet, LockKeyhole } from "lucide-react";
+import { ArrowRight, BarChart3, FileSpreadsheet, LockKeyhole, Package } from "lucide-react";
 
-const plannedProducts = [
+const availableProducts = [
+  {
+    label: "Pack Gestion essentielle",
+    description: "Trésorerie, dépenses et tableau de bord réunis dans une formule complète.",
+    icon: Package,
+    badge: "Pack complet",
+  },
   {
     label: "Suivi de trésorerie",
-    description: "Entrées, sorties et solde mensuel dans une vue simple.",
+    description: "Entrées, sorties et solde mensuel dans une vue simple et directement exploitable.",
     icon: BarChart3,
+    badge: "Disponible",
   },
   {
     label: "Suivi des dépenses",
-    description: "Catégoriser les charges et garder une lecture nette.",
+    description: "Catégoriser les charges et garder une lecture nette de vos coûts.",
     icon: FileSpreadsheet,
+    badge: "Disponible",
   },
 ];
 
@@ -28,31 +36,35 @@ export default function BoutiquePreview() {
               Des outils prêts à utiliser pour gagner en clarté.
             </h2>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-300 sm:text-lg">
-              La boutique arrive avec des modèles de gestion et des tableaux de bord conçus pour les petites entreprises. Achetez, téléchargez et adaptez.
+              Explorez nos modèles de gestion et nos tableaux de bord conçus pour les artisans, indépendants et PME. Achetez, téléchargez et commencez immédiatement.
             </p>
             <Link
               href="/boutique"
               className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-orange-300 hover:text-orange-200"
             >
-              Voir la boutique
+              Explorer la boutique
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {plannedProducts.map(({ label, description, icon: Icon }) => (
-              <article key={label} className="rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm sm:p-6">
-                <div className="flex items-center justify-between">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-400/15 text-orange-300">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <span className="rounded-full border border-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">Bientôt</span>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {availableProducts.map(({ label, description, icon: Icon, badge }) => (
+              <article key={label} className="flex flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-sm sm:p-6">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-400/15 text-orange-300">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-300">
+                      {badge}
+                    </span>
+                  </div>
+                  <h3 className="mt-8 text-xl font-semibold">{label}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-400">{description}</p>
                 </div>
-                <h3 className="mt-8 text-xl font-semibold">{label}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-400">{description}</p>
                 <div className="mt-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                   <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />
-                  Fichier numérique sécurisé
+                  Téléchargement immédiat
                 </div>
               </article>
             ))}
