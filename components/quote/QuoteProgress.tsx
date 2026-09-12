@@ -17,17 +17,17 @@ export default function QuoteProgress({
   return (
     <div className="mb-10">
 
-      <div className="mb-4 flex items-center justify-between">
-        <p className="text-sm font-medium text-slate-300">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-sm font-semibold text-slate-700">
           Étape {step} sur 4
         </p>
 
-        <p className="text-sm text-orange-300">
+        <p className="text-sm font-bold text-orange-600">
           {Math.round((step / 4) * 100)} %
         </p>
       </div>
 
-      <div className="h-2 overflow-hidden rounded-full bg-blue-950">
+      <div className="h-2.5 overflow-hidden rounded-full bg-slate-100">
         <div
           className="h-full rounded-full bg-gradient-to-r from-orange-500 to-orange-400 transition-all duration-500"
           style={{
@@ -48,24 +48,24 @@ export default function QuoteProgress({
               className="flex flex-col items-center"
             >
               <div
-                className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold transition-all
+                className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold transition-all
                 ${
                   current < step
-                    ? "bg-green-500 text-white"
+                    ? "bg-emerald-600 text-white shadow-sm"
                     : current === step
-                    ? "bg-orange-500 text-white"
-                    : "bg-blue-950 text-slate-400"
+                    ? "bg-orange-500 text-white shadow-md shadow-orange-500/20"
+                    : "border border-slate-200 bg-slate-100 text-slate-400"
                 }`}
               >
                 {current < step ? "✓" : current}
               </div>
 
               <span
-                className={`mt-2 text-center text-xs
+                className={`mt-2 text-center text-xs font-semibold
                 ${
                   current <= step
-                    ? "text-white"
-                    : "text-slate-500"
+                    ? "text-slate-900"
+                    : "text-slate-400"
                 }`}
               >
                 {label}

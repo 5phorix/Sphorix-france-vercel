@@ -51,12 +51,12 @@ export default function StepProject({
   return (
     <div>
 
-      <h2 className="text-2xl font-semibold text-white">
+      <h2 className="text-2xl font-bold tracking-tight text-slate-950">
         Décrivez votre projet
       </h2>
 
 
-      <p className="mt-3 text-slate-300">
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">
           Ces informations nous permettent d&apos;adapter notre estimation.
       </p>
 
@@ -65,7 +65,7 @@ export default function StepProject({
 
 
         <div>
-          <label className="mb-3 block text-sm text-slate-300">
+          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
             Taille de votre structure
           </label>
 
@@ -77,11 +77,11 @@ export default function StepProject({
                 type="button"
                 onClick={() => onCompanySizeChange(item)}
                 className={`
-                  rounded-xl border p-3 text-left text-sm transition
+                  rounded-xl border p-3.5 text-left text-sm font-medium transition
                   ${
                     companySize === item
-                    ? "border-orange-400 bg-blue-800 text-white"
-                    : "border-blue-800 bg-blue-950/50 text-slate-300"
+                    ? "border-orange-500 bg-orange-50/70 text-slate-950 font-bold shadow-sm"
+                    : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-orange-300 hover:bg-orange-50/30"
                   }
                 `}
               >
@@ -95,7 +95,7 @@ export default function StepProject({
 
 
         <div>
-          <label className="mb-3 block text-sm text-slate-300">
+          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
             Quand souhaitez-vous avancer ?
           </label>
 
@@ -108,11 +108,11 @@ export default function StepProject({
                 type="button"
                 onClick={() => onUrgencyChange(item)}
                 className={`
-                  rounded-xl border p-3 text-sm transition
+                  rounded-xl border p-3.5 text-center text-sm font-medium transition
                   ${
                     urgency === item
-                    ? "border-orange-400 bg-blue-800 text-white"
-                    : "border-blue-800 bg-blue-950/50 text-slate-300"
+                    ? "border-orange-500 bg-orange-50/70 text-slate-950 font-bold shadow-sm"
+                    : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-orange-300 hover:bg-orange-50/30"
                   }
                 `}
               >
@@ -126,7 +126,7 @@ export default function StepProject({
 
 
         <div>
-          <label className="mb-3 block text-sm text-slate-300">
+          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
             Votre objectif principal
           </label>
 
@@ -139,11 +139,11 @@ export default function StepProject({
                 type="button"
                 onClick={() => onObjectiveChange(item)}
                 className={`
-                  rounded-xl border p-3 text-left text-sm transition
+                  rounded-xl border p-3.5 text-left text-sm font-medium transition
                   ${
                     objective === item
-                    ? "border-orange-400 bg-blue-800 text-white"
-                    : "border-blue-800 bg-blue-950/50 text-slate-300"
+                    ? "border-orange-500 bg-orange-50/70 text-slate-950 font-bold shadow-sm"
+                    : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-orange-300 hover:bg-orange-50/30"
                   }
                 `}
               >
@@ -157,7 +157,7 @@ export default function StepProject({
 
 
         <div>
-          <label className="mb-3 block text-sm text-slate-300">
+          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
             Quelques précisions sur votre projet
           </label>
 
@@ -166,7 +166,7 @@ export default function StepProject({
             value={details}
             onChange={(e) => onDetailsChange(e.target.value)}
             placeholder="Décrivez votre situation actuelle, vos difficultés ou vos attentes..."
-            className="w-full rounded-xl border border-blue-800 bg-blue-950/70 px-4 py-3 text-sm text-white outline-none focus:border-orange-400"
+            className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
           />
 
         </div>

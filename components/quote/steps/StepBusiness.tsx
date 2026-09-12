@@ -43,11 +43,11 @@ export default function StepBusiness({
 }: StepBusinessProps) {
   return (
     <div>
-      <h2 className="text-2xl font-semibold text-white">
+      <h2 className="text-2xl font-bold tracking-tight text-slate-950">
         Quel est votre profil ?
       </h2>
 
-      <p className="mt-3 text-slate-300">
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">
         Choisissez la situation qui correspond le mieux à votre besoin.
       </p>
 
@@ -61,16 +61,16 @@ export default function StepBusiness({
               rounded-2xl border p-5 text-left transition-all duration-300
               ${
                 value === profile.id
-                  ? "border-orange-400 bg-blue-800"
-                  : "border-blue-800 bg-blue-950/50 hover:border-blue-500"
+                  ? "border-orange-500 bg-orange-50/70 shadow-sm"
+                  : "border-slate-200 bg-slate-50/50 hover:border-orange-300 hover:bg-orange-50/30"
               }
             `}
           >
-            <h3 className="font-semibold text-white">
+            <h3 className={`font-bold ${value === profile.id ? "text-slate-950" : "text-slate-900"}`}>
               {profile.title}
             </h3>
 
-            <p className="mt-2 text-sm text-slate-300">
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
               {profile.description}
             </p>
           </button>
@@ -79,7 +79,7 @@ export default function StepBusiness({
 
       {value === "autre" && (
         <div className="mt-6">
-          <label className="mb-2 block text-sm text-slate-300">
+          <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-700">
             Précisez votre activité
           </label>
 
@@ -88,7 +88,7 @@ export default function StepBusiness({
             value={customValue}
             onChange={(e) => onCustomChange(e.target.value)}
             placeholder="Exemple : cabinet médical, artisan, organisme de formation..."
-            className="w-full rounded-xl border border-blue-800 bg-blue-950/70 px-4 py-3 text-sm text-white outline-none focus:border-orange-400"
+            className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
           />
         </div>
       )}

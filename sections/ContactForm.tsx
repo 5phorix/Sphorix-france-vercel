@@ -108,13 +108,13 @@ export default function ContactForm() {
   return (
     <div
       id="contact-form"
-      className="scroll-mt-24 rounded-[28px] border border-blue-800/60 bg-blue-900/70 p-6 sm:p-8"
+      className="scroll-mt-24 rounded-[28px] border border-slate-200/80 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] sm:p-8 lg:p-10"
     >
-      <h3 className="mb-2 text-2xl font-semibold text-white">
+      <h3 className="mb-2 text-2xl font-bold text-slate-950">
         Envoyez votre message
       </h3>
 
-      <p className="mb-6 text-sm leading-relaxed text-slate-300">
+      <p className="mb-6 text-sm leading-relaxed text-slate-600">
         Décrivez votre projet, votre contexte et vos besoins. Nous vous
         recontacterons rapidement.
       </p>
@@ -129,12 +129,12 @@ export default function ContactForm() {
         }}
       >
         <fieldset className="space-y-3">
-          <legend className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-300">
+          <legend className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
             Votre profil
           </legend>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white">
+            <label className={`flex cursor-pointer items-center gap-3 rounded-xl border p-3.5 text-sm font-medium transition ${contactType === "particulier" ? "border-orange-500 bg-orange-50/70 font-semibold text-slate-950 shadow-sm" : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-orange-300"}`}>
               <input
                 type="radio"
                 name="contactType"
@@ -146,7 +146,7 @@ export default function ContactForm() {
               Particulier
             </label>
 
-            <label className="flex cursor-pointer items-center gap-3 rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white">
+            <label className={`flex cursor-pointer items-center gap-3 rounded-xl border p-3.5 text-sm font-medium transition ${contactType === "entreprise" ? "border-orange-500 bg-orange-50/70 font-semibold text-slate-950 shadow-sm" : "border-slate-200 bg-slate-50/50 text-slate-700 hover:border-orange-300"}`}>
               <input
                 type="radio"
                 name="contactType"
@@ -162,7 +162,7 @@ export default function ContactForm() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="space-y-2">
-            <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
               Nom complet
             </span>
             <input
@@ -174,12 +174,12 @@ export default function ContactForm() {
               minLength={2}
               maxLength={120}
               required
-              className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
             />
           </label>
 
           <label className="space-y-2">
-            <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
               Email professionnel
             </span>
             <input
@@ -190,14 +190,14 @@ export default function ContactForm() {
               autoComplete="email"
               maxLength={160}
               required
-              className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
             />
           </label>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="space-y-2">
-            <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
               Téléphone
             </span>
             <input
@@ -207,12 +207,12 @@ export default function ContactForm() {
               placeholder="Ex: +33 6 12 34 56 78"
               autoComplete="tel"
               maxLength={25}
-              className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
             />
           </label>
 
           <label className="space-y-2">
-            <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+            <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
               Objet
             </span>
             <input
@@ -223,7 +223,7 @@ export default function ContactForm() {
               minLength={4}
               maxLength={140}
               required
-              className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+              className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
             />
           </label>
         </div>
@@ -231,7 +231,7 @@ export default function ContactForm() {
         {contactType === "entreprise" && (
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="space-y-2">
-              <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
                 Entreprise
               </span>
               <input
@@ -243,12 +243,12 @@ export default function ContactForm() {
                 minLength={2}
                 maxLength={120}
                 required={contactType === "entreprise"}
-                className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
               />
             </label>
 
             <label className="space-y-2">
-              <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
                 Fonction
               </span>
               <input
@@ -257,12 +257,12 @@ export default function ContactForm() {
                 onChange={(e) => setCompanyRole(e.target.value)}
                 placeholder="Ex: Dirigeant"
                 maxLength={80}
-                className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
               />
             </label>
 
             <label className="space-y-2">
-              <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
                 SIRET (optionnel)
               </span>
               <input
@@ -273,12 +273,12 @@ export default function ContactForm() {
                 placeholder="14 chiffres"
                 pattern="[0-9]{14}"
                 maxLength={14}
-                className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
               />
             </label>
 
             <label className="space-y-2">
-              <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+              <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
                 Secteur d’activité
               </span>
               <input
@@ -289,25 +289,25 @@ export default function ContactForm() {
                 minLength={2}
                 maxLength={120}
                 required={contactType === "entreprise"}
-                className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
               />
             </label>
           </div>
         )}
 
         <label className="space-y-2">
-          <span className="text-xs font-medium uppercase tracking-[0.12em] text-slate-300">
+          <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-700">
             Votre message
           </span>
           <textarea
-            rows={7}
+            rows={6}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Décrivez votre contexte, vos objectifs et le niveau d’accompagnement souhaité."
             minLength={20}
             maxLength={2500}
             required
-            className="w-full rounded-xl border border-blue-800/70 bg-blue-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-orange-400"
+            className="w-full rounded-xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400 focus:bg-white"
           />
         </label>
 
@@ -322,7 +322,7 @@ export default function ContactForm() {
           />
         </label>
 
-        <label className="flex items-start gap-3 rounded-xl border border-blue-800/50 bg-blue-950/40 p-4 text-sm text-slate-300">
+        <label className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50/50 p-4 text-sm text-slate-600">
           <input
             type="checkbox"
             checked={consent}
@@ -337,7 +337,7 @@ export default function ContactForm() {
               href="/politique-confidentialite"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-orange-300 underline underline-offset-4"
+              className="font-semibold text-orange-600 underline underline-offset-4"
             >
               politique de confidentialité
             </Link>
@@ -345,7 +345,7 @@ export default function ContactForm() {
           </span>
         </label>
 
-        <label className="flex items-start gap-3 rounded-xl border border-blue-800/50 bg-blue-950/40 p-4 text-sm text-slate-300">
+        <label className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50/50 p-4 text-sm text-slate-600">
           <input
             type="checkbox"
             checked={marketingConsent}
@@ -361,19 +361,19 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isSending}
-          className="inline-flex items-center justify-center rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-400 disabled:opacity-50"
+          className="inline-flex items-center justify-center rounded-full bg-slate-950 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-orange-600 disabled:opacity-50"
         >
           {isSending ? "Envoi..." : "Envoyer le message"}
         </button>
 
         {errorMessage && (
-          <p className="mt-2 text-sm font-medium text-red-300">
+          <p className="mt-2 rounded-xl bg-red-50 p-3.5 text-sm font-medium text-red-700">
             {errorMessage}
           </p>
         )}
 
         {successMessage && (
-          <p className="mt-4 text-sm font-medium text-green-400">
+          <p className="mt-4 rounded-xl bg-emerald-50 p-3.5 text-sm font-medium text-emerald-800">
             {successMessage}
           </p>
         )}

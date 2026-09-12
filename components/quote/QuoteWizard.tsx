@@ -37,7 +37,7 @@ export default function QuoteWizard() {
         objective !== ""));
 
   return (
-    <div className="rounded-[32px] border border-blue-800/60 bg-blue-900/60 p-6 sm:p-10">
+    <div className="rounded-[32px] border border-slate-200/80 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] sm:p-10">
 
       {/* Barre de progression */}
       <QuoteProgress step={step} />
@@ -89,13 +89,13 @@ export default function QuoteWizard() {
 
       {/* Navigation */}
 
-      <div className="mt-10 flex justify-between">
+      <div className="mt-10 flex justify-between border-t border-slate-100 pt-6">
 
         <button
           type="button"
           disabled={step === 1}
           onClick={() => setStep((current) => Math.max(current - 1, 1))}
-          className="rounded-full border border-blue-700 px-5 py-2 text-white transition hover:border-orange-400 disabled:cursor-not-allowed disabled:opacity-30"
+          className="rounded-full border border-slate-300 px-6 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-orange-400 hover:text-orange-700 disabled:cursor-not-allowed disabled:opacity-30"
         >
           Retour
         </button>
@@ -105,7 +105,7 @@ export default function QuoteWizard() {
             type="button"
             disabled={!canContinue}
             onClick={() => setStep((current) => Math.min(current + 1, 4))}
-            className="rounded-full bg-orange-500 px-6 py-2 font-semibold text-white transition hover:bg-orange-400 disabled:cursor-not-allowed disabled:opacity-30"
+            className="rounded-full bg-slate-950 px-7 py-2.5 text-sm font-bold text-white transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-30"
           >
             Continuer
           </button>

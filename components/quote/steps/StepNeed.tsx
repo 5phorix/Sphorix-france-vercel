@@ -60,11 +60,11 @@ export default function StepNeed({
   return (
     <div>
 
-      <h2 className="text-2xl font-semibold text-white">
+      <h2 className="text-2xl font-bold tracking-tight text-slate-950">
         Quels sont vos besoins principaux ?
       </h2>
 
-      <p className="mt-3 text-slate-300">
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">
         Sélectionnez une ou plusieurs réponses afin de mieux comprendre votre projet.
       </p>
 
@@ -84,8 +84,8 @@ export default function StepNeed({
                 rounded-2xl border p-5 text-left transition-all duration-300
                 ${
                   selected
-                    ? "border-orange-400 bg-blue-800"
-                    : "border-blue-800 bg-blue-950/50 hover:border-blue-500"
+                    ? "border-orange-500 bg-orange-50/70 shadow-sm"
+                    : "border-slate-200 bg-slate-50/50 hover:border-orange-300 hover:bg-orange-50/30"
                 }
               `}
             >
@@ -99,12 +99,12 @@ export default function StepNeed({
 
                 <div>
 
-                  <h3 className="font-semibold text-white">
+                  <h3 className={`font-bold ${selected ? "text-slate-950" : "text-slate-900"}`}>
                     {need.title}
                   </h3>
 
 
-                  <p className="mt-2 text-sm text-slate-300">
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
                     {need.description}
                   </p>
 

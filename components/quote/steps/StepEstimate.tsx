@@ -232,12 +232,12 @@ export default function StepEstimate({
     return (
     <div>
 
-      <h2 className="text-2xl font-semibold text-white">
+      <h2 className="text-2xl font-bold tracking-tight text-slate-950">
         Votre estimation personnalisée
       </h2>
 
 
-      <p className="mt-3 text-slate-300">
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">
         Cette première estimation est calculée selon votre activité,
           vos besoins et la charge d&apos;accompagnement nécessaire.
       </p>
@@ -246,14 +246,14 @@ export default function StepEstimate({
 
       {/* ESTIMATION */}
 
-      <div className="mt-8 rounded-3xl border border-orange-400/50 bg-blue-950/70 p-6">
+      <div className="mt-8 rounded-3xl border border-orange-200 bg-orange-50/70 p-6 sm:p-8">
 
-        <p className="text-sm text-slate-300">
+        <p className="text-xs font-bold uppercase tracking-wider text-orange-700">
             Estimation indicative de l&apos;accompagnement
         </p>
 
 
-        <div className="mt-3 text-3xl font-bold text-white">
+        <div className="mt-3 text-3xl font-extrabold text-slate-950 sm:text-4xl">
 
           {minPrice.toLocaleString("fr-FR")} € -{" "}
           {maxPrice.toLocaleString("fr-FR")} € HT
@@ -261,7 +261,7 @@ export default function StepEstimate({
         </div>
 
 
-        <p className="mt-4 text-sm text-slate-300">
+        <p className="mt-3 text-sm font-medium text-slate-600">
 
           Soit environ {minDays} à {maxDays} jour(s)
             d&apos;accompagnement selon le périmètre retenu.
@@ -276,15 +276,15 @@ export default function StepEstimate({
 
       {/* FORMULAIRE EMAIL */}
 
-      <div className="mt-8 rounded-3xl border border-blue-800 bg-blue-950/70 p-6">
+      <div className="mt-8 rounded-3xl border border-slate-200/80 bg-slate-50/60 p-6 sm:p-8">
 
 
-        <h3 className="text-xl font-semibold text-white">
+        <h3 className="text-xl font-bold text-slate-950">
           Votre estimation est prête.
         </h3>
 
 
-        <p className="mt-2 text-sm text-slate-300">
+        <p className="mt-1 text-sm leading-relaxed text-slate-600">
           Recevez votre synthèse personnalisée par email.
         </p>
 
@@ -304,7 +304,7 @@ export default function StepEstimate({
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full rounded-xl border border-blue-800 bg-blue-900 px-4 py-3 text-white outline-none focus:border-orange-400"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400"
             />
 
 
@@ -314,7 +314,7 @@ export default function StepEstimate({
               placeholder="Entreprise (optionnel)"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
-              className="w-full rounded-xl border border-blue-800 bg-blue-900 px-4 py-3 text-white outline-none focus:border-orange-400"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400"
             />
 
 
@@ -325,7 +325,7 @@ export default function StepEstimate({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full rounded-xl border border-blue-800 bg-blue-900 px-4 py-3 text-white outline-none focus:border-orange-400"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400"
             />
 
 
@@ -335,7 +335,7 @@ export default function StepEstimate({
               placeholder="Téléphone (optionnel)"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full rounded-xl border border-blue-800 bg-blue-900 px-4 py-3 text-white outline-none focus:border-orange-400"
+              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400"
             />
 
 
@@ -343,7 +343,7 @@ export default function StepEstimate({
             <button
               type="submit"
               disabled={isSending}
-              className="rounded-full bg-orange-500 px-6 py-3 font-semibold text-white transition hover:bg-orange-400 disabled:opacity-50"
+              className="rounded-full bg-slate-950 px-7 py-3 text-sm font-bold text-white transition hover:bg-orange-600 disabled:opacity-50"
             >
 
               {isSending
@@ -361,15 +361,15 @@ export default function StepEstimate({
         ) : (
 
 
-          <div className="mt-6 rounded-xl border border-green-500/30 bg-green-500/10 p-4">
+          <div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
 
 
-            <p className="font-medium text-green-400">
+            <p className="font-bold text-emerald-800">
               Merci pour votre demande.
             </p>
 
 
-            <p className="mt-2 text-sm text-slate-300">
+            <p className="mt-1 text-sm text-emerald-700">
 
               Votre synthèse personnalisée sera envoyée rapidement
               après vérification des informations.
@@ -391,44 +391,44 @@ export default function StepEstimate({
 
       {/* SYNTHÈSE */}
 
-      <div className="mt-8 rounded-2xl bg-blue-950/50 p-5">
+      <div className="mt-8 rounded-2xl border border-slate-200/80 bg-white p-6">
 
 
-        <h3 className="font-semibold text-white">
+        <h3 className="font-bold text-slate-950">
           Synthèse de votre demande
         </h3>
 
 
 
-        <div className="mt-4 space-y-2 text-sm text-slate-300">
+        <div className="mt-3 space-y-2 text-sm text-slate-600">
 
 
           <p>
-            Profil : {businessType || "Non renseigné"}
+            Profil : <span className="font-semibold text-slate-950">{businessType || "Non renseigné"}</span>
           </p>
 
 
 
           <p>
-            Besoins : {needs.length} sélectionné(s)
+            Besoins : <span className="font-semibold text-slate-950">{needs.length} sélectionné(s)</span>
           </p>
 
 
 
           <p>
-            Taille : {companySize || "Non renseignée"}
+            Taille : <span className="font-semibold text-slate-950">{companySize || "Non renseignée"}</span>
           </p>
 
 
 
           <p>
-            Objectif : {objective || "Non renseigné"}
+            Objectif : <span className="font-semibold text-slate-950">{objective || "Non renseigné"}</span>
           </p>
 
 
 
           <p>
-            Taux journalier appliqué : {dailyRate} €/jour
+            Taux journalier appliqué : <span className="font-semibold text-slate-950">{dailyRate} €/jour</span>
           </p>
 
 
@@ -443,10 +443,10 @@ export default function StepEstimate({
 
       {/* INFORMATION TARIFAIRE */}
 
-      <div className="mt-6 rounded-xl border border-blue-800 bg-blue-900/50 p-4">
+      <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4">
 
 
-        <p className="text-sm leading-relaxed text-slate-300">
+        <p className="text-sm leading-relaxed text-slate-600">
 
             Cette estimation est indicative et permet d&apos;obtenir
           une première visibilité budgétaire.
