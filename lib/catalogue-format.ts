@@ -1,4 +1,7 @@
 export function formatPrice(priceCents: number, currency = "EUR") {
+  if (priceCents === 0) {
+    return "Sur devis";
+  }
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency,
