@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { MotionConfig } from "framer-motion";
+import { Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
@@ -11,29 +12,22 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://sphorixfrance.fr"),
-  title: "Sphorix France | outils de gestion et tableaux de bord sur mesure",
+  title: "Sphorix France | applications numériques sur mesure pour PME",
   description:
-    "Outils numériques, tableaux de bord et applications de gestion comptable, analytique, budgétaire et financière pour les artisans et les PME.",
+    "Conception d’applications numériques sur mesure pour les PME : connexion des outils, automatisation des processus et données utiles à la décision.",
   keywords: [
-    "outil de gestion sur mesure",
-    "tableau de bord financier",
+    "application numérique sur mesure",
+    "application métier pour PME",
+    "automatisation des processus",
+    "connexion des outils",
+    "tableau de bord pour PME",
     "suivi budgétaire",
     "suivi de trésorerie",
     "gestion analytique",
-    "application de gestion",
-    "développement d'outil métier",
+    "application métier",
+    "développement d'application sur mesure",
     "tableaux de bord",
     "suivi d'activité",
     "organisation des données",
@@ -60,8 +54,8 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: "https://sphorixfrance.fr",
     siteName: "Sphorix France",
-    title: "Sphorix France | outils de gestion et tableaux de bord sur mesure",
-    description: "Des outils numériques pour structurer les données, suivre l'activité et prendre de meilleures décisions.",
+    title: "Sphorix France | applications numériques sur mesure pour PME",
+    description: "Applications sur mesure pour connecter vos outils, automatiser vos processus et prendre de meilleures décisions.",
     images: [
       {
         url: "/og-image.png",
@@ -73,8 +67,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sphorix France | outils de gestion et tableaux de bord sur mesure",
-    description: "Applications de gestion, tableaux de bord et outils numériques adaptés aux artisans et aux PME.",
+    title: "Sphorix France | applications numériques sur mesure pour PME",
+    description: "Applications sur mesure pour connecter vos outils, automatiser vos processus et prendre de meilleures décisions.",
     images: ["/og-image.png"],
   },
   verification: {
@@ -92,7 +86,7 @@ export default function RootLayout({
     "@type": "ProfessionalService",
     name: "Sphorix France",
     description:
-      "Outils numériques, tableaux de bord et applications de gestion sur mesure pour les artisans et les PME",
+      "Applications numériques sur mesure pour connecter les outils, automatiser les processus et rendre les données utiles aux PME",
     url: "https://sphorixfrance.fr",
     telephone: "+33781525393",
     areaServed: "FR",
@@ -140,7 +134,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} h-full antialiased scroll-smooth`}
       suppressHydrationWarning
     >
       <head>
@@ -156,9 +150,11 @@ export default function RootLayout({
         <link rel="icon" href="/logo/logo.png" />
       </head>
       <body className="min-h-full bg-slate-100 text-slate-900">
-        <ThemeProvider>
-          <CartProvider>{children}</CartProvider>
-        </ThemeProvider>
+        <MotionConfig reducedMotion="user">
+          <ThemeProvider>
+            <CartProvider>{children}</CartProvider>
+          </ThemeProvider>
+        </MotionConfig>
       </body>
     </html>
   );

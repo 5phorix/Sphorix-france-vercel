@@ -1,196 +1,67 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
-const quickLinks = [
-  { label: "Nos services", href: "/services" },
-  { label: "Gestion d'entreprise", href: "/services/gestion-entreprise" },
-  { label: "Tableaux de bord et suivi d'activité", href: "/services/tableaux-de-bord-suivi-activite" },
-  { label: "Activités comptables", href: "/services/activites-comptables" },
-  { label: "La boutique", href: "/boutique" },
-  { label: "Création site internet", href: "/services/creation-site-internet" },
-  { label: "Design web", href: "/services/design-web-ui-ux" },
-  { label: "Notre approche", href: "/#projects" },
-  { label: "À propos", href: "/a-propos" },
-  { label: "Prendre contact", href: "/contact" },
+const pageLinks = [
+  { label: "Nos solutions", href: "/services" },
+  { label: "La vision Sphorix", href: "/a-propos" },
+  { label: "Notre méthode", href: "/methode" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const contactLinks = [
-  { label: "contact@sphorix.fr", href: "mailto:contact@sphorix.fr" },
-  { label: "WhatsApp", href: "https://wa.me/+33781525393", external: true },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/sphorix?utm_source=share_via&utm_content=profile&utm_medium=member_android", external: true },
-];
-
-const activityHighlights = [
-  "Saisie de factures",
-  "Déclaration TVA",
-  "Calcul des coûts",
-  "Conception de site web",
-  "Tableaux de bord",
-  "Suivi d'activité",
-  "Facturation",
-  "Relance client",
-  "Organisation comptable",
-  "Rapprochements bancaires",
-  "Comptabilité fournisseurs",
-  "Comptabilité clients",
-  "Gestion des KPI",
-  "Suivi de trésorerie",
+const legalLinks = [
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "Confidentialité", href: "/politique-confidentialite" },
+  { label: "Conditions générales", href: "/cgv" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-blue-900/40 bg-blue-950 px-4 py-10 text-white sm:px-6 sm:py-12 lg:px-8 lg:py-14">
-      <div className="flex w-full flex-col gap-10">
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.7fr_0.7fr_0.8fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.45 }}
-            className="max-w-xl"
-          >
-            <div className="mb-6 flex items-center gap-3">
-              <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white p-2 shadow-md sm:h-14 sm:w-14">
-                <Image
-                  src="/logo/logo.png"
-                  alt="Logo Sphorix France"
-                  width={56}
-                  height={56}
-                  className="h-full w-full object-contain"
-                  priority
-                />
-              </div>
-              <div>
-                <span className="block text-xl font-bold tracking-tight text-white sm:text-2xl">
-                  Sphorix <span className="text-orange-400">France</span>
-                </span>
-                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
-                  Solutions digitales &amp; gestion
-                </span>
-              </div>
-            </div>
-
-            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              Sites internet, outils métier et suivi d’activité
-            </h2>
-
-            <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-              Nous aidons les entreprises à Paris, Orléans, Vierzon et partout en France à clarifier leur présence en ligne, leurs outils et leur suivi avec des solutions simples, fiables et concrètes.
+    <footer className="bg-[#172b27] px-4 py-10 text-white sm:px-6 sm:py-12 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-10 border-b border-white/15 pb-9 md:grid-cols-[1.4fr_0.7fr_0.7fr] md:gap-12">
+          <div>
+            <Link href="/" className="inline-flex items-center gap-3" aria-label="Sphorix France, accueil">
+              <span className="flex h-10 w-10 items-center justify-center rounded-md bg-white p-1.5">
+                <Image src="/logo/logo.png" alt="" width={40} height={40} className="h-full w-full object-contain" />
+              </span>
+              <span className="text-lg font-bold">Sphorix <span className="text-[#f08a66]">France</span></span>
+            </Link>
+            <p className="mt-5 max-w-md text-base leading-relaxed text-[#d1ddd5]">
+              Nous connectons vos outils, automatisons vos processus et transformons vos données en informations utiles pour mieux décider.
             </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#contact"
-                className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-400"
-              >
-                Prendre contact
-              </a>
-              <a
-                href="#services"
-                className="rounded-full border border-blue-800 px-5 py-2.5 text-sm font-semibold text-slate-200 transition hover:border-orange-400 hover:text-orange-400"
-              >
-                Voir les services
-              </a>
-            </div>
-          </motion.div>
+            <Link href="/contact#contact-form" className="mt-5 inline-flex rounded-md bg-[#df6a43] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#c85332]">
+              Parlons de votre système
+            </Link>
+          </div>
 
           <div>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-gradient-to-r from-orange-400 to-transparent" />
-              <h3 className="text-base font-bold uppercase tracking-[0.18em] text-white">
-                Navigation
-              </h3>
-            </div>
-            <ul className="mt-4 space-y-3 text-sm text-slate-300">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="transition hover:text-orange-400">
-                    {link.label}
-                  </a>
+            <h2 className="text-sm font-semibold text-white">Explorer</h2>
+            <ul className="mt-4 space-y-3 text-sm text-[#d1ddd5]">
+              {pageLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="transition hover:text-[#d7f280]">{link.label}</a>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-gradient-to-r from-orange-400 to-transparent" />
-              <h3 className="text-base font-bold uppercase tracking-[0.18em] text-white">
-                Contact
-              </h3>
-            </div>
-            <ul className="mt-4 space-y-3 text-sm text-slate-300">
-              {contactLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noreferrer" : undefined}
-                    className="transition hover:text-orange-400"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+            <h2 className="text-sm font-semibold text-white">Écrire ou échanger</h2>
+            <ul className="mt-4 space-y-3 text-sm text-[#d1ddd5]">
+              <li><a href="mailto:contact@sphorix.fr" className="transition hover:text-[#d7f280]">contact@sphorix.fr</a></li>
+              <li><a href="https://wa.me/+33781525393" target="_blank" rel="noreferrer" className="transition hover:text-[#d7f280]">WhatsApp</a></li>
+              <li><a href="https://www.linkedin.com/in/sphorix" target="_blank" rel="noreferrer" className="transition hover:text-[#d7f280]">LinkedIn</a></li>
             </ul>
-          </div>
-
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-gradient-to-r from-orange-400 to-transparent" />
-              <h3 className="text-base font-bold uppercase tracking-[0.18em] text-white">
-                Zone d’intervention
-              </h3>
-            </div>
-            <p className="mt-4 text-sm leading-relaxed text-slate-300">
-              Services web, organisation et suivi pour les entreprises en France.
-            </p>
-
-            <div className="mt-5 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2">
-              {activityHighlights.map((activity) => (
-                <div
-                  key={activity}
-                  className="flex items-start gap-2 text-sm leading-relaxed text-slate-200"
-                >
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-orange-400" />
-                  <span>{activity}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-blue-900/50 pt-6 md:flex-row md:items-center md:justify-between">
-          <p className="text-sm text-slate-400">
-            © 2026 Sphorix France — Tous droits réservés.
-          </p>
-
-          <div className="flex flex-wrap gap-4 text-sm text-slate-300">
-            <a
-              href="#contact-form"
-              onClick={(event) => {
-                event.preventDefault();
-                window.dispatchEvent(new Event("open-contact-form"));
-              }}
-              className="transition hover:text-orange-400"
-            >
-              Planifier un échange
-            </a>
-            <a href="/boutique" className="transition hover:text-orange-400">
-              Boutique
-            </a>
-            <a href="/cgv" className="transition hover:text-orange-400">
-              Conditions générales
-            </a>
-            <a href="/politique-remboursement" className="transition hover:text-orange-400">
-              Remboursement
-            </a>
-            <a href="/politique-confidentialite" className="transition hover:text-orange-400">
-              Confidentialité
-            </a>
-          </div>
+        <div className="flex flex-col gap-4 pt-5 text-xs text-[#aebeb4] sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 Sphorix France. Tous droits réservés.</p>
+          <nav aria-label="Informations légales" className="flex flex-wrap gap-x-5 gap-y-2">
+            {legalLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="transition hover:text-white">{link.label}</Link>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

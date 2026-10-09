@@ -1,16 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
 import ContactInfo from "./ContactInfo";
 import ContactForm from "./ContactForm";
 
-export default function Contact() {
-  const [isFormVisible, setIsFormVisible] = useState(
-    () => typeof window !== "undefined" && window.location.hash === "#contact-form"
-  );
+interface ContactProps {
+  showForm?: boolean;
+}
+
+export default function Contact({ showForm = false }: ContactProps) {
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const openContactForm = useCallback(() => {
     setIsFormVisible(true);
@@ -64,35 +65,15 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="border-t border-blue-900/50 bg-blue-950 px-4 py-14 text-white sm:px-6 sm:py-16 lg:px-8 lg:py-24"
+      className="scroll-mt-20 border-t border-[#29483f] bg-[#172b27] px-4 py-14 text-white sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <div className="mx-auto max-w-6xl space-y-8">
-        <div className="grid gap-8 rounded-[32px] border border-blue-800/60 bg-blue-900/50 p-6 sm:gap-10 sm:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:p-10">
-
+        <div className="border-y border-[#45635a] py-8 sm:py-10">
           <ContactInfo onOpenForm={openContactForm} />
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="overflow-hidden rounded-[24px] border border-blue-800/60"
-          >
-            <div className="relative h-64 w-full min-h-[280px] sm:h-72 lg:h-full lg:min-h-[320px]">
-              <Image
-                src="/images/hero-illustration.png"
-                alt="Accompagnement des PME et indépendants par Sphorix France"
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 40vw"
-                className="object-cover"
-              />
-            </div>
-          </motion.div>
-
         </div>
 
         <AnimatePresence mode="wait">
-          {isFormVisible && (
+          {(isFormVisible || showForm) && (
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}

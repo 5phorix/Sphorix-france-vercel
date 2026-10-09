@@ -48,12 +48,12 @@ export default function ActivitesComptablesPage() {
       ]}
       extraSections={[
         {
-          title: "Logiciel & Suivi : Abonnement Sadesk Compta",
-          paragraphs: [
-            "Afin d'automatiser et de simplifier vos tâches courantes, nous proposons l'Abonnement Sadesk Compta : une solution logicielle avec suivi personnalisé.",
-            "Centralisez vos pièces comptables, suivez la trésorerie et vos factures en temps réel, et transmettez vos données sans effort à votre expert-comptable.",
-            "Découvrez la formule et demandez un devis adapté à votre entreprise dans notre boutique en ligne.",
-          ],
+          title: "Organisation et suivi comptable administratif",
+            paragraphs: [
+              "Nous vous aidons à automatiser et à simplifier vos tâches administratives courantes avec une organisation adaptée à votre entreprise.",
+              "Centralisez vos pièces, suivez vos échéances et préparez vos données pour les transmettre plus facilement à votre expert-comptable.",
+              "Demandez un accompagnement adapté à votre entreprise.",
+            ],
         },
         {
           title: "Les bénéfices pour votre entreprise",

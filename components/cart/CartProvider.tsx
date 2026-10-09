@@ -11,6 +11,24 @@ export type CartItem = {
   quantity: number;
 };
 
+export function mergeCartItem(current: CartItem[], item: Omit<CartItem, "quantity">): CartItem[] {
+  const existing = current.find((entry) => entry.id === item.id);
+  if (existing) {
+    return current.map((entry) => entry.id === item.id
+      ? { ...entry, quantity: entry.quantity + 1 }
+      : entry);
+  }
+  return [...current, { ...item, quantity: 1 }];
+}
+
+export function updateCartItemQuantity(current: CartItem[], id: string, quantity: number): CartItem[] {
+  if (quantity <= 0) {
+    return current.filter((item) => item.id !== id);
+  }
+
+  return current.map((item) => item.id === id ? { ...item, quantity } : item);
+}
+
 type CartContextValue = {
   items: CartItem[];
   itemCount: number;
@@ -39,35 +57,32 @@ function readStoredItems(): CartItem[] {
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [isStorageLoaded, setIsStorageLoaded] = useState(false);
 
   useEffect(() => {
-    const timeoutId = window.setTimeout(() => setItems(readStoredItems()), 0);
+    const timeoutId = window.setTimeout(() => {
+      setItems(readStoredItems());
+      setIsStorageLoaded(true);
+    }, 0);
+
     return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
+    if (!isStorageLoaded) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items]);
+  }, [isStorageLoaded, items]);
 
   const value = useMemo<CartContextValue>(() => ({
     items,
     itemCount: items.reduce((total, item) => total + item.quantity, 0),
     totalCents: items.reduce((total, item) => total + item.priceCents * item.quantity, 0),
     addItem: (item) => {
-      setItems((current) => {
-        const existing = current.find((entry) => entry.id === item.id);
-        if (existing) {
-          return current.map((entry) => entry.id === item.id
-            ? { ...entry, quantity: entry.quantity + 1 }
-            : entry);
-        }
-        return [...current, { ...item, quantity: 1 }];
-      });
+      setItems((current) => mergeCartItem(current, item));
     },
     removeItem: (id) => setItems((current) => current.filter((item) => item.id !== id)),
     updateQuantity: (id, quantity) => {
-      setItems((current) => current
-        .map((item) => item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item));
+      setItems((current) => updateCartItemQuantity(current, id, quantity));
     },
     clearCart: () => setItems([]),
   }), [items]);

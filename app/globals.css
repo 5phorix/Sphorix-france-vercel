@@ -4,16 +4,17 @@
   :root {
     --background: #ffffff;
     --foreground: #0f172a;
-    --primary: #2563eb;
-    --secondary: #f97316;
-    --dark: #0f172a;
-    --light: #f8fafc;
-    --accent: #06b6d4;
+    --primary: #14213d;
+    --primary-action: #2457d6;
+    --secondary: #d96c2c;
+    --dark: #14213d;
+    --light: #f7f4ee;
+    --accent: #2f8f72;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
-    --gradient-secondary: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
-    --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --gradient-primary: linear-gradient(135deg, #14213d 0%, #2457d6 100%);
+    --gradient-secondary: linear-gradient(135deg, #d96c2c 0%, #e89a5f 100%);
+    --gradient-dark: linear-gradient(135deg, #14213d 0%, #263b68 100%);
   }
 }
 
@@ -294,4 +295,19 @@ body {
 
 .shadow-glow-orange {
   @apply shadow-lg shadow-orange-500/20;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

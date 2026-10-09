@@ -11,7 +11,7 @@ export default function PolitiqueRemboursementPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-slate-950">1. Principes généraux</h2>
             <p>
-              Sphorix France s'engage à garantir la satisfaction de ses clients. Cette politique explique comment fonctionnent
+              Sphorix France s’engage à garantir la satisfaction de ses clients. Cette politique explique comment fonctionnent
               les remboursements pour les produits numériques vendus sur notre plateforme.
             </p>
             <div
@@ -28,7 +28,7 @@ export default function PolitiqueRemboursementPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-slate-950">2. Délais de remboursement</h2>
             <p>
-              Vous bénéficiez d'un droit de rétractation de <strong>14 jours</strong> à compter de la date de votre commande,
+              Vous bénéficiez d’un droit de rétractation de <strong>14 jours</strong> à compter de la date de votre commande,
               <strong>sous certaines conditions</strong>.
             </p>
             <p>
@@ -44,7 +44,7 @@ export default function PolitiqueRemboursementPage() {
             </p>
             <ul>
               <li>Vous <strong>acceptez implicitement</strong> que le produit numérique devient consommé</li>
-              <li>Selon la loi UE 2011/83/UE, il n'existe <strong>pas de droit de rétractation</strong> une fois l'accès
+              <li>Selon la loi UE 2011/83/UE, il n’existe <strong>pas de droit de rétractation</strong> une fois l’accès
                 commencé</li>
               <li>Un remboursement est exceptionnellement possible uniquement si le produit est défectueux (voir section 3)</li>
             </ul>
@@ -58,8 +58,8 @@ export default function PolitiqueRemboursementPage() {
             <ul>
               <li>Vous pouvez demander un remboursement dans les <strong>7 jours</strong> après achat</li>
               <li>Décrivez précisément le problème lors de votre demande</li>
-              <li>Indiquez votre version d'Excel, de navigateur ou système d'exploitation</li>
-              <li>Fournissez des preuves (captures d'écran, message d'erreur)</li>
+              <li>Indiquez votre version d’Excel, de navigateur ou système d’exploitation</li>
+              <li>Fournissez des preuves (captures d’écran, message d’erreur)</li>
             </ul>
             <p>
               <strong>Exclusions :</strong> Ne seront pas considérés comme des défauts :
@@ -67,7 +67,7 @@ export default function PolitiqueRemboursementPage() {
             <ul>
               <li>Les problèmes liés à votre version logicielle (Excel trop ancien, navigateur incompatible)</li>
               <li>Les incompatibilités avec vos paramètres système</li>
-              <li>Les demandes de personnalisation ou d'adaptation à vos besoins spécifiques</li>
+              <li>Les demandes de personnalisation ou d’adaptation à vos besoins spécifiques</li>
               <li>Les modifications que vous avez apportées au produit</li>
             </ul>
           </section>
@@ -78,7 +78,7 @@ export default function PolitiqueRemboursementPage() {
               Pour être admissible au remboursement, vous devez :
             </p>
             <ul>
-              <li>Être le client d'origine (adresse email d'achat)</li>
+              <li>Être le client d’origine (adresse email d’achat)</li>
               <li>Contacter <a href="mailto:contact@sphorix-france.fr"
                 className="text-orange-600 hover:text-orange-700">contact@sphorix-france.fr</a> avec votre
                 <strong> numéro de commande</strong></li>
@@ -100,7 +100,7 @@ export default function PolitiqueRemboursementPage() {
             </p>
             <ul>
               <li>Votre numéro de commande</li>
-              <li>Votre adresse email d'achat</li>
+              <li>Votre adresse email d’achat</li>
               <li>La raison du remboursement</li>
               <li>Tout détail pertinent ou preuve</li>
             </ul>
@@ -109,7 +109,7 @@ export default function PolitiqueRemboursementPage() {
             </p>
             <p>
               Nous examinons votre demande sous <strong>3 à 5 jours ouvrables</strong>. Nous pouvons vous contacter pour
-              plus d'informations.
+              plus d’informations.
             </p>
             <p>
               <strong>Étape 3 : Décision</strong>
@@ -122,7 +122,7 @@ export default function PolitiqueRemboursementPage() {
             </p>
             <p>
               Si approuvé, le remboursement est traité sous <strong>5 à 10 jours ouvrables</strong> vers votre
-              moyen de paiement d'origine.
+              moyen de paiement d’origine.
             </p>
           </section>
 
@@ -152,7 +152,7 @@ export default function PolitiqueRemboursementPage() {
               <strong>Abonnements ou services récurrents :</strong>
             </p>
             <ul>
-              <li>Remboursement possible jusqu'à la fin du mois/cycle en cours</li>
+              <li>Remboursement possible jusqu’à la fin du mois/cycle en cours</li>
               <li>Accès annulé immédiatement après approbation</li>
             </ul>
             <p>
@@ -169,11 +169,11 @@ export default function PolitiqueRemboursementPage() {
             <p>
               <strong>Délai de rétrofacturation :</strong> Les remboursements sont traités via Stripe (notre processeur de
               paiement). Votre banque recevra le remboursement dans les
-              <strong> 5 à 10 jours ouvrables</strong>, mais l'apparition sur votre compte peut prendre jusqu'à
+              <strong> 5 à 10 jours ouvrables</strong>, mais l’apparition sur votre compte peut prendre jusqu’à
               <strong> 2 à 3 semaines</strong> selon votre établissement.
             </p>
             <p>
-              <strong>Frais de remboursement :</strong> Aucun frais supplémentaire n'est déduit. Vous recevez le montant
+              <strong>Frais de remboursement :</strong> Aucun frais supplémentaire n’est déduit. Vous recevez le montant
               complet remboursé.
             </p>
           </section>
@@ -190,7 +190,7 @@ export default function PolitiqueRemboursementPage() {
               <li>Nous vous répondrons sous <strong>7 jours</strong></li>
             </ul>
             <p>
-              Si le différend n'est pas résolu à l'amiable, vous pouvez recourir à la médiation ou aux juridictions
+              Si le différend n’est pas résolu à l’amiable, vous pouvez recourir à la médiation ou aux juridictions
               compétentes selon la loi française.
             </p>
           </section>
@@ -203,7 +203,7 @@ export default function PolitiqueRemboursementPage() {
             <ul>
               <li>Demande après le délai imparti</li>
               <li>Raison non documentée ou peu claire</li>
-              <li>Produit acheté lors d'une promotion/solde sans raison valable</li>
+              <li>Produit acheté lors d’une promotion/solde sans raison valable</li>
               <li>Achat accidentel (erreur utilisateur)</li>
               <li>Modification ou utilisation commerciale du produit</li>
               <li>Fraude suspectée</li>
@@ -214,10 +214,10 @@ export default function PolitiqueRemboursementPage() {
             <h2 className="text-3xl font-bold text-slate-950">11. Garantie de satisfaction</h2>
             <p>
               Nous sommes convaincus de la qualité de nos produits. Si vous ne êtes pas satisfait pour une raison valide
-              <strong> avant d'accéder au produit</strong>, nous remboursons sans tracas.
+              <strong> avant d’accéder au produit</strong>, nous remboursons sans tracas.
             </p>
             <p>
-              Notre objectif est d'assurer votre confiance dans les outils et ressources que vous achetez chez Sphorix France.
+              Notre objectif est d’assurer votre confiance dans les outils et ressources que vous achetez chez Sphorix France.
             </p>
           </section>
 
@@ -229,12 +229,12 @@ export default function PolitiqueRemboursementPage() {
               R : Non, sauf si le produit présente un défaut technique. Les demandes tardives seront rejetées.
             </p>
             <p>
-              <strong>Q : Combien de temps avant que l'argent revienne dans mon compte ?</strong>
+              <strong>Q : Combien de temps avant que l’argent revienne dans mon compte ?</strong>
               <br />
-              R : Le remboursement est traité sous 5 à 10 jours, mais votre banque peut prendre jusqu'à 2-3 semaines.
+              R : Le remboursement est traité sous 5 à 10 jours, mais votre banque peut prendre jusqu’à 2-3 semaines.
             </p>
             <p>
-              <strong>Q : Que se passe-t-il si j'ai des questions sur mon remboursement ?</strong>
+              <strong>Q : Que se passe-t-il si j’ai des questions sur mon remboursement ?</strong>
               <br />
               R : Contactez contact@sphorix-france.fr avec votre numéro de commande.
             </p>
@@ -248,7 +248,7 @@ export default function PolitiqueRemboursementPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-slate-950">13. Modifications de cette politique</h2>
             <p>
-              Sphorix France se réserve le droit de modifier cette politique à tout moment. Les modifications s'appliqueront
+              Sphorix France se réserve le droit de modifier cette politique à tout moment. Les modifications s’appliqueront
               uniquement aux commandes futures, sauf obligation légale.
             </p>
           </section>

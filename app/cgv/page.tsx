@@ -9,15 +9,15 @@ export default function CGVPage() {
 
         <div className="prose prose-slate mt-12 max-w-none">
           <section className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-950">1. Objet et champ d'application</h2>
+            <h2 className="text-3xl font-bold text-slate-950">1. Objet et champ d’application</h2>
             <p>
               Les présentes conditions générales de vente (ci-après « CGV ») régissent les relations commerciales entre
               <strong> Sphorix France</strong> (ci-après « le Vendeur ») et ses clients personnes physiques ou morales
-              (ci-après « le Client ») pour l'achat de produits numériques (fichiers, outils, modèles Excel, tableaux
+              (ci-après « le Client ») pour l’achat de produits numériques (fichiers, outils, modèles Excel, tableaux
               de bord) proposés sur le site <strong>sphorix-france.fr</strong> (ci-après « la Plateforme »).
             </p>
             <p>
-              Toute commande implique l'acceptation sans réserve des présentes CGV. L'absence de protestation du Client
+              Toute commande implique l’acceptation sans réserve des présentes CGV. L’absence de protestation du Client
               vaut acceptation.
             </p>
           </section>
@@ -33,7 +33,7 @@ export default function CGVPage() {
               schémas et descriptions sont fournis à titre informatif et non contractuel.
             </p>
             <p>
-              Le Vendeur se réserve le droit de modifier l'offre, de suspendre ou de cesser la vente de produits à tout
+              Le Vendeur se réserve le droit de modifier l’offre, de suspendre ou de cesser la vente de produits à tout
               moment, en particulier en cas de rupture de stock numérique ou de problème technique.
             </p>
           </section>
@@ -41,7 +41,7 @@ export default function CGVPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-slate-950">3. Commande et paiement</h2>
             <p>
-              Le Client confirme sa commande via la Plateforme. Une commande n'est valide que lorsque le paiement a été
+              Le Client confirme sa commande via la Plateforme. Une commande n’est valide que lorsque le paiement a été
               entièrement reçu et traité.
             </p>
             <p>
@@ -53,7 +53,7 @@ export default function CGVPage() {
               <li>Le client doit utiliser une adresse email valide pour recevoir la confirmation de commande</li>
             </ul>
             <p>
-              En cas de refus ou d'échec du paiement, la commande est automatiquement annulée et le Client ne peut pas
+              En cas de refus ou d’échec du paiement, la commande est automatiquement annulée et le Client ne peut pas
               accéder aux produits. Les coordonnées bancaires ne sont jamais conservées sur nos serveurs.
             </p>
           </section>
@@ -65,7 +65,7 @@ export default function CGVPage() {
             </p>
             <ul>
               <li>Un email de confirmation avec un lien de téléchargement sécurisé</li>
-              <li>L'accès à son espace client pour consulter ses commandes et téléchargements</li>
+              <li>L’accès à son espace client pour consulter ses commandes et téléchargements</li>
               <li>Une durée de disponibilité des liens de téléchargement : <strong>30 jours</strong> à partir de la
                 commande</li>
             </ul>
@@ -74,8 +74,8 @@ export default function CGVPage() {
               nécessaire.
             </p>
             <p>
-              <strong>Importante limitation :</strong> En accord avec la politique de l'UE sur les produits numériques,
-              il n'y a <strong>pas de droit de rétractation</strong> une fois le téléchargement effectué ou l'accès au
+              <strong>Importante limitation :</strong> En accord avec la politique de l’UE sur les produits numériques,
+              il n’y a <strong>pas de droit de rétractation</strong> une fois le téléchargement effectué ou l’accès au
               produit commencé.
             </p>
           </section>
@@ -83,17 +83,17 @@ export default function CGVPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-slate-950">5. Responsabilités du Vendeur</h2>
             <p>
-              Le Vendeur s'engage à fournir des produits de qualité, testés et fonctionnels. Cependant :
+              Le Vendeur s’engage à fournir des produits de qualité, testés et fonctionnels. Cependant :
             </p>
             <ul>
-              <li>Les produits numériques sont fournis « en l'état »</li>
+              <li>Les produits numériques sont fournis « en l’état »</li>
               <li>Le Vendeur ne peut être tenu responsable des dysfonctionnements liés à la version logicielle du Client
-                (Excel, navigateur, système d'exploitation)</li>
-              <li>Aucune assistance personnalisée n'est incluse sauf mention explicite dans l'offre</li>
+                (Excel, navigateur, système d’exploitation)</li>
+              <li>Aucune assistance personnalisée n’est incluse sauf mention explicite dans l’offre</li>
               <li>Le Vendeur ne garantit pas la compatibilité totale avec toutes les versions logicielles futures</li>
             </ul>
             <p>
-              Les produits sont commercialisés à titre de modèles ou d'outils. Ils ne remplacent pas un conseil
+              Les produits sont commercialisés à titre de modèles ou d’outils. Ils ne remplacent pas un conseil
               professionnel adapté à votre situation spécifique.
             </p>
           </section>
@@ -101,17 +101,17 @@ export default function CGVPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-slate-950">6. Propriété intellectuelle</h2>
             <p>
-              Tous les produits numériques vendus par Sphorix France sont protégés par les droits d'auteur. Le Client
-              acquiert une licence d'utilisation personnelle, non exclusive et incessible.
+              Tous les produits numériques vendus par Sphorix France sont protégés par les droits d’auteur. Le Client
+              acquiert une licence d’utilisation personnelle, non exclusive et incessible.
             </p>
             <p>
-              Le Client s'engage à :
+              Le Client s’engage à :
             </p>
             <ul>
               <li>Utiliser les produits pour un usage personnel ou professionnel uniquement</li>
               <li>Ne pas reproduire, copier, modifier ou partager les produits sans autorisation</li>
               <li>Ne pas revendre ou redistribuer les produits</li>
-              <li>Respecter les droits d'auteur et les marques du Vendeur</li>
+              <li>Respecter les droits d’auteur et les marques du Vendeur</li>
             </ul>
             <p>
               Toute utilisation non autorisée expose le Client à des poursuites légales.
@@ -137,12 +137,12 @@ export default function CGVPage() {
             <p>
               <strong>Garantie limitée :</strong> Si un produit ne fonctionne pas correctement du fait du Vendeur, le
               Client peut demander un remboursement complet dans les 7 jours suivant la commande, à condition que le
-              produit n'ait pas été modifié.
+              produit n’ait pas été modifié.
             </p>
             <p>
               <strong>Limitations de responsabilité :</strong> Le Vendeur décline toute responsabilité quant aux
               dommages indirects, pertes de données, pertes de profits ou interruptions commerciales résultant de
-              l'utilisation ou de l'incapacité à utiliser les produits.
+              l’utilisation ou de l’incapacité à utiliser les produits.
             </p>
           </section>
 
@@ -159,7 +159,7 @@ export default function CGVPage() {
             <p>
               Les demandes de rétractation doivent être adressées à <a href="mailto:contact@sphorix-france.fr"
                 className="text-orange-600 hover:text-orange-700">contact@sphorix-france.fr</a> avec
-              la preuve d'achat.
+              la preuve d’achat.
             </p>
           </section>
 
@@ -174,7 +174,7 @@ export default function CGVPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-slate-950">11. Litiges et droit applicable</h2>
             <p>
-              Les présentes CGV sont régies par le droit français. En cas de litiges, le Client engage d'abord une
+              Les présentes CGV sont régies par le droit français. En cas de litiges, le Client engage d’abord une
               procédure amiable en contactant <a href="mailto:contact@sphorix-france.fr"
                 className="text-orange-600 hover:text-orange-700">contact@sphorix-france.fr</a>.
             </p>
@@ -187,7 +187,7 @@ export default function CGVPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-slate-950">12. Modification des CGV</h2>
             <p>
-              Sphorix France se réserve le droit de modifier ces CGV à tout moment. Les modifications s'appliqueront aux
+              Sphorix France se réserve le droit de modifier ces CGV à tout moment. Les modifications s’appliqueront aux
               nouvelles commandes. Les commandes passées avant la modification restent régies par les CGV en vigueur à la
               date de commande.
             </p>

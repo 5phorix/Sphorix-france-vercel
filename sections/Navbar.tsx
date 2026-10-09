@@ -4,17 +4,10 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import CartButton from "@/components/cart/CartButton";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  const handleOpenContactForm = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    window.dispatchEvent(new CustomEvent("open-contact-form"));
-    setOpen(false);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,11 +47,8 @@ export default function Navbar() {
 
           <div className="min-w-0">
             <span className="block text-lg font-bold leading-tight tracking-tight text-slate-950 sm:text-xl md:text-2xl">
-              <span className="text-blue-950">Sphorix</span>{" "}
-              <span className="text-orange-500">France</span>
-            </span>
-            <span className="hidden text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500 sm:block md:text-xs">
-              Solutions digitales &amp; gestion
+              <span className="text-[#172b27]">Sphorix</span>{" "}
+              <span className="text-[#df6a43]">France</span>
             </span>
           </div>
         </Link>
@@ -66,36 +56,26 @@ export default function Navbar() {
         {/* MENU DESKTOP */}
         <nav className="hidden flex-1 justify-center gap-6 md:flex">
           {[
-            { label: "À propos", href: "/#about" },
-            { label: "Nos Services", href: "/services" },
-            { label: "La boutique", href: "/boutique" },
-            { label: "Notre approche", href: "/#projects" },
-            { label: "Contact", href: "/#contact" },
+            { label: "Nos solutions", href: "/services" },
+            { label: "Notre vision", href: "/a-propos" },
+            { label: "Méthode", href: "/methode" },
           ].map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="px-4 py-2 rounded-lg text-slate-700 font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-50 relative group"
+              className="relative rounded-md px-3 py-2 font-medium text-[#34443b] transition hover:bg-[#eef3ed] hover:text-[#c85332] md:text-[18px]"
             >
               {item.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-900 to-orange-500 rounded-full group-hover:w-full transition-all duration-300"></span>
             </Link>
           ))}
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <CartButton />
           <Link
-            href="/compte"
-            className="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-orange-400 hover:text-orange-700 lg:inline-flex"
+            href="/contact#contact-form"
+            className="hidden shrink-0 items-center gap-2 rounded-md bg-[#df6a43] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#c85332] md:flex md:text-[18px]"
           >
-            Espace client
-          </Link>
-          <Link
-            href="/demande-devis"
-            className="hidden shrink-0 items-center gap-2 rounded-lg bg-blue-900 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:shadow-lg whitespace-nowrap md:flex"
-          >
-            Demander un devis
+            Parler de votre système
           </Link>
         </div>
         {/* MENU MOBILE */}
@@ -114,31 +94,27 @@ export default function Navbar() {
           
         <div className="flex flex-col gap-4 sm:gap-5">
             {[
-              { label: "À propos", href: "/#about" },
-              { label: "Nos Services", href: "/services" },
-              { label: "La boutique", href: "/boutique" },
-              { label: "Notre approche", href: "/#projects" },
-              { label: "Contact", href: "/#contact" },
-              { label: "Espace client", href: "/compte" },
-              { label: "Demander un devis", href: "/demande-devis" },
+              { label: "Nos solutions", href: "/services" },
+              { label: "Notre vision", href: "/a-propos" },
+              { label: "Méthode", href: "/methode" },
             ].map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="px-4 py-2 rounded-lg text-slate-900 font-medium transition-all duration-300 hover:text-orange-500 hover:bg-orange-50"
+                className="rounded-md px-3 py-2 font-medium text-[#34443b] transition hover:bg-[#eef3ed] hover:text-[#c85332]"
               >
                 {item.label}
               </Link>
             ))}
 
-            <a
-              href="#contact-form"
-              onClick={handleOpenContactForm}
-              className="rounded-full bg-gradient-to-r from-blue-900 to-orange-500 px-4 py-2 text-center text-sm font-semibold text-white transition-all duration-300 hover:shadow-lg sm:px-5 sm:py-3"
+            <Link
+              href="/contact#contact-form"
+              onClick={() => setOpen(false)}
+              className="rounded-md bg-[#df6a43] px-4 py-2 text-center text-sm font-semibold text-white transition hover:bg-[#c85332] sm:px-5 sm:py-3"
             >
-              Consultation
-            </a>
+              Parler de votre système
+            </Link>
           </div>
         </div>
       )}

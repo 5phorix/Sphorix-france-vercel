@@ -15,39 +15,30 @@ export default function ContactInfo({ onOpenForm }: ContactInfoProps) {
       transition={{ duration: 0.6 }}
       className="flex flex-col justify-center"
     >
-      <p className="mb-3 font-semibold tracking-[0.2em] text-orange-400">
-        CONTACT
+      <p className="mb-3 text-xs font-bold uppercase text-[#d7f280]">
+        Le prochain pas
       </p>
 
-      <h2 className="mb-4 text-[clamp(1.75rem,2.6vw,2.8rem)] font-bold tracking-tight text-white">
-        Échangeons sur vos besoins
+      <h2 className="mb-4 max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+        Parlons de votre écosystème.
       </h2>
 
-      <p className="mb-8 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-        Vous souhaitez améliorer votre organisation ou faire évoluer vos outils numériques ? Échangeons sur vos objectifs et identifions ensemble les solutions adaptées à votre activité, partout en France, y compris à Paris, Orléans et Vierzon.
+      <p className="mb-8 max-w-2xl text-base leading-relaxed text-[#d1ddd5] sm:text-lg">
+        Décrivez les outils que vous utilisez, les processus à automatiser et les informations dont vous avez besoin pour décider. Nous verrons comment les réunir dans une application adaptée à votre activité.
       </p>
 
-      <div className="mb-8 grid gap-4 text-sm text-slate-300 sm:grid-cols-2">
-        <div className="rounded-xl border border-blue-800/50 bg-blue-950/40 p-5">
-          <h3 className="mb-2 font-semibold text-white">
-            Organisation
-          </h3>
-
-          <p className="leading-relaxed">
-            Structuration des activités, amélioration des processus
-            et optimisation des méthodes de travail.
-          </p>
+      <div className="mb-8 grid gap-5 text-sm text-[#d1ddd5] sm:grid-cols-3 lg:text-[18px]">
+        <div className="border-l border-[#df6a43] pl-4">
+          <h3 className="font-semibold text-white">Vos logiciels</h3>
+          <p className="mt-1 leading-relaxed lg:text-[18px]">Les plateformes, logiciels et banques à relier.</p>
         </div>
-
-        <div className="rounded-xl border border-blue-800/50 bg-blue-950/40 p-5">
-          <h3 className="mb-2 font-semibold text-white">
-            Outils numériques
-          </h3>
-
-          <p className="leading-relaxed">
-            Intégration d’outils numériques pour simplifier
-            et améliorer votre efficacité.
-          </p>
+        <div className="border-l border-[#df6a43] pl-4">
+          <h3 className="font-semibold text-white">Vos processus</h3>
+          <p className="mt-1 leading-relaxed lg:text-[18px]">Les étapes qui prennent du temps ou manquent de fiabilité.</p>
+        </div>
+        <div className="border-l border-[#df6a43] pl-4">
+          <h3 className="font-semibold text-white">Vos indicateurs</h3>
+          <p className="mt-1 leading-relaxed lg:text-[18px]">La vue dont vous avez besoin pour décider.</p>
         </div>
       </div>
 
@@ -58,7 +49,7 @@ export default function ContactInfo({ onOpenForm }: ContactInfoProps) {
             event.preventDefault();
             onOpenForm();
           }}
-          className="inline-flex items-center justify-center rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-400"
+          className="inline-flex items-center justify-center rounded-md bg-[#df6a43] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#c85332]"
         >
           Prendre contact
         </a>
@@ -67,7 +58,7 @@ export default function ContactInfo({ onOpenForm }: ContactInfoProps) {
           href="https://wa.me/+33781525393"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-full border border-blue-800/70 px-6 py-3 text-sm font-semibold text-slate-200 transition hover:border-orange-400 hover:text-orange-400"
+          className="inline-flex items-center justify-center rounded-md border border-[#6a8278] px-6 py-3 text-sm font-semibold text-[#e4ebe5] transition hover:border-[#d7f280] hover:text-[#d7f280]"
         >
           Échanger sur WhatsApp
         </a>

@@ -1,111 +1,140 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowDown, ArrowRight, BarChart3, Globe2, Sparkles } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowRight,
+  Banknote,
+  Boxes,
+  FileSpreadsheet,
+  Landmark,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
-const signals = [
-  { icon: BarChart3, label: "Suivi d’activité", value: "Décider" },
-  { icon: Sparkles, label: "Outils simples", value: "Avancer" },
-  { icon: Globe2, label: "Présence en ligne", value: "Développer" },
+const sources = [
+  { icon: Boxes, label: "Plateforme A" },
+  { icon: Boxes, label: "Plateforme B" },
+  { icon: FileSpreadsheet, label: "Logiciel comptable" },
+  { icon: Landmark, label: "Banque" },
 ];
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-[#f4f0e9] px-4 pb-14 pt-28 text-slate-950 sm:px-6 sm:pb-20 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-44">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.72),transparent_40%,rgba(249,115,22,0.08))]" />
-      <div className="pointer-events-none absolute -right-24 top-20 h-80 w-80 rounded-full border border-orange-300/50 sm:h-[28rem] sm:w-[28rem]" />
-      <div className="pointer-events-none absolute -right-10 top-34 h-56 w-56 rounded-full border border-blue-300/50 sm:h-80 sm:w-80" />
+    <section className="relative overflow-hidden bg-[#eef3ed] px-4 pb-16 pt-28 text-[#17231f] sm:px-6 sm:pb-20 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-40">
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[48%] bg-[linear-gradient(rgba(23,35,31,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(23,35,31,0.035)_1px,transparent_1px)] bg-[size:36px_36px] lg:block" />
 
-      <div className="relative mx-auto grid max-w-7xl items-end gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
         <div>
-          <motion.h2
+          <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-            className="mb-4 text-xl font-extrabold uppercase tracking-tight text-orange-600 sm:text-2xl lg:text-3xl"
+            transition={{ duration: 0.4 }}
+            className="mb-5 flex items-center gap-3 text-sm font-semibold text-[#355c4b]"
           >
-            Outils numériques &amp; gestion financière sur mesure
-          </motion.h2>
+            <span className="h-px w-8 bg-[#df6a43]" aria-hidden="true" />
+            Systèmes numériques pour PME
+          </motion.p>
 
           <motion.h1
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.06 }}
-            className="max-w-4xl text-5xl font-bold leading-[0.98] tracking-[-0.04em] text-slate-950 sm:text-6xl lg:text-8xl"
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="max-w-2xl text-3xl font-semibold leading-[1.04] text-[#17231f] sm:text-4xl lg:text-5xl"
           >
-            Vos données deviennent des décisions plus claires.
+            <span className="block">Connectez vos outils.</span>
+            <span className="block text-[#355c4b]">Décidez sereinement.</span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.12 }}
-            className="mt-7 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg lg:text-xl"
+            transition={{ duration: 0.5, delay: 0.12 }}
+            className="mt-7 max-w-xl text-base leading-relaxed text-[#53625b] sm:text-lg lg:text-[19px]"
           >
-            Sphorix conçoit des outils numériques, tableaux de bord et applications de gestion sur mesure pour les artisans et les PME.
+            Nous concevons des applications qui connectent vos outils, automatisent vos processus et transforment vos données en informations utiles pour piloter votre activité et prendre de meilleures décisions.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.18 }}
+            transition={{ duration: 0.5, delay: 0.18 }}
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
             <Link
-              href="/services"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-blue-900"
+              href="#solutions"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#df6a43] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#c85332] lg:text-[15px]"
             >
-              Découvrir les services
+              Voir nos solutions
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
-              href="#boutique"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/70 px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:border-orange-400 hover:text-orange-700"
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-md border border-[#bdc9be] bg-white/60 px-5 py-3.5 text-sm font-semibold text-[#26382f] transition hover:border-[#355c4b] lg:text-[15px]"
             >
-              Explorer les outils
+              Parler de votre projet
             </Link>
           </motion.div>
 
-          <div className="mt-12 flex items-center gap-2 text-sm font-semibold text-slate-500">
-            <ArrowDown className="h-4 w-4 text-orange-500" aria-hidden="true" />
-            Une expertise de gestion, des outils réellement adaptés
+          <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-semibold uppercase text-[#607168]">
+            <span>API</span>
+            <span className="h-1 w-1 rounded-full bg-[#df6a43]" />
+            <span>Webhooks</span>
+            <span className="h-1 w-1 rounded-full bg-[#df6a43]" />
+            <span>Imports de fichiers</span>
           </div>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, x: 24 }}
+          initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, delay: 0.18 }}
-          className="relative min-h-[23rem] overflow-hidden rounded-[2rem] bg-slate-950 p-6 text-white shadow-[0_26px_80px_rgba(15,23,42,0.18)] sm:p-8 lg:min-h-[30rem] lg:p-10"
+          transition={{ duration: 0.65, delay: 0.12 }}
+          className="relative mx-auto w-full max-w-xl rounded-xl bg-[#172b27] p-5 text-white shadow-[0_28px_80px_rgba(23,43,39,0.18)] sm:p-7"
         >
-          <div className="absolute right-[-4rem] top-[-4rem] h-56 w-56 rounded-full border border-orange-400/30" />
-          <div className="absolute bottom-[-5rem] left-[-3rem] h-48 w-48 rounded-full border border-blue-400/25" />
-          <div className="relative flex h-full flex-col justify-between">
+          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-300">L’expertise Sphorix</p>
-              <h2 className="mt-4 max-w-sm text-3xl font-semibold leading-tight tracking-[-0.02em] sm:text-4xl">
-                Structurer, mesurer et mieux comprendre votre activité.
-              </h2>
+              <p className="text-[11px] font-semibold uppercase text-[#b9c9bd]">Architecture Sphorix</p>
+              <p className="mt-1 text-sm font-semibold">De vos outils à des décisions mieux éclairées</p>
             </div>
+            <Banknote className="h-5 w-5 shrink-0 text-[#d7f280]" aria-hidden="true" />
+          </div>
 
-            <div className="mt-10 space-y-3">
-              {signals.map(({ icon: Icon, label, value }, index) => (
-                <motion.div
-                  key={label}
-                  initial={{ opacity: 0, x: 16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: 0.35 + index * 0.1 }}
-                  className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3"
-                >
-                  <span className="flex items-center gap-3 text-sm text-slate-300">
-                    <Icon className="h-4 w-4 text-orange-300" aria-hidden="true" />
-                    {label}
-                  </span>
-                  <span className="text-sm font-semibold text-white">{value}</span>
-                </motion.div>
-              ))}
+          <div className="mt-5 grid grid-cols-2 gap-2">
+            {sources.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex min-h-12 items-center gap-2 rounded-md border border-white/10 bg-white/[0.06] px-3 py-2 text-xs text-[#e1e9e1] sm:text-sm lg:text-[15px]">
+                <Icon className="h-4 w-4 shrink-0 text-[#d7f280]" aria-hidden="true" />
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="relative ml-5 h-8 border-l border-dashed border-[#94aa9d]">
+            <ArrowDown className="absolute -bottom-1 -left-[9px] h-4 w-4 text-[#d7f280]" aria-hidden="true" />
+          </div>
+
+          <div className="rounded-md border border-[#61766a] bg-[#223a34] px-4 py-3">
+            <p className="text-[10px] font-semibold uppercase text-[#b9c9bd]">Sphorix Connect</p>
+            <p className="mt-1 text-sm font-medium lg:text-[15px]">API · Webhooks · Imports</p>
+          </div>
+
+          <div className="relative ml-5 h-8 border-l border-dashed border-[#94aa9d]">
+            <ArrowDown className="absolute -bottom-1 -left-[9px] h-4 w-4 text-[#d7f280]" aria-hidden="true" />
+          </div>
+
+          <div className="rounded-md bg-[#d7f280] px-4 py-3 text-[#172b27]">
+            <p className="text-[10px] font-bold uppercase">Moteur commun de données</p>
+            <p className="mt-1 text-sm font-semibold">Normaliser · Contrôler · Tracer</p>
+          </div>
+
+          <div className="relative ml-5 h-8 border-l border-dashed border-[#94aa9d]">
+            <ArrowDown className="absolute -bottom-1 -left-[9px] h-4 w-4 text-[#d7f280]" aria-hidden="true" />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-md bg-white px-4 py-3 text-[#172b27]">
+            <div>
+              <p className="text-[10px] font-bold uppercase text-[#607168]">Sadesk Compta</p>
+              <p className="mt-1 text-sm font-semibold lg:text-[15px]">Importer · Facturer · Comptabiliser · Suivre</p>
             </div>
+            <ArrowRight className="h-5 w-5 text-[#df6a43]" aria-hidden="true" />
           </div>
         </motion.div>
       </div>

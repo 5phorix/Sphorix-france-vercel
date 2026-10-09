@@ -61,13 +61,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/boutique`,
+      url: `${BASE_URL}/a-propos`,
       lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.85,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
-      url: `${BASE_URL}/a-propos`,
+      url: `${BASE_URL}/methode`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,

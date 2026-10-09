@@ -4,6 +4,7 @@ import Stripe from "stripe";
 
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { sendConfirmationEmail } from "@/lib/email";
+import type { Json } from "@/types/supabase";
 
 export const runtime = "nodejs";
 
@@ -14,11 +15,11 @@ function getStripe() {
 }
 
 async function logPaymentEvent(
-  supabase: any,
+  supabase: ReturnType<typeof createSupabaseAdminClient>,
   orderId: string,
   eventType: string,
   stripeEventId: string,
-  details?: any
+  details?: Json
 ) {
   try {
     await supabase.from("payment_events").insert({
@@ -145,7 +146,7 @@ export async function POST(request: Request) {
         if (!error) {
           await logPaymentEvent(supabase, refundOrderId, "refunded", event.id, {
             amount_refunded: charge.amount_refunded,
-            reason: (charge.refunds?.data[0] as any)?.reason || "unknown",
+            reason: charge.refunds?.data[0]?.reason ?? "unknown",
           });
         }
       }

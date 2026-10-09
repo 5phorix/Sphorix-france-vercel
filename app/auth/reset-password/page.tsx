@@ -1,16 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export default function ResetPasswordPage() {
+  const [supabase] = useState(createSupabaseBrowserClient);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isRecoveryReady, setIsRecoveryReady] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    void (async () => {
+      const hashParams = new URLSearchParams(window.location.hash.slice(1));
+      const accessToken = hashParams.get("access_token");
+      const refreshToken = hashParams.get("refresh_token");
+
+      if (accessToken && refreshToken) {
+        const { error: recoveryError } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        });
+
+        if (recoveryError) {
+          if (isMounted) setError("Le lien de réinitialisation est invalide ou a expiré.");
+          return;
+        }
+
+        window.history.replaceState(null, "", window.location.pathname);
+      }
+
+      const { data, error: sessionError } = await supabase.auth.getSession();
+      if (!isMounted) return;
+
+      if (sessionError || !data.session) {
+        setError("Le lien de réinitialisation est invalide ou a expiré.");
+        return;
+      }
+
+      setIsRecoveryReady(true);
+    })();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [supabase]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,7 +71,6 @@ export default function ResetPasswordPage() {
     }
 
     try {
-      const supabase = createSupabaseBrowserClient();
       const { error: updateError } = await supabase.auth.updateUser({
         password,
       });
@@ -108,10 +147,10 @@ export default function ResetPasswordPage() {
 
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={isLoading || !isRecoveryReady}
             className="w-full rounded-full bg-slate-950 px-5 py-3.5 text-sm font-bold text-white hover:bg-blue-900 disabled:opacity-50 transition"
           >
-            {isLoading ? "Enregistrement..." : "Enregistrer le mot de passe"}
+            {isLoading ? "Enregistrement..." : isRecoveryReady ? "Enregistrer le mot de passe" : "Vérification du lien..."}
           </button>
         </form>
 

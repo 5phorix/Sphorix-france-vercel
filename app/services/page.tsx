@@ -1,22 +1,31 @@
 import type { Metadata } from "next";
-import ServicesCatalog from "@/components/services/ServicesCatalog";
+import Navbar from "@/sections/Navbar";
+import Services from "@/sections/Services";
+import Footer from "@/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Services de gestion et outils numériques | Sphorix France",
+  title: "Nos solutions | Applications Sphorix pour PME",
   description:
-    "Découvrez les solutions Sphorix pour structurer vos données, suivre vos indicateurs et concevoir des outils de gestion sur mesure.",
+    "Découvrez comment Sphorix connecte vos plateformes, automatise vos processus et transforme vos données en informations utiles pour votre PME.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Services de gestion et outils numériques | Sphorix France",
-    description:
-      "Outils numériques, tableaux de bord et applications de gestion comptable, analytique, budgétaire et financière.",
+    title: "Nos solutions | Sphorix France",
+    description: "Des connecteurs, un moteur commun de données et une application conçue autour de votre activité.",
     url: "/services",
     type: "website",
   },
 };
 
 export default function ServicesPage() {
-  return <ServicesCatalog />;
+  return (
+    <>
+      <Navbar />
+      <main className="min-h-screen pt-20">
+        <Services />
+      </main>
+      <Footer />
+    </>
+  );
 }

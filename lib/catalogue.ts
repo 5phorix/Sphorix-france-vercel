@@ -13,6 +13,32 @@ type CatalogueProduct = ProductRow & {
 
 type Category = Database["public"]["Tables"]["categories"]["Row"];
 
+const LEGACY_EXCEL_SLUGS = new Set([
+  "abonnement-sadesk-compta",
+  "pack-gestion-essentielle",
+  "tableau-suivi-tresorerie",
+  "tableau-suivi-depenses",
+  "tableau-bord-petite-entreprise",
+]);
+
+const PRODUCT_COVER_PATHS: Record<string, string> = {
+  "sadesk-devis": "/images/devis.png",
+  "sadesk-facturation": "/images/facturation.png",
+  "sadesk-budget": "/images/Budget.png",
+  "sadesk-depenses-tresorerie": "/images/Depenses.png",
+  "sadesk-tableaux-de-bord": "/images/Tableaux-de-bord.png",
+};
+
+function isSellableProduct(product: CatalogueProduct) {
+  return !LEGACY_EXCEL_SLUGS.has(product.slug);
+}
+
+function withProductCover(product: CatalogueProduct): CatalogueProduct {
+  return PRODUCT_COVER_PATHS[product.slug]
+    ? { ...product, preview_image_path: PRODUCT_COVER_PATHS[product.slug] }
+    : product;
+}
+
 function hasSupabaseConfiguration() {
   return Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
@@ -30,24 +56,108 @@ const FALLBACK_CATEGORIES: Category[] = [
 
 const FALLBACK_PRODUCTS: CatalogueProduct[] = [
   {
-    id: "prod-sadesk",
+    id: "prod-sadesk-devis",
     category_id: "cat-5",
-    name: "Abonnement Sadesk Compta",
-    slug: "abonnement-sadesk-compta",
+    name: "Sadesk Devis",
+    slug: "sadesk-devis",
     kind: "single",
-    short_description: "Solution logicielle et suivi comptable sur mesure pour TPE, artisans et PME.",
-    description: "Accédez à la plateforme Sadesk Compta pour centraliser la gestion de votre comptabilité, l’enregistrement de vos pièces justificatives, le suivi de trésorerie et la transmission simplifiée à votre expert-comptable.",
+    short_description: "Créez, personnalisez et suivez vos devis depuis une base prête à évoluer avec Sadesk.",
+    description: "Une brique logicielle pour préparer des devis professionnels, réutiliser vos prestations, suivre les statuts et transformer les devis acceptés en factures.",
     format: "SaaS / Web",
     price_cents: 0,
     currency: "EUR",
-    preview_image_path: null,
+    preview_image_path: "/images/devis.png",
     is_active: true,
-    features: ["Centralisation des pièces comptables", "Suivi de trésorerie et facturation", "Interface adaptée TPE et PME", "Accompagnement et configuration sur mesure"],
-    included_items: ["Accès plateforme Sadesk Compta", "Assistance au paramétrage", "Support technique réactif", "Formule et tarif sur devis"],
-    seo_title: "Abonnement Sadesk Compta | Gestion comptable TPE & PME",
-    seo_description: "Découvrez Sadesk Compta par Sphorix France : abonnement logiciel et suivi comptable simplifié sur devis.",
-    created_at: "2026-09-12T00:00:00Z",
-    updated_at: "2026-09-12T00:00:00Z",
+    features: ["Catalogue de prestations réutilisable", "Devis personnalisables", "Suivi des statuts et relances", "Préparation à la conversion en facture"],
+    included_items: ["Accès au module Sadesk Devis", "Modèles de devis configurables", "Base de données clients et prestations", "Formule et tarif sur devis"],
+    seo_title: "Sadesk Devis | Logiciel de devis pour TPE et PME",
+    seo_description: "Un logiciel de devis professionnel, conçu comme une brique de la suite Sadesk.",
+    created_at: "2026-09-21T00:00:00Z",
+    updated_at: "2026-09-21T00:00:00Z",
+    categories: FALLBACK_CATEGORIES[4],
+  },
+  {
+    id: "prod-sadesk-facturation",
+    category_id: "cat-5",
+    name: "Sadesk Facturation",
+    slug: "sadesk-facturation",
+    kind: "single",
+    short_description: "Émettez vos factures avec des modèles professionnels et gardez le fil des règlements.",
+    description: "Un module de facturation conçu pour prolonger les devis, centraliser les modèles de factures, suivre les échéances et préparer une gestion unifiée dans Sadesk.",
+    format: "SaaS / Web",
+    price_cents: 0,
+    currency: "EUR",
+    preview_image_path: "/images/facturation.png",
+    is_active: true,
+    features: ["Modèles de factures personnalisables", "Numérotation et mentions configurables", "Suivi des échéances et règlements", "Conversion d'un devis accepté"],
+    included_items: ["Accès au module Sadesk Facturation", "Modèles de factures prêts à adapter", "Base clients et catalogue partagés", "Formule et tarif sur devis"],
+    seo_title: "Sadesk Facturation | Logiciel de facturation avec modèles",
+    seo_description: "Un logiciel de facturation avec modèles de factures, pensé pour la future suite Sadesk.",
+    created_at: "2026-09-21T00:00:00Z",
+    updated_at: "2026-09-21T00:00:00Z",
+    categories: FALLBACK_CATEGORIES[4],
+  },
+  {
+    id: "prod-sadesk-budget",
+    category_id: "cat-5",
+    name: "Sadesk Budget",
+    slug: "sadesk-budget",
+    kind: "single",
+    short_description: "Construisez vos budgets, comparez le prévu au réalisé et anticipez vos décisions.",
+    description: "Une base de budgétisation pour définir des objectifs par période ou activité, suivre les écarts et alimenter les tableaux de bord Sadesk.",
+    format: "SaaS / Web",
+    price_cents: 0,
+    currency: "EUR",
+    preview_image_path: "/images/Budget.png",
+    is_active: true,
+    features: ["Budgets par période et catégorie", "Comparaison prévu / réalisé", "Analyse des écarts", "Indicateurs prêts pour les tableaux de bord"],
+    included_items: ["Accès au module Sadesk Budget", "Structure budgétaire configurable", "Vues de suivi mensuelles", "Formule et tarif sur devis"],
+    seo_title: "Sadesk Budget | Logiciel de budgétisation",
+    seo_description: "Une base de budgétisation pour piloter les objectifs et les écarts de votre entreprise.",
+    created_at: "2026-09-21T00:00:00Z",
+    updated_at: "2026-09-21T00:00:00Z",
+    categories: FALLBACK_CATEGORIES[4],
+  },
+  {
+    id: "prod-sadesk-pilotage",
+    category_id: "cat-5",
+    name: "Sadesk Dépenses & Trésorerie",
+    slug: "sadesk-depenses-tresorerie",
+    kind: "single",
+    short_description: "Centralisez vos dépenses et suivez votre trésorerie dans une vue exploitable.",
+    description: "Une brique de pilotage pour enregistrer les dépenses, catégoriser les mouvements, suivre les encaissements et comprendre l'évolution de la trésorerie.",
+    format: "SaaS / Web",
+    price_cents: 0,
+    currency: "EUR",
+    preview_image_path: "/images/Depenses.png",
+    is_active: true,
+    features: ["Saisie et catégorisation des dépenses", "Suivi des entrées et sorties", "Soldes et échéances", "Données partagées avec les tableaux de bord"],
+    included_items: ["Accès au module Sadesk Dépenses & Trésorerie", "Catégories personnalisables", "Vues de trésorerie", "Formule et tarif sur devis"],
+    seo_title: "Sadesk Dépenses & Trésorerie | Logiciel de suivi",
+    seo_description: "Un module Sadesk pour suivre les dépenses, les encaissements et la trésorerie.",
+    created_at: "2026-09-21T00:00:00Z",
+    updated_at: "2026-09-21T00:00:00Z",
+    categories: FALLBACK_CATEGORIES[4],
+  },
+  {
+    id: "prod-sadesk-tableaux-bord",
+    category_id: "cat-5",
+    name: "Sadesk Tableaux de bord",
+    slug: "sadesk-tableaux-de-bord",
+    kind: "single",
+    short_description: "Rassemblez vos indicateurs de vente, facturation, budget et trésorerie au même endroit.",
+    description: "Une couche de pilotage pour transformer les données des modules Sadesk en indicateurs clairs, filtrables et adaptés à votre activité.",
+    format: "SaaS / Web",
+    price_cents: 0,
+    currency: "EUR",
+    preview_image_path: "/images/Tableaux-de-bord.png",
+    is_active: true,
+    features: ["Indicateurs de chiffre d'affaires et de marge", "Vues facturation et règlements", "Suivi budget et trésorerie", "Tableaux adaptés aux besoins de l'entreprise"],
+    included_items: ["Accès au module Sadesk Tableaux de bord", "Indicateurs configurables", "Filtres par période et activité", "Formule et tarif sur devis"],
+    seo_title: "Sadesk Tableaux de bord | Pilotage d'entreprise",
+    seo_description: "Des tableaux de bord pour réunir les indicateurs clés de la suite Sadesk.",
+    created_at: "2026-09-21T00:00:00Z",
+    updated_at: "2026-09-21T00:00:00Z",
     categories: FALLBACK_CATEGORIES[4],
   },
   {
@@ -138,7 +248,7 @@ const FALLBACK_PRODUCTS: CatalogueProduct[] = [
 
 export async function getCatalogue() {
   if (!hasSupabaseConfiguration()) {
-    return { products: FALLBACK_PRODUCTS, categories: FALLBACK_CATEGORIES };
+    return { products: FALLBACK_PRODUCTS.filter(isSellableProduct), categories: FALLBACK_CATEGORIES };
   }
 
   try {
@@ -156,28 +266,36 @@ export async function getCatalogue() {
           .order("sort_order", { ascending: true }),
       ]);
 
-    const allProducts = (products ?? []) as CatalogueProduct[];
-    const hasSadesk = allProducts.some((p) => p.slug === "abonnement-sadesk-compta");
-    if (!hasSadesk) {
-      allProducts.unshift(FALLBACK_PRODUCTS[0]);
+    const allProducts = ((products ?? []) as CatalogueProduct[]).filter(isSellableProduct).map(withProductCover);
+    const existingSlugs = new Set(allProducts.map((product) => product.slug));
+    for (const fallbackProduct of FALLBACK_PRODUCTS) {
+      if (!existingSlugs.has(fallbackProduct.slug)) {
+        allProducts.push(fallbackProduct);
+      }
     }
 
     const allCategories = (categories ?? []) as Category[];
-    const hasAbonnementsCat = allCategories.some((c) => c.slug === "abonnements");
-    if (!hasAbonnementsCat) {
-      allCategories.push(FALLBACK_CATEGORIES[4]);
+    const existingCategorySlugs = new Set(allCategories.map((category) => category.slug));
+    for (const fallbackCategory of FALLBACK_CATEGORIES) {
+      if (!existingCategorySlugs.has(fallbackCategory.slug)) {
+        allCategories.push(fallbackCategory);
+      }
     }
 
     return {
-      products: allProducts,
+      products: allProducts.filter(isSellableProduct),
       categories: allCategories,
     };
   } catch {
-    return { products: FALLBACK_PRODUCTS, categories: FALLBACK_CATEGORIES };
+    return { products: FALLBACK_PRODUCTS.filter(isSellableProduct), categories: FALLBACK_CATEGORIES };
   }
 }
 
 export async function getProductBySlug(slug: string) {
+  if (LEGACY_EXCEL_SLUGS.has(slug)) {
+    return null;
+  }
+
   if (!hasSupabaseConfiguration()) {
     return FALLBACK_PRODUCTS.find((p) => p.slug === slug) ?? null;
   }
@@ -198,4 +316,16 @@ export async function getProductBySlug(slug: string) {
   } catch {
     return FALLBACK_PRODUCTS.find((p) => p.slug === slug) ?? null;
   }
+}
+
+export function getProductNavigation<T extends { slug: string }>(products: T[], currentSlug: string) {
+  const currentIndex = products.findIndex((product) => product.slug === currentSlug);
+  if (currentIndex === -1) {
+    return { prevProduct: null, nextProduct: null };
+  }
+
+  return {
+    prevProduct: currentIndex > 0 ? products[currentIndex - 1] : null,
+    nextProduct: currentIndex < products.length - 1 ? products[currentIndex + 1] : null,
+  };
 }

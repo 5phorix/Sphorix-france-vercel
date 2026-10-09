@@ -34,7 +34,7 @@ export async function prepareAccountData(userId: string, email: string) {
     .eq("id", userId)
     .single();
 
-  let profile: AccountProfile = {
+  const profile: AccountProfile = {
     id: userId,
     fullName: profileData?.full_name ?? null,
     companyName: profileData?.company_name ?? null,

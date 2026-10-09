@@ -1,95 +1,105 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Database, Link2, ShieldCheck } from "lucide-react";
 
-const expertiseCards = [
+const principles = [
   {
-    title: "Gestion financière",
-    description: "Trésorerie, budget, chiffre d’affaires et lecture des marges.",
+    icon: Link2,
+    title: "Votre existant reste en place",
+    description: "Nous connectons les outils que vos équipes utilisent déjà.",
   },
   {
-    title: "Analyse et indicateurs",
-    description: "Données structurées, indicateurs clés et tableaux de bord lisibles.",
+    icon: Database,
+    title: "La donnée devient exploitable",
+    description: "Les données deviennent des informations utiles pour suivre l’activité et décider.",
   },
   {
-    title: "Outils sur mesure",
-    description: "Applications et automatisations adaptées à votre gestion quotidienne.",
+    icon: ShieldCheck,
+    title: "Chaque étape reste traçable",
+    description: "Les règles et les échanges sont conçus pour être vérifiables.",
   },
 ];
 
-export default function About() {
-  return (
-    <section
-      id="about"
-      className="bg-slate-100 px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
-    >
-      <div className="mx-auto grid max-w-7xl gap-8 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="mb-3 font-semibold text-orange-500">À PROPOS</p>
+interface AboutProps {
+  summary?: boolean;
+}
 
-          <h2 className="page-title">Des outils de gestion conçus autour de votre activité</h2>
-
-          <p className="mb-6 text-base leading-relaxed text-slate-600 sm:text-lg">
-            Sphorix France conçoit des outils numériques, tableaux de bord et applications de gestion sur mesure, spécialisés dans la gestion comptable, analytique, budgétaire et financière des artisans et des PME.
-          </p>
-
-          <p className="text-base leading-relaxed text-slate-600 sm:text-lg">
-            Nous vous aidons à structurer vos données, automatiser votre gestion et mieux comprendre votre activité pour prendre des décisions plus éclairées.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.7 }}
-          className="rounded-2xl bg-slate-100 p-4 shadow-lg sm:rounded-3xl sm:p-5 lg:p-6"
-        >
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-white">
-            <Image
-              src="/photos/2.png"
-              alt="Doua Konate en tenue professionnelle"
-              fill
-              sizes="(max-width: 640px) 100vw, 420px"
-              className="object-contain p-3"
-            />
+export default function About({ summary = false }: AboutProps) {
+  if (summary) {
+    return (
+      <section className="bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          <div>
+            <p className="mb-4 text-xs font-bold uppercase text-[#c85332]">Notre vision</p>
+            <h2 className="max-w-xl text-4xl font-semibold leading-tight text-[#17231f] sm:text-5xl">
+              On ne remplace pas ce qui fonctionne. On le connecte.
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#53625b] lg:text-[18px]">
+              Sphorix relie vos logiciels, automatise les échanges et rend vos données plus utiles pour votre activité.
+            </p>
+            <Link href="/a-propos" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#355c4b] hover:text-[#c85332]">
+              Découvrir notre vision
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.7, delay: 0.16 }}
-          className="mt-6 rounded-2xl bg-slate-100 p-6 shadow-lg sm:rounded-3xl sm:p-8 lg:p-10"
-        >
-          <h3 className="mb-8 text-xl font-bold text-slate-900 sm:text-2xl">
-            Domaines de compétences
-          </h3>
-
-          <div className="space-y-5">
-            {expertiseCards.map((card, index) => (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                whileHover={{ y: -4, scale: 1.01 }}
-                className="rounded-2xl border border-slate-200 bg-white p-5"
-              >
-                <h4 className="mb-2 font-semibold text-slate-900">{card.title}</h4>
-                <p className="text-slate-600">{card.description}</p>
-              </motion.div>
+          <div className="border-y border-[#dce3dc]">
+            {principles.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="grid gap-3 border-b border-[#dce3dc] py-5 last:border-b-0 sm:grid-cols-[2.5rem_1fr] sm:gap-4">
+                <Icon className="h-5 w-5 text-[#df6a43]" aria-hidden="true" />
+                <div>
+                  <h3 className="text-lg font-semibold text-[#17231f]">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-[#66756c] lg:text-[18px]">{description}</p>
+                </div>
+              </div>
             ))}
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id="sphorix" className="bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="mb-4 text-xs font-bold uppercase text-[#c85332]">La vision Sphorix</p>
+          <h2 className="max-w-xl text-4xl font-semibold leading-tight text-[#17231f] sm:text-5xl">
+            On ne remplace pas ce qui fonctionne. On le connecte.
+          </h2>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-[#53625b] sm:text-lg lg:text-[18px]">
+            Les PME s’appuient déjà sur des plateformes, des logiciels métier et leur banque. Sphorix les connecte, automatise les processus entre ces outils et transforme les données en informations utiles à la décision.
+          </p>
+          <Link href="/services" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#355c4b] hover:text-[#c85332]">
+            Comprendre l’architecture
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </motion.div>
+
+        <div className="border-y border-[#dce3dc]">
+          {principles.map(({ icon: Icon, title, description }, index) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, x: 14 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="grid gap-3 border-b border-[#dce3dc] py-5 last:border-b-0 sm:grid-cols-[2.5rem_1fr] sm:gap-4 sm:py-6"
+            >
+              <Icon className="h-5 w-5 text-[#df6a43]" aria-hidden="true" />
+              <div>
+                <h3 className="text-lg font-semibold text-[#17231f]">{title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-[#66756c] sm:text-base lg:text-[18px]">{description}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

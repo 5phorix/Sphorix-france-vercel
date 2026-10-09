@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 
+import Navbar from "@/sections/Navbar";
 import Contact from "@/sections/Contact";
+import Footer from "@/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Contact & Devis | Sphorix France",
+  title: "Contact | Sphorix France",
   description:
-    "Prenez contact avec Sphorix France pour échanger sur vos besoins en outils numériques, tableaux de bord et gestion d'entreprise.",
+    "Parlons des outils à connecter, des processus à automatiser et des informations dont votre PME a besoin pour décider.",
   alternates: {
     canonical: "/contact",
   },
@@ -13,8 +15,12 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-slate-950 pt-20">
-      <Contact />
-    </main>
+    <>
+      <Navbar />
+      <main className="min-h-screen pt-20">
+        <Contact showForm />
+      </main>
+      <Footer />
+    </>
   );
 }

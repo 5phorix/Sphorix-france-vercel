@@ -139,7 +139,7 @@ export default function ConnexionPage() {
         <div className="mt-8 border-t border-slate-100 pt-6 text-center text-sm text-slate-600">
           Pas encore de compte ?{" "}
           <Link href="/inscription" className="font-semibold text-orange-600 hover:underline">
-            S'inscrire
+            S’inscrire
           </Link>
         </div>
       </div>

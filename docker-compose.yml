@@ -1,0 +1,15 @@
+services:
+  sphorix:
+    build:
+      context: .
+    container_name: sphorix-france
+    env_file:
+      - .env.local
+    ports:
+      - "3000:3000"
+    volumes:
+      - sphorix-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  sphorix-data:

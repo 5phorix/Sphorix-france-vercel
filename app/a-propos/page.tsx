@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 
+import Navbar from "@/sections/Navbar";
 import About from "@/sections/About";
-import Contact from "@/sections/Contact";
+import Footer from "@/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "À propos | Expertise en gestion et outils sur mesure | Sphorix France",
+  title: "Notre vision | Sphorix France",
   description:
-    "Découvrez la démarche de Sphorix France : accompagnement des artisans et PME avec des outils numériques et de gestion sur mesure.",
+    "Découvrez la vision Sphorix : connecter les outils existants, automatiser les processus et rendre les données utiles aux décisions des PME.",
   alternates: {
     canonical: "/a-propos",
   },
@@ -14,9 +15,12 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-slate-100 pt-20">
-      <About />
-      <Contact />
-    </main>
+    <>
+      <Navbar />
+      <main className="min-h-screen pt-20">
+        <About />
+      </main>
+      <Footer />
+    </>
   );
 }
