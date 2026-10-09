@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export default function ResetPasswordPage() {
-  const [supabase] = useState(createSupabaseBrowserClient);
+  const supabaseRef = useRef<ReturnType<typeof createSupabaseBrowserClient> | null>(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -18,6 +18,8 @@ export default function ResetPasswordPage() {
     let isMounted = true;
 
     void (async () => {
+      const supabase = createSupabaseBrowserClient();
+      supabaseRef.current = supabase;
       const hashParams = new URLSearchParams(window.location.hash.slice(1));
       const accessToken = hashParams.get("access_token");
       const refreshToken = hashParams.get("refresh_token");
@@ -49,14 +51,22 @@ export default function ResetPasswordPage() {
 
     return () => {
       isMounted = false;
+      supabaseRef.current = null;
     };
-  }, [supabase]);
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     setMessage("");
     setError("");
+
+    const supabase = supabaseRef.current;
+    if (!supabase) {
+      setError("La session de réinitialisation n’est pas prête.");
+      setIsLoading(false);
+      return;
+    }
 
     if (password.length < 8) {
       setError("Le nouveau mot de passe doit contenir au moins 8 caractères.");
