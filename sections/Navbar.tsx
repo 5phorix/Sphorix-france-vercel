@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -73,9 +73,12 @@ export default function Navbar() {
         <div className="flex shrink-0 items-center gap-2">
           <Link
             href="/contact#contact-form"
-            className="hidden shrink-0 items-center gap-2 rounded-md bg-[#df6a43] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#c85332] md:flex md:text-[18px]"
+            className="group hidden shrink-0 items-center gap-3 rounded-lg border border-white/10 bg-[#172b27] py-1.5 pl-4 pr-1.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(23,43,39,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#24453a] hover:shadow-[0_12px_28px_rgba(23,43,39,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#df6a43] focus-visible:ring-offset-2 active:translate-y-0 md:flex md:text-[15px] lg:text-base"
           >
             Parler de votre système
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#df6a43] transition-colors duration-300 group-hover:bg-[#ee8059]">
+              <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+            </span>
           </Link>
         </div>
         {/* MENU MOBILE */}
@@ -111,9 +114,12 @@ export default function Navbar() {
             <Link
               href="/contact#contact-form"
               onClick={() => setOpen(false)}
-              className="rounded-md bg-[#df6a43] px-4 py-2 text-center text-sm font-semibold text-white transition hover:bg-[#c85332] sm:px-5 sm:py-3"
+              className="group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-[#172b27] py-1.5 pl-4 pr-1.5 text-center text-sm font-semibold text-white shadow-[0_8px_24px_rgba(23,43,39,0.2)] transition-all duration-300 hover:bg-[#24453a] hover:shadow-[0_12px_28px_rgba(23,43,39,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#df6a43] focus-visible:ring-offset-2 sm:py-2"
             >
               Parler de votre système
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#df6a43] transition-colors duration-300 group-hover:bg-[#ee8059]">
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              </span>
             </Link>
           </div>
         </div>
