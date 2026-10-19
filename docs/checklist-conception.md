@@ -316,3 +316,66 @@ Cette checklist sert de référence avant et pendant la construction de la plate
 - [ ] Outil d’administration souhaité.
 - [ ] Domaine de production définitif.
 - [ ] Outil d’analytics retenu ou absence d’analytics.
+
+## 18. Sadesk Compta et Sphorix Connect
+
+Les deux produits ont des dépôts, interfaces, authentifications, bases de données, stockages et déploiements indépendants. Connect peut relier d’autres logiciels sans dépendre de Sadesk; leur seul échange passe par l’API publique Sadesk versionnée.
+
+### Conception et fondations
+
+- [x] Définir la propriété des organisations, connexions, secrets, transferts, identifiants externes et erreurs.
+- [x] Créer le dépôt autonome `sphorix-connect` et le pousser sur GitHub (`main`, commit initial `f113777`).
+- [x] Créer son API Fastify/OpenAPI et son projet Supabase local distinct, migrations `0001` à `0007`.
+- [x] Ajouter le frontend Connect (connexion, organisations, applications, import, transferts, clés API) avec les modèles visuels fournis.
+- [x] Chiffrer les credentials Sadesk dans Connect; ne jamais les placer dans la configuration ordinaire ni les réafficher.
+- [x] Définir l’API publique Sadesk d’import scoped et l’interface d’émission/révocation des credentials `sds_live_...`.
+
+### Connecteur fichier et validation locale
+
+- [x] Implémenter l’aperçu CSV/JSON, la validation, les doublons et les erreurs paginées.
+- [x] Traiter les transferts avec idempotence, lease et checkpoint; vérifier la reprise au-delà de 250 lignes avec une ligne invalide au milieu.
+- [x] Valider l’import Sadesk local en brouillon, ses références de tiers et ses résultats par ligne.
+- [x] Vérifier les interfaces d’authentification, connexions, clés, import et révocation dans les deux produits.
+- [x] Tests Connect : 28 réussis; build et audit des dépendances validés.
+- [x] Tests Sadesk : 211 unitaires et 89 d’intégration réussis; lint, typecheck et build validés.
+
+### Bascule et retrait
+
+- [ ] Déployer les deux produits indépendamment et exécuter des tests de contrat sur leurs environnements de validation.
+- [ ] Migrer les connexions et exécutions historiques avec comparaison, consentement et procédure de retour arrière.
+- [ ] Valider la bascule de production avant de retirer les routes, tables et écrans Connect historiques de Sadesk.
+- [ ] Configurer les sauvegardes, la rétention/expiration des archives et l’observabilité dans les deux environnements.
+
+### Commercialisation différée
+
+- [x] Décider que Sadesk Compta et Sphorix Connect seront commercialisés comme deux produits distincts.
+- [ ] Attendre la validation explicite de la conception, des parcours, de la sécurité, des tests et de l’exploitation avant tout chantier commercial.
+- [ ] Définir le modèle de vente idéal pour chaque produit après cette validation; ne pas ajouter de tarification, abonnement, essai ou paiement maintenant.
+
+## 19. Back-office plateforme (`/administration`)
+
+Console interne Sphorix France de pilotage éditeur : produits, sociétés abonnées, abonnements et accès. Gestion manuelle, aucun paiement ni facturation Stripe déclenchés.
+
+### Réalisé
+
+- [x] Modèle Supabase : administrateurs, produits, offres, sociétés, abonnements, accès produit, journal d’événements (migrations `20261019000000` à `20261019040000`).
+- [x] RLS réservée aux administrateurs plateforme (`is_platform_admin()`), journal d’audit en lecture/insertion admin.
+- [x] Actions via fonctions SQL : créer société, offre, abonnement; changer le statut d’un abonnement; confirmer/mettre à jour l’accès et le tenant d’un produit.
+- [x] Console (`AdministrationConsole`) : vue d’ensemble, sociétés, abonnements, provisionnement produit, catalogue produits/offres.
+- [x] Connexion administrateur dédiée (`/administration/connexion`), redirection post-connexion selon le rôle, protection par `proxy.ts`.
+- [x] Tests : `admin-proxy` et `post-login-destination`; suite complète 19 tests réussis, typecheck propre.
+
+### Reste à faire
+
+- [ ] Appliquer les migrations sur l’environnement Supabase distant et créer le premier administrateur.
+- [ ] Recette manuelle de la console sur l’environnement de validation.
+- [ ] Provisionnement automatisé des tenants Sadesk/Connect (actuellement confirmation manuelle).
+- [ ] Facturation et paiement des abonnements (volontairement différés).
+
+## 20. État réel par application
+
+| Application | État | Prochaines étapes |
+| --- | --- | --- |
+| Back-office (Sphorix France) | Fonctionnel en local, tests et typecheck OK; migrations non déployées | Déploiement Supabase, premier admin, recette |
+| Sadesk Compta | Import public scoped et émission/révocation de clés validés en local (211 unitaires, 89 intégration) | Déploiement indépendant, tests de contrat, sauvegardes/observabilité |
+| Sphorix Connect | Dépôt autonome, API, frontend et connecteur fichier validés en local (28 tests) | Déploiement indépendant, migration de l’historique, retrait des écrans Connect de Sadesk |
