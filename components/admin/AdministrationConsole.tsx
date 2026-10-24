@@ -172,12 +172,14 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [loadError, setLoadError] = useState("");
   const [notice, setNotice] = useState("");
   const [selectedAccess, setSelectedAccess] = useState<{ access: AccessSummary; subscription: SubscriptionView } | null>(null);
 
   const refresh = async () => {
     setLoading(true);
     setError("");
+    setLoadError("");
     try {
       const data = await loadPlatformData();
       setProducts(data.products);
@@ -185,7 +187,7 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
       setSubscribers(data.subscribers);
       setSubscriptions(data.subscriptions);
     } catch {
-      setError("Chargement impossible. Vérifiez l’accès administrateur et la connexion locale.");
+      setLoadError("Chargement impossible. Vérifiez l’accès administrateur et la connexion au registre.");
     } finally {
       setLoading(false);
     }
@@ -202,7 +204,7 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
         setSubscriptions(data.subscriptions);
       })
       .catch(() => {
-        if (isCurrent) setError("Chargement impossible. Vérifiez l’accès administrateur et la connexion locale.");
+        if (isCurrent) setLoadError("Chargement impossible. Vérifiez l’accès administrateur et la connexion au registre.");
       })
       .finally(() => {
         if (isCurrent) setLoading(false);
@@ -321,18 +323,23 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
   };
 
   const changeSubscriptionStatus = async (subscription: SubscriptionView, status: Subscription["status"]) => {
-    const supabase = createSupabaseBrowserClient();
-    const { error: actionError } = await supabase.rpc("update_platform_subscription_status", {
-      target_subscription_id: subscription.id,
-      target_status: status,
-      target_notes: null,
-    });
-    if (actionError) {
+    setSaving(true);
+    setError("");
+    try {
+      const supabase = createSupabaseBrowserClient();
+      const { error: actionError } = await supabase.rpc("update_platform_subscription_status", {
+        target_subscription_id: subscription.id,
+        target_status: status,
+        target_notes: null,
+      });
+      if (actionError) throw actionError;
+      notify("Statut d’abonnement mis à jour.");
+      await refresh();
+    } catch {
       setError("Le statut de l’abonnement n’a pas pu être modifié.");
-      return;
+    } finally {
+      setSaving(false);
     }
-    notify("Statut d’abonnement mis à jour.");
-    await refresh();
   };
 
   const updateAccess = async (event: FormEvent<HTMLFormElement>) => {
@@ -361,8 +368,13 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
   };
 
   const signOut = async () => {
-    await createSupabaseBrowserClient().auth.signOut();
-    router.replace("/administration/connexion");
+    try {
+      const { error: signOutError } = await createSupabaseBrowserClient().auth.signOut();
+      if (signOutError) throw signOutError;
+      router.replace("/administration/connexion");
+    } catch {
+      setError("La déconnexion a échoué. Réessayez.");
+    }
   };
 
   const activeLabel = navigation.find((item) => item.id === activeTab)?.label ?? "Administration";
@@ -404,12 +416,19 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
             <div className="flex items-center gap-2 sm:gap-4">
               <label className="relative hidden md:block">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-                <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher une société…" className="h-9 w-[240px] rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm outline-none focus:border-[#168a79] focus:bg-white" />
+                <input aria-label="Rechercher une société ou un abonnement" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher une société…" className="h-9 w-[240px] rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm outline-none focus:border-[#168a79] focus:bg-white" />
               </label>
-              <span className="hidden items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-800 sm:inline-flex"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Local</span>
+              <span className="hidden items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700 sm:inline-flex"><span className="h-1.5 w-1.5 rounded-full bg-slate-500" /> Gestion manuelle</span>
               <button type="button" onClick={signOut} aria-label="Déconnexion" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 lg:hidden"><LogOut className="h-4 w-4" /></button>
             </div>
           </header>
+
+          <div className="border-b border-slate-200 bg-white px-3 py-3 md:hidden">
+            <label className="relative block">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden="true" />
+              <input aria-label="Rechercher une société ou un abonnement" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher une société…" className="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm outline-none focus:border-[#168a79] focus:bg-white" />
+            </label>
+          </div>
 
           <div className="border-b border-slate-200 bg-white px-3 py-2 lg:hidden">
             <nav className="flex gap-1 overflow-x-auto">
@@ -428,11 +447,16 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
 
             {error && <div role="alert" className="flex items-start justify-between gap-3 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800"><span>{error}</span><button type="button" onClick={() => setError("")} aria-label="Fermer" className="font-bold">×</button></div>}
             {notice && <div role="status" className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800"><Check className="h-4 w-4" />{notice}</div>}
-            {loading ? <div className="flex min-h-60 items-center justify-center gap-3 text-sm text-slate-500"><LoaderCircle className="h-5 w-5 animate-spin text-[#168a79]" />Chargement du registre éditeur…</div> : (
+            {loading ? <div className="flex min-h-60 items-center justify-center gap-3 text-sm text-slate-500"><LoaderCircle className="h-5 w-5 animate-spin text-[#168a79]" />Chargement du registre éditeur…</div> : loadError ? (
+              <div role="alert" className="flex min-h-60 flex-col items-center justify-center gap-4 rounded-xl border border-rose-200 bg-white p-6 text-center">
+                <p className="text-sm text-rose-800">{loadError}</p>
+                <button type="button" onClick={() => void refresh()} className="rounded-lg bg-[#14213d] px-4 py-2 text-sm font-semibold text-white hover:bg-[#20395f]">Réessayer</button>
+              </div>
+            ) : (
               <>
                 {activeTab === "overview" && <Overview products={products} subscribers={subscribers} subscriptions={subscriptions} pendingAccessCount={pendingAccessCount} monthlyValue={monthlyValue} chartData={chartData} />}
                 {activeTab === "subscribers" && <SubscribersView subscribers={filteredSubscribers} />}
-                {activeTab === "subscriptions" && <SubscriptionsView subscriptions={filteredSubscriptions} onStatusChange={changeSubscriptionStatus} />}
+                {activeTab === "subscriptions" && <SubscriptionsView subscriptions={filteredSubscriptions} onStatusChange={changeSubscriptionStatus} saving={saving} />}
                 {activeTab === "access" && <AccessView subscriptions={subscriptions} onProvision={setSelectedAccess} />}
                 {activeTab === "products" && <ProductsView products={products} plans={plans} />}
               </>
@@ -470,7 +494,7 @@ function Overview({ products, subscribers, subscriptions, pendingAccessCount, mo
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.3fr)_minmax(300px,0.8fr)]">
         <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-          <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="font-bold text-[#14213d]">Abonnements par produit</h3><p className="mt-1 text-xs text-slate-500">Actifs et en attente · registre local</p></div><span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold text-slate-600"><Activity className="h-3 w-3" />Vue instantanée</span></div>
+          <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="font-bold text-[#14213d]">Abonnements par produit</h3><p className="mt-1 text-xs text-slate-500">Actifs et en attente · registre éditeur</p></div><span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold text-slate-600"><Activity className="h-3 w-3" />Vue instantanée</span></div>
           <div className="mt-5 h-[250px] w-full">
             {products.length ? <ResponsiveContainer width="100%" height="100%"><BarChart data={chartData} margin={{ top: 10, right: 12, left: -18, bottom: 5 }}><CartesianGrid stroke="#e9eef0" vertical={false} /><XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: "#52606d", fontSize: 12 }} /><YAxis allowDecimals={false} axisLine={false} tickLine={false} tick={{ fill: "#87919a", fontSize: 11 }} /><Tooltip cursor={{ fill: "#f3f6f5" }} contentStyle={{ border: "1px solid #dce4e3", borderRadius: 10, fontSize: 12 }} /><Bar dataKey="active" name="Actifs / essais" fill="#168a79" radius={[5, 5, 0, 0]} /><Bar dataKey="pending" name="À confirmer" fill="#e28a45" radius={[5, 5, 0, 0]} /></BarChart></ResponsiveContainer> : <EmptyState text="Aucun produit au catalogue." />}
           </div>
@@ -499,11 +523,11 @@ function SubscribersView({ subscribers }: { subscribers: Subscriber[] }) {
   );
 }
 
-function SubscriptionsView({ subscriptions, onStatusChange }: { subscriptions: SubscriptionView[]; onStatusChange: (subscription: SubscriptionView, status: Subscription["status"]) => void }) {
+function SubscriptionsView({ subscriptions, onStatusChange, saving }: { subscriptions: SubscriptionView[]; onStatusChange: (subscription: SubscriptionView, status: Subscription["status"]) => void; saving: boolean }) {
   return (
     <section className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4"><div><h3 className="font-bold text-[#14213d]">Registre des abonnements</h3><p className="mt-1 text-xs text-slate-500">Gestion manuelle, sans prestataire de paiement</p></div><span className="text-xs font-semibold text-slate-500">{subscriptions.length}</span></div>
-      {subscriptions.length ? <div className="overflow-x-auto"><table className="w-full min-w-[980px] text-left text-sm"><thead className="bg-slate-50 text-[11px] uppercase tracking-wide text-slate-500"><tr><th className="px-5 py-3 font-semibold">Souscripteur</th><th className="px-5 py-3 font-semibold">Produit et offre</th><th className="px-5 py-3 font-semibold">Montant</th><th className="px-5 py-3 font-semibold">Période</th><th className="px-5 py-3 font-semibold">Statut</th><th className="px-5 py-3 font-semibold">Accès</th><th className="px-5 py-3 font-semibold">Changer statut</th></tr></thead><tbody className="divide-y divide-slate-100">{subscriptions.map((subscription) => { const accessPending = subscription.platform_product_access.some((access) => access.status === "pending"); return <tr key={subscription.id} className="hover:bg-[#f7faf9]"><td className="px-5 py-3.5"><p className="font-semibold text-slate-800">{subscription.platform_subscribers?.company_name ?? "Société"}</p><p className="mt-0.5 text-xs text-slate-500">{subscription.platform_subscribers?.email}</p></td><td className="px-5 py-3.5"><p className="font-semibold text-slate-700">{subscription.product_code}</p><p className="mt-0.5 text-xs text-slate-500">{subscription.plan_name} · {intervalLabels[subscription.billing_interval]}</p></td><td className="px-5 py-3.5 font-semibold text-slate-700">{money(subscription.amount_cents)}</td><td className="px-5 py-3.5 text-slate-600"><p>{formatDate(subscription.starts_at)}</p><p className="mt-0.5 text-xs text-slate-400">Fin : {formatDate(subscription.current_period_end)}</p></td><td className="px-5 py-3.5"><StatusBadge status={subscription.status} label={subscriptionStatusLabels[subscription.status]} /></td><td className="px-5 py-3.5"><span className={`inline-flex items-center gap-1.5 text-xs font-semibold ${accessPending ? "text-amber-700" : "text-emerald-700"}`}><span className={`h-1.5 w-1.5 rounded-full ${accessPending ? "bg-amber-500" : "bg-emerald-500"}`} />{accessPending ? "À provisionner" : "Suivi"}</span></td><td className="px-5 py-3.5"><select aria-label={`Statut de ${subscription.plan_name}`} value={subscription.status} onChange={(event) => onStatusChange(subscription, event.target.value as Subscription["status"])} className="h-8 rounded-md border border-slate-200 bg-white px-2 text-xs text-slate-700 outline-none focus:border-[#168a79]">{Object.entries(subscriptionStatusLabels).map(([status, label]) => <option key={status} value={status}>{label}</option>)}</select></td></tr>; })}</tbody></table></div> : <EmptyState text="Aucun abonnement. Créez un abonnement manuel depuis un souscripteur." />}
+      {subscriptions.length ? <div className="overflow-x-auto"><table className="w-full min-w-[980px] text-left text-sm"><thead className="bg-slate-50 text-[11px] uppercase tracking-wide text-slate-500"><tr><th className="px-5 py-3 font-semibold">Souscripteur</th><th className="px-5 py-3 font-semibold">Produit et offre</th><th className="px-5 py-3 font-semibold">Montant</th><th className="px-5 py-3 font-semibold">Période</th><th className="px-5 py-3 font-semibold">Statut</th><th className="px-5 py-3 font-semibold">Accès</th><th className="px-5 py-3 font-semibold">Changer statut</th></tr></thead><tbody className="divide-y divide-slate-100">{subscriptions.map((subscription) => { const accessPending = subscription.platform_product_access.some((access) => access.status === "pending"); return <tr key={subscription.id} className="hover:bg-[#f7faf9]"><td className="px-5 py-3.5"><p className="font-semibold text-slate-800">{subscription.platform_subscribers?.company_name ?? "Société"}</p><p className="mt-0.5 text-xs text-slate-500">{subscription.platform_subscribers?.email}</p></td><td className="px-5 py-3.5"><p className="font-semibold text-slate-700">{subscription.product_code}</p><p className="mt-0.5 text-xs text-slate-500">{subscription.plan_name} · {intervalLabels[subscription.billing_interval]}</p></td><td className="px-5 py-3.5 font-semibold text-slate-700">{money(subscription.amount_cents)}</td><td className="px-5 py-3.5 text-slate-600"><p>{formatDate(subscription.starts_at)}</p><p className="mt-0.5 text-xs text-slate-400">Fin : {formatDate(subscription.current_period_end)}</p></td><td className="px-5 py-3.5"><StatusBadge status={subscription.status} label={subscriptionStatusLabels[subscription.status]} /></td><td className="px-5 py-3.5"><span className={`inline-flex items-center gap-1.5 text-xs font-semibold ${accessPending ? "text-amber-700" : "text-emerald-700"}`}><span className={`h-1.5 w-1.5 rounded-full ${accessPending ? "bg-amber-500" : "bg-emerald-500"}`} />{accessPending ? "À provisionner" : "Suivi"}</span></td><td className="px-5 py-3.5"><select disabled={saving} aria-label={`Statut de ${subscription.plan_name}`} value={subscription.status} onChange={(event) => onStatusChange(subscription, event.target.value as Subscription["status"])} className="h-8 rounded-md border border-slate-200 bg-white px-2 text-xs text-slate-700 outline-none focus:border-[#168a79] disabled:bg-slate-100 disabled:text-slate-400">{Object.entries(subscriptionStatusLabels).map(([status, label]) => <option key={status} value={status}>{label}</option>)}</select></td></tr>; })}</tbody></table></div> : <EmptyState text="Aucun abonnement. Créez un abonnement manuel depuis un souscripteur." />}
     </section>
   );
 }

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
-import ProductWorkspaceApp from "@/components/products/ProductWorkspaceApp";
+import VentesApp from "@/components/products/VentesApp";
 
 export const metadata: Metadata = { title: "Sadesk Facturation | Sphorix France", robots: { index: false, follow: false } };
 
 export default function InvoicesProductPage() {
-  return <ProductWorkspaceApp module="invoices" />;
+  return <VentesApp initialTab="invoices" />;
 }

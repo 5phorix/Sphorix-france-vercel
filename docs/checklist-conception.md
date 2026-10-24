@@ -362,12 +362,14 @@ Console interne Sphorix France de pilotage éditeur : produits, sociétés abonn
 - [x] RLS réservée aux administrateurs plateforme (`is_platform_admin()`), journal d’audit en lecture/insertion admin.
 - [x] Actions via fonctions SQL : créer société, offre, abonnement; changer le statut d’un abonnement; confirmer/mettre à jour l’accès et le tenant d’un produit.
 - [x] Console (`AdministrationConsole`) : vue d’ensemble, sociétés, abonnements, provisionnement produit, catalogue produits/offres.
+- [x] Console : recherche accessible sur mobile, erreurs de chargement avec reprise et états de sauvegarde des changements de statut.
 - [x] Connexion administrateur dédiée (`/administration/connexion`), redirection post-connexion selon le rôle, protection par `proxy.ts`.
-- [x] Tests : `admin-proxy` et `post-login-destination`; suite complète 19 tests réussis, typecheck propre.
+- [x] Tests : `admin-proxy` et `post-login-destination`; suite complète 19 tests réussis, lint sans erreur et build de production réussis.
 
 ### Reste à faire
 
-- [ ] Appliquer les migrations sur l’environnement Supabase distant et créer le premier administrateur.
+- [ ] Démarrer Supabase local et effectuer la recette fonctionnelle de la console avec des données fictives.
+- [ ] Après validation locale, appliquer les migrations sur l’environnement Supabase distant et créer le premier administrateur.
 - [ ] Recette manuelle de la console sur l’environnement de validation.
 - [ ] Provisionnement automatisé des tenants Sadesk/Connect (actuellement confirmation manuelle).
 - [ ] Facturation et paiement des abonnements (volontairement différés).

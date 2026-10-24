@@ -19,12 +19,13 @@ const today = () => new Date().toISOString().slice(0, 10);
 const money = (value: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(value);
 const emptyLine = (): QuoteLine => ({ id: crypto.randomUUID(), label: "", quantity: 1, unitPrice: 0, taxRate: 20 });
 const emptyBudget = (): BusinessBudget => ({ id: "primary", period: today().slice(0, 7), lines: [] });
+const workspaceTone: Tone = { page: "bg-[#f3f6f5]", rail: "bg-[#102f2b]", ink: "text-[#172a26]", accent: "bg-[#16866b]", secondary: "bg-[#e3f3ed]", soft: "bg-[#e3f3ed]", border: "border-[#e0e9e5]" };
 
 const productConfig: Record<Module, { name: string; eyebrow: string; subtitle: string; tabs: string[]; tone: Tone }> = {
-  quotes: { name: "Sadesk Devis", eyebrow: "Ventes · Pipeline", subtitle: "Transformez chaque opportunité en proposition claire, suivie et prête à accepter.", tabs: ["Opportunités", "Clients", "Prestations"], tone: { page: "bg-[#eef3ff]", rail: "bg-[#193a8a]", ink: "text-[#193a8a]", accent: "bg-[#2457d6]", secondary: "bg-[#dce7ff]", soft: "bg-[#e1eaff]", border: "border-[#c4d3f5]" } },
-  invoices: { name: "Sadesk Facturation", eyebrow: "Encaissement · Échéances", subtitle: "Émettez, relancez et suivez vos règlements depuis une vue conçue pour le quotidien.", tabs: ["À encaisser", "Échéances", "Modèles"], tone: { page: "bg-[#edf8f3]", rail: "bg-[#12614f]", ink: "text-[#12614f]", accent: "bg-[#16866b]", secondary: "bg-[#d7f0e6]", soft: "bg-[#dff3e9]", border: "border-[#b9dfd1]" } },
-  budget: { name: "Sadesk Budget", eyebrow: "Pilotage · Prévision", subtitle: "Donnez un cap à vos dépenses et voyez immédiatement ce qui dévie du plan.", tabs: ["Plan annuel", "Écarts", "Scénarios"], tone: { page: "bg-[#fff7ed]", rail: "bg-[#a9521f]", ink: "text-[#873e18]", accent: "bg-[#d96c2c]", secondary: "bg-[#fae1cc]", soft: "bg-[#fbe7d6]", border: "border-[#ebc7a8]" } },
-  dashboard: { name: "Sadesk Tableaux de bord", eyebrow: "Direction · Décision", subtitle: "Les signaux essentiels de votre activité, présentés pour décider sans chercher.", tabs: ["Vue d'ensemble", "Activité", "Alertes"], tone: { page: "bg-[#f5f0ff]", rail: "bg-[#5c3a91]", ink: "text-[#4b2f7c]", accent: "bg-[#7651b8]", secondary: "bg-[#e9ddff]", soft: "bg-[#eee5ff]", border: "border-[#d6c5f0]" } },
+  quotes: { name: "Sadesk Devis", eyebrow: "Ventes · Pipeline", subtitle: "Transformez chaque opportunité en proposition claire, suivie et prête à accepter.", tabs: ["Opportunités", "Clients", "Prestations"], tone: workspaceTone },
+  invoices: { name: "Sadesk Facturation", eyebrow: "Encaissement · Échéances", subtitle: "Émettez, relancez et suivez vos règlements depuis une vue conçue pour le quotidien.", tabs: ["À encaisser", "Échéances", "Modèles"], tone: workspaceTone },
+  budget: { name: "Sadesk Budget", eyebrow: "Pilotage · Prévision", subtitle: "Donnez un cap à vos dépenses et voyez immédiatement ce qui dévie du plan.", tabs: ["Plan annuel", "Écarts", "Scénarios"], tone: workspaceTone },
+  dashboard: { name: "Sadesk Tableaux de bord", eyebrow: "Direction · Décision", subtitle: "Les signaux essentiels de votre activité, présentés pour décider sans chercher.", tabs: ["Vue d'ensemble", "Activité", "Alertes"], tone: workspaceTone },
 };
 
 function readStored<T>(key: string, fallback: T): T { try { const value = window.localStorage.getItem(key); return value ? JSON.parse(value) as T : fallback; } catch { return fallback; } }

@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function TreasuryProductPage() {
-  return <TreasuryApp />;
+  return <div className="sd-product"><TreasuryApp /></div>;
 }
