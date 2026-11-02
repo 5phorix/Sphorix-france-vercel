@@ -210,7 +210,7 @@ export default function CGVPage() {
             </p>
             <ul>
               <li><strong>Email :</strong> contact@sphorix.fr</li>
-              <li><strong>Site :</strong> https://sphorix.fr</li>
+              <li><strong>Site :</strong> https://www.sphorix.fr</li>
             </ul>
           </section>
         </div>

@@ -93,12 +93,12 @@ export async function syncPublicWebsiteKnowledge(): Promise<{ indexedPages: numb
   const apiKey = getRequired("AZURE_AI_SEARCH_API_KEY");
   const indexName = getRequired("AZURE_AI_SEARCH_INDEX");
   const apiVersion = process.env.AZURE_AI_SEARCH_API_VERSION?.trim() || "2024-07-01";
-  const siteUrl = new URL(process.env.CHATBOT_PUBLIC_SITE_URL?.trim() || "https://sphorixfrance.fr");
+  const siteUrl = new URL(process.env.CHATBOT_PUBLIC_SITE_URL?.trim() || "https://www.sphorix.fr");
   if (
     siteUrl.protocol !== "https:"
-    || !["sphorixfrance.fr", "www.sphorixfrance.fr"].includes(siteUrl.hostname)
+    || !["sphorix.fr", "www.sphorix.fr"].includes(siteUrl.hostname)
   ) {
-    throw new Error("L’URL source doit être le site public sphorixfrance.fr.");
+    throw new Error("L’URL source doit être le site public sphorix.fr.");
   }
 
   const sitemapResponse = await fetch(new URL("/sitemap.xml", siteUrl), {

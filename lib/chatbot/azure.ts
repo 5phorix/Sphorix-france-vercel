@@ -129,7 +129,7 @@ export async function searchSphorixKnowledge(query: string): Promise<KnowledgeSo
 
     if (
       sourceUrl.protocol !== "https:"
-      || !["sphorixfrance.fr", "www.sphorixfrance.fr"].includes(sourceUrl.hostname)
+      || !["sphorix.fr", "www.sphorix.fr"].includes(sourceUrl.hostname)
     ) {
       return [];
     }

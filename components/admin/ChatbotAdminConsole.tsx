@@ -353,7 +353,7 @@ export default function ChatbotAdminConsole() {
           <div className="mb-5">
             <h2 className="text-lg font-bold text-[#14213d]">Configuration de l’assistant</h2>
             <p className="mt-1 text-sm text-slate-500">
-              Sources au lancement : pages publiques de sphorixfrance.fr. {settings.indexed_page_count} page(s) indexée(s)
+              Sources au lancement : pages publiques de www.sphorix.fr. {settings.indexed_page_count} page(s) indexée(s)
               {settings.knowledge_synced_at ? ` · dernière actualisation ${formatDate(settings.knowledge_synced_at)}` : " · aucune synchronisation effectuée"}.
             </p>
           </div>

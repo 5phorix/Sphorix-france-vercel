@@ -15,7 +15,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sphorixfrance.fr"),
+  metadataBase: new URL("https://www.sphorix.fr"),
   title: "Sphorix France | applications numériques sur mesure pour PME",
   description:
     "Conception d’applications numériques sur mesure pour les PME : connexion des outils, automatisation des processus et données utiles à la décision.",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://sphorixfrance.fr",
+    url: "https://www.sphorix.fr",
     siteName: "Sphorix France",
     title: "Sphorix France | applications numériques sur mesure pour PME",
     description: "Applications sur mesure pour connecter vos outils, automatiser vos processus et prendre de meilleures décisions.",
@@ -89,7 +89,7 @@ export default function RootLayout({
     name: "Sphorix France",
     description:
       "Applications numériques sur mesure pour connecter les outils, automatiser les processus et rendre les données utiles aux PME",
-    url: "https://sphorixfrance.fr",
+    url: "https://www.sphorix.fr",
     telephone: "+33781525393",
     areaServed: "FR",
     priceRange: "$$",

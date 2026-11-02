@@ -14,7 +14,7 @@ afterEach(() => {
 
 describe("API chatbot", () => {
   it("refuse les requêtes provenant d’une autre origine", async () => {
-    const response = await chatPost(new NextRequest("https://sphorixfrance.fr/api/chat", {
+    const response = await chatPost(new NextRequest("https://www.sphorix.fr/api/chat", {
       method: "POST",
       headers: {
         origin: "https://attacker.example",
@@ -27,7 +27,7 @@ describe("API chatbot", () => {
   });
 
   it("refuse un message vide", async () => {
-    const response = await chatPost(new NextRequest("https://sphorixfrance.fr/api/chat", {
+    const response = await chatPost(new NextRequest("https://www.sphorix.fr/api/chat", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ message: "   " }),
@@ -48,7 +48,7 @@ describe("API chatbot", () => {
       vi.stubEnv(name, "");
     }
 
-    const response = await chatPost(new NextRequest("https://sphorixfrance.fr/api/chat", {
+    const response = await chatPost(new NextRequest("https://www.sphorix.fr/api/chat", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ message: "Bonjour" }),
@@ -72,7 +72,7 @@ describe("API chatbot", () => {
       vi.stubEnv(name, "");
     }
 
-    const response = await chatGet(new NextRequest("https://sphorixfrance.fr/api/chat"));
+    const response = await chatGet(new NextRequest("https://www.sphorix.fr/api/chat"));
     expect(response.status).toBe(200);
     await expect(response.json()).resolves.toEqual({ enabled: false });
   });

@@ -87,8 +87,16 @@ SMTP_FROM=noreply@votre-domaine.fr
 SMTP_SECURE=false
 ```
 
-En production, configurez `NEXT_PUBLIC_SITE_URL` avec l’URL publique HTTPS du site.
+En production, configurez `NEXT_PUBLIC_SITE_URL=https://www.sphorix.fr`.
 Elle est utilisée pour générer les liens d’invitation à l’espace client.
+
+Dans Vercel, définissez cette variable pour les environnements Production et Preview
+qui doivent générer des liens valides, puis redéployez après toute modification.
+Dans Supabase Dashboard > Authentication > URL Configuration, définissez le Site URL
+sur `https://www.sphorix.fr` et ajoutez `https://www.sphorix.fr/**` ainsi que
+`https://sphorix.fr/**` aux Redirect URLs autorisées. Le domaine sans `www`
+redirige vers `www`; l’autoriser aussi couvre les retours OAuth/magic-link initiés
+depuis l’adresse historique.
 
 #### Production (Vercel Dashboard)
 ```
@@ -118,7 +126,7 @@ AZURE_AI_SEARCH_ENDPOINT=https://<service>.search.windows.net
 AZURE_AI_SEARCH_API_KEY=<clé serveur Azure AI Search>
 AZURE_AI_SEARCH_INDEX=sphorix-public-site
 AZURE_AI_SEARCH_API_VERSION=2024-07-01
-CHATBOT_PUBLIC_SITE_URL=https://sphorixfrance.fr
+CHATBOT_PUBLIC_SITE_URL=https://www.sphorix.fr
 ```
 
 `AZURE_AI_SEARCH_SEMANTIC_CONFIGURATION` est facultative. Pour l'utiliser, la

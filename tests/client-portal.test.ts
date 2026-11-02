@@ -15,7 +15,7 @@ beforeAll(async () => {
 
 describe("API de l’espace client", () => {
   it("refuse les requêtes inter-origines avant toute action d’administration", async () => {
-    const response = await adminInvitePost(new NextRequest("https://sphorixfrance.fr/api/admin/client-invitations", {
+    const response = await adminInvitePost(new NextRequest("https://www.sphorix.fr/api/admin/client-invitations", {
       method: "POST",
       headers: { origin: "https://attacker.example", "content-type": "application/json" },
       body: JSON.stringify({ subscriberId: "00000000-0000-4000-8000-000000000001" }),
@@ -25,9 +25,9 @@ describe("API de l’espace client", () => {
   });
 
   it("refuse les tokens d’invitation mal formés", async () => {
-    const response = await redeemPost(new NextRequest("https://sphorixfrance.fr/api/client-invitations/redeem", {
+    const response = await redeemPost(new NextRequest("https://www.sphorix.fr/api/client-invitations/redeem", {
       method: "POST",
-      headers: { origin: "https://sphorixfrance.fr", "content-type": "application/json" },
+      headers: { origin: "https://www.sphorix.fr", "content-type": "application/json" },
       body: JSON.stringify({ token: "invalid" }),
     }));
 
@@ -35,7 +35,7 @@ describe("API de l’espace client", () => {
   });
 
   it("refuse les messages clients inter-origines", async () => {
-    const response = await clientPortalPost(new NextRequest("https://sphorixfrance.fr/api/client/portal", {
+    const response = await clientPortalPost(new NextRequest("https://www.sphorix.fr/api/client/portal", {
       method: "POST",
       headers: { origin: "https://attacker.example", "content-type": "application/json" },
       body: JSON.stringify({ projectId: "00000000-0000-4000-8000-000000000001", body: "Bonjour" }),
@@ -46,7 +46,7 @@ describe("API de l’espace client", () => {
 
   it("ne recherche pas de document avec un identifiant invalide", async () => {
     const response = await clientDocumentGet(
-      new NextRequest("https://sphorixfrance.fr/api/client/portal/documents/not-a-uuid"),
+      new NextRequest("https://www.sphorix.fr/api/client/portal/documents/not-a-uuid"),
       { params: Promise.resolve({ id: "not-a-uuid" }) },
     );
 
