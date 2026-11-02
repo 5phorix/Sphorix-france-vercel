@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 
-import ContactInfo from "./ContactInfo";
 import ContactForm from "./ContactForm";
 
 interface ContactProps {
@@ -68,10 +67,6 @@ export default function Contact({ showForm = false }: ContactProps) {
       className="scroll-mt-20 border-t border-[#29483f] bg-[#172b27] px-4 py-14 text-white sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <div className="mx-auto max-w-6xl space-y-8">
-        <div className="border-y border-[#45635a] py-8 sm:py-10">
-          <ContactInfo onOpenForm={openContactForm} />
-        </div>
-
         <AnimatePresence mode="wait">
           {(isFormVisible || showForm) && (
             <motion.div

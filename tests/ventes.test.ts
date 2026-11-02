@@ -9,7 +9,7 @@ import { missingDependencies } from "@/lib/suite/modules";
 import {
   cancelInvoice, convertQuoteToInvoice, createInvoice, createQuote, deleteInvoice, deleteQuote, documentTrail, documentTotals, expireQuotes,
   invoiceBalance, issueInvoice, recordPayment, removeCustomer, saveCustomer, transitionQuote, updateInvoice, updateQuote,
-  type Customer, type SalesLine,
+  saveProduct, type Customer, type SalesLine, type SalesProduct,
 } from "@/lib/ventes/ventes";
 import type { JournalEntry } from "@/lib/finance/types";
 
@@ -28,6 +28,24 @@ describe("clients", () => {
     const quote = createQuote([], { id: "q", customer, date: "2026-03-01", validUntil: "2026-03-31", lines }, config);
     expect(() => removeCustomer(list, "c1", [quote], [])).toThrow(/archivez/);
     expect(removeCustomer(list, "c1", [], [])).toEqual([]);
+    expect(saveCustomer([], { ...customer, creditLimit: 125_000 })[0].creditLimit).toBe(125_000);
+    expect(() => saveCustomer([], { ...customer, creditLimit: -1 })).toThrow(/Plafond/);
+  });
+});
+
+describe("catalogue des ventes", () => {
+  const product: SalesProduct = { id: "p1", code: "SRV001", label: "Conseil", unit: "heure", unitPrice: 12_000, taxCode: "TVA20", account: "706000", active: true };
+
+  it("enregistre un article avec ses paramètres comptables et refuse les références en double", () => {
+    expect(saveProduct([], product, config)).toEqual([product]);
+    expect(saveProduct([product], { ...product, label: "Conseil spécialisé" }, config)[0].label).toBe("Conseil spécialisé");
+    expect(() => saveProduct([product], { ...product, id: "p2" }, config)).toThrow(/existe déjà/);
+  });
+
+  it("refuse un prix, un taux de TVA ou un compte de vente invalide", () => {
+    expect(() => saveProduct([], { ...product, unitPrice: -1 }, config)).toThrow(/Prix unitaire/);
+    expect(() => saveProduct([], { ...product, taxCode: "UNKNOWN" }, config)).toThrow(/TVA/);
+    expect(() => saveProduct([], { ...product, account: "613000" }, config)).toThrow(/Compte de produit/);
   });
 });
 

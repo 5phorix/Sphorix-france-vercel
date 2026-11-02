@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createDefaultConfig, lockPeriod, upsertAccount } from "@/lib/finance/config";
 import { buildPurchaseInvoice, buildPayment, buildSalesInvoice } from "@/lib/finance/documents";
 import { parseOcrInvoiceText } from "@/lib/finance/einvoice";
-import { fiscalYearOf, generalLedger, postEntry, reverseEntry, trialBalance, validateEntry } from "@/lib/finance/ledger";
+import { accountsInLedgerRange, fiscalYearOf, generalLedger, generalLedgerByAccounts, postEntry, reverseEntry, trialBalance, validateEntry } from "@/lib/finance/ledger";
 import { autoMatch, controllingReport, openItems } from "@/lib/finance/echeancier-gestion";
 import { buildPilotage } from "@/lib/finance/pilotage";
 import { balanceSheet, closingTaxEntry, corporateTax, incomeStatement, vatReturn } from "@/lib/finance/reports";
@@ -51,6 +51,59 @@ describe("Comptabilité - écritures", () => {
   it("produit le grand livre avec solde cumulé", () => {
     const rows = generalLedger(ledgerWithActivity(), "512000");
     expect(rows.at(-1)?.balance).toBe(1_000_000);
+  });
+
+  it("conserve le solde antérieur au début de la période du grand livre", () => {
+    const entries = ledgerWithActivity();
+    entries.push(postEntry(entries, buildPayment({ id: "pay", date: "2026-03-01", kind: "customer", partnerId: "C1", amount: 600_000, reference: "R1" }), config));
+    const rows = generalLedger(entries, "512000", "2026-02-01", "2026-12-31");
+    expect(rows).toHaveLength(1);
+    expect(rows[0].balance).toBe(1_600_000);
+  });
+
+  it("calcule les soldes d'ouverture et de clôture de plusieurs comptes sur la même période", () => {
+    const ledgers = generalLedgerByAccounts(ledgerWithActivity(), ["512000", "411000", "706000"], "2026-02-01", "2026-02-28");
+    expect(ledgers).toEqual([
+      { accountCode: "512000", rows: [], openingBalance: 1_000_000, closingBalance: 1_000_000 },
+      { accountCode: "411000", rows: [expect.objectContaining({ debit: 600_000, balance: 600_000 })], openingBalance: 0, closingBalance: 600_000 },
+      { accountCode: "706000", rows: [expect.objectContaining({ credit: 500_000, balance: -500_000 })], openingBalance: 0, closingBalance: -500_000 },
+    ]);
+  });
+
+  it("filtre le plan comptable par plages de racines et de comptes", () => {
+    const rootsOneToFive = accountsInLedgerRange(config.accounts, { mode: "root", from: "1", to: "5" });
+    expect(rootsOneToFive.map((account) => account.code)).toContain("512000");
+    expect(rootsOneToFive.map((account) => account.code)).not.toContain("601000");
+
+    const accounts101To512 = accountsInLedgerRange(config.accounts, { mode: "account", from: "101", to: "512" });
+    expect(accounts101To512.map((account) => account.code)).toContain("101000");
+    expect(accounts101To512.map((account) => account.code)).toContain("512000");
+    expect(accounts101To512.map((account) => account.code)).not.toContain("530000");
+    expect(accounts101To512.map((account) => account.code)).not.toContain("601000");
+    expect(accountsInLedgerRange(config.accounts, { mode: "account", from: "512", to: "101" })).toEqual([]);
+  });
+
+  it("présente les soldes initiaux et finaux de la balance autour des mouvements de période", () => {
+    const result = trialBalance(ledgerWithActivity(), config, "2026-02-01", "2026-02-28");
+    expect(result.rows.find((row) => row.code === "512000")).toMatchObject({
+      openingBalance: 1_000_000,
+      debit: 0,
+      credit: 0,
+      closingBalance: 1_000_000,
+    });
+    expect(result.rows.find((row) => row.code === "101000")).toMatchObject({
+      openingBalance: -1_000_000,
+      closingBalance: -1_000_000,
+    });
+    expect(result.rows.find((row) => row.code === "706000")).toMatchObject({
+      openingBalance: 0,
+      debit: 0,
+      credit: 500_000,
+      closingBalance: -500_000,
+    });
+    expect(result.openingDebit).toBe(result.openingCredit);
+    expect(result.debit).toBe(result.credit);
+    expect(result.closingDebit).toBe(result.closingCredit);
   });
 });
 

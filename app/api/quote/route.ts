@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 import { consumeRateLimit } from "@/lib/contact-leads-db";
+import {
+  CONTACT_RETENTION_MONTHS,
+  PRIVACY_POLICY_VERSION,
+  storeContactLead,
+} from "@/lib/privacy-retention";
 
 export const runtime = "nodejs";
 
@@ -212,6 +217,36 @@ export async function POST(request: NextRequest) {
 
       </div>
       `,
+    });
+
+    const requestSummary = [
+      `Profil : ${businessType || "Non renseigné"}`,
+      `Entreprise : ${company || "Non renseignée"}`,
+      `Besoins : ${needs.join(", ") || "Non renseigné"}`,
+      `Taille : ${companySize || "Non renseignée"}`,
+      `Urgence : ${urgency || "Non renseignée"}`,
+      `Objectif : ${objective || "Non renseigné"}`,
+      `Détails : ${details || "Aucun détail fourni."}`,
+      `Estimation indicative : ${minPrice} à ${maxPrice} € HT (${minDays} à ${maxDays} jour(s))`,
+    ].join("\n");
+
+    await storeContactLead({
+      contact_type: "entreprise",
+      full_name: name,
+      email,
+      phone: phone || null,
+      subject: "Demande d'estimation",
+      message: requestSummary,
+      company_name: company || null,
+      company_role: null,
+      siret: null,
+      activity: businessType || null,
+      consent: false,
+      marketing_consent: false,
+      retention_months: CONTACT_RETENTION_MONTHS,
+      policy_version: PRIVACY_POLICY_VERSION,
+      admin_email_sent: true,
+      acknowledgement_sent: false,
     });
 
     return NextResponse.json({

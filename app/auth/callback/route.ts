@@ -6,15 +6,18 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const next = requestUrl.searchParams.get("next") ?? "/compte";
+  const requestedNext = requestUrl.searchParams.get("next") ?? "/compte";
+  const invitationNext = /^\/invitation\?token=[A-Za-z0-9_-]{43}$/.test(requestedNext)
+    ? requestedNext
+    : null;
 
   if (code) {
     const supabase = await createSupabaseServerClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (error) return NextResponse.redirect(new URL("/connexion?error=link-expired", request.url));
 
-    if (next === "/auth/reset-password") {
-      return NextResponse.redirect(new URL(next, request.url));
+    if (requestedNext === "/auth/reset-password") {
+      return NextResponse.redirect(new URL(requestedNext, request.url));
     }
 
     const { data: { user } } = await supabase.auth.getUser();
@@ -22,7 +25,7 @@ export async function GET(request: Request) {
       ? await supabase.from("platform_admins").select("role, is_active").eq("user_id", user.id).maybeSingle()
       : { data: null };
     return NextResponse.redirect(new URL(
-      postLoginDestination(platformAdmin?.role, platformAdmin?.is_active ?? false),
+      invitationNext ?? postLoginDestination(platformAdmin?.role, platformAdmin?.is_active ?? false),
       request.url
     ));
   }

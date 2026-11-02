@@ -87,11 +87,75 @@ SMTP_FROM=noreply@votre-domaine.fr
 SMTP_SECURE=false
 ```
 
+En production, configurez `NEXT_PUBLIC_SITE_URL` avec l’URL publique HTTPS du site.
+Elle est utilisée pour générer les liens d’invitation à l’espace client.
+
 #### Production (Vercel Dashboard)
 ```
 Settings > Environment Variables > Add
 [Copier les mêmes variables que .env.local]
+CRON_SECRET=<secret aléatoire d'au moins 16 caractères>
 ```
+
+`CRON_SECRET` protège la purge quotidienne des données arrivées à échéance et la
+synchronisation hebdomadaire des connaissances du chatbot. Ajoutez ce secret à
+l'environnement Production.
+
+### Chatbot Azure (activation explicite)
+
+Le chatbot est désactivé par défaut. Avant de l'activer, créez/configurez un déploiement
+de chat Azure AI Foundry et un service Azure AI Search dans une région adaptée aux
+engagements de traitement des données. Le code ne provisionne aucune ressource Azure.
+
+Configurez les variables suivantes côté serveur dans Vercel (et dans `.env.local` pour
+un test local). Ne préfixez aucune clé par `NEXT_PUBLIC_` :
+
+```text
+AZURE_AI_FOUNDRY_CHAT_COMPLETIONS_URL=<URL HTTPS complète de l'API chat compatible OpenAI>
+AZURE_AI_FOUNDRY_API_KEY=<clé serveur du déploiement Foundry>
+AZURE_AI_FOUNDRY_MODEL=<nom du déploiement de modèle>
+AZURE_AI_SEARCH_ENDPOINT=https://<service>.search.windows.net
+AZURE_AI_SEARCH_API_KEY=<clé serveur Azure AI Search>
+AZURE_AI_SEARCH_INDEX=sphorix-public-site
+AZURE_AI_SEARCH_API_VERSION=2024-07-01
+CHATBOT_PUBLIC_SITE_URL=https://sphorixfrance.fr
+```
+
+`AZURE_AI_SEARCH_SEMANTIC_CONFIGURATION` est facultative. Pour l'utiliser, la
+configuration sémantique correspondante doit déjà exister dans l'index. Le service
+de recherche doit être dédié ou compatible avec les champs `id`, `title`, `url`,
+`content` et `source`. La synchronisation ne cible que les documents dont
+`source` vaut `public-website`.
+
+Appliquez la migration `supabase/migrations/20261102000000_chatbot.sql` avec la
+procédure habituelle Supabase. Elle crée le stockage privé des conversations, la
+configuration administrateur et la limitation du débit. Les tables ne sont pas
+accessibles aux rôles `anon` ou `authenticated` ; l'application les manipule côté
+serveur après contrôle des droits administrateur ou du cookie de session visiteur.
+
+### Espace de suivi client
+
+Appliquez également `supabase/migrations/20261102120500_client_portal.sql` après la
+migration du chatbot. Elle relie les comptes aux fiches clients, crée le suivi des
+projets, des étapes et des échanges, et configure un bucket privé pour les documents.
+Les documents ajoutés depuis l’administration sont limités à 4 Mo par fichier.
+
+Depuis `/administration/suivi-clients`, créez une fiche client, ses dossiers et étapes,
+ajoutez les logiciels/abonnements dans la console d’administration existante, puis
+générez un lien d’invitation. Le lien doit être transmis manuellement au client, n’est
+stocké qu’à l’état haché et expire après 7 jours. Le client active son compte depuis
+`/invitation`, puis retrouve ses travaux, messages, logiciels et documents dans
+`/compte`. Les devis et factures affichés sont des documents déposés par l’administrateur ;
+ce portail ne crée pas de facture et ne déclenche aucun paiement.
+
+Le cron `/api/cron/sync-chatbot-knowledge` synchronise chaque semaine les pages
+publiques présentes dans `sitemap.xml` vers Azure AI Search. Le cron quotidien de
+purge supprime également les conversations expirées après 24 mois et les clés de
+limitation de débit après 24 heures. Les deux routes utilisent `CRON_SECRET`.
+Après le déploiement, vérifiez les exécutions dans Vercel, puis ouvrez
+`/administration/chatbot` pour configurer le nom, l'accueil, le ton et activer
+l'assistant. L'activation effective reste impossible tant que les variables Azure
+ne sont pas complètes.
 
 ### Phase 3 : Stripe Webhooks
 

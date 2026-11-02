@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Mail, MessageCircle } from "lucide-react";
 
 const pageLinks = [
-  { label: "Nos solutions", href: "/services" },
-  { label: "La vision Sphorix", href: "/a-propos" },
-  { label: "Notre méthode", href: "/methode" },
-  { label: "Contact", href: "/contact" },
+  { label: "Accueil", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Méthode", href: "/methode" },
 ];
 
 const legalLinks = [
@@ -27,16 +27,16 @@ export default function Footer() {
               <span className="text-lg font-bold">Sphorix <span className="text-[#f08a66]">France</span></span>
             </Link>
             <p className="mt-5 max-w-md text-base leading-relaxed text-[#d1ddd5]">
-              Nous connectons vos outils, automatisons vos processus et transformons vos données en informations utiles pour mieux décider.
+              Organiser et améliorer la gestion de votre petite entreprise.
             </p>
-            <Link href="/contact#contact-form" className="mt-5 inline-flex rounded-md bg-[#df6a43] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#c85332]">
-              Parlons de votre système
+            <Link href="/contact#contact-form" className="mt-5 inline-flex rounded-md bg-[#df6a43] px-4 py-2.5 text-base font-semibold text-white transition hover:bg-[#c85332]">
+              Nous contacter
             </Link>
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold text-white">Explorer</h2>
-            <ul className="mt-4 space-y-3 text-sm text-[#d1ddd5]">
+            <h2 className="text-lg font-semibold text-white">Explorer</h2>
+            <ul className="mt-4 space-y-3 text-base text-[#d1ddd5]">
               {pageLinks.map((link) => (
                 <li key={link.href}>
                   <a href={link.href} className="transition hover:text-[#d7f280]">{link.label}</a>
@@ -46,17 +46,32 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold text-white">Écrire ou échanger</h2>
-            <ul className="mt-4 space-y-3 text-sm text-[#d1ddd5]">
-              <li><a href="mailto:contact@sphorix.fr" className="transition hover:text-[#d7f280]">contact@sphorix.fr</a></li>
-              <li><a href="https://wa.me/+33781525393" target="_blank" rel="noreferrer" className="transition hover:text-[#d7f280]">WhatsApp</a></li>
-              <li><a href="https://www.linkedin.com/in/sphorix" target="_blank" rel="noreferrer" className="transition hover:text-[#d7f280]">LinkedIn</a></li>
+            <h2 className="text-lg font-semibold text-white">Écrire ou échanger</h2>
+            <ul className="mt-4 space-y-3 text-base text-[#d1ddd5]">
+              <li>
+                <a href="mailto:contact@sphorix-france.fr" className="inline-flex items-center gap-2.5 transition hover:text-[#d7f280]">
+                  <Mail aria-hidden="true" size={18} />
+                  contact@sphorix-france.fr
+                </a>
+              </li>
+              <li>
+                <a href="https://wa.me/+33781525393" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 transition hover:text-[#d7f280]">
+                  <MessageCircle aria-hidden="true" size={18} />
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/company/sphorix-france" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 transition hover:text-[#d7f280]">
+                  <span aria-hidden="true" className="flex h-[18px] w-[18px] items-center justify-center rounded-sm bg-white text-[11px] font-bold leading-none text-[#172b27]">in</span>
+                  LinkedIn
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 pt-5 text-xs text-[#aebeb4] sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Sphorix France. Tous droits réservés.</p>
+        <div className="flex flex-col gap-4 pt-5 text-sm text-[#aebeb4] sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm">© 2026 Sphorix France. Tous droits réservés.</p>
           <nav aria-label="Informations légales" className="flex flex-wrap gap-x-5 gap-y-2">
             {legalLinks.map((link) => (
               <Link key={link.href} href={link.href} className="transition hover:text-white">{link.label}</Link>

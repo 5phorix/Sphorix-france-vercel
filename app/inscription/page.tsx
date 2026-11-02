@@ -209,6 +209,14 @@ export default function InscriptionPage() {
             )}
           </div>
 
+          <p className="text-sm leading-relaxed text-slate-600">
+            Les informations de votre compte sont utilisées pour gérer votre accès et vos achats.
+            Consultez notre{" "}
+            <Link href="/politique-confidentialite" target="_blank" rel="noopener noreferrer" className="font-semibold text-orange-700 underline underline-offset-2">
+              politique de confidentialité
+            </Link>.
+          </p>
+
           <button
             type="submit"
             disabled={isLoading}

@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-import { consumeRateLimit, insertContactLead } from "@/lib/contact-leads-db";
+import { consumeRateLimit } from "@/lib/contact-leads-db";
+import {
+  CONTACT_RETENTION_MONTHS,
+  PRIVACY_POLICY_VERSION,
+  storeContactLead,
+  updateContactLeadDelivery,
+} from "@/lib/privacy-retention";
 
 export const runtime = "nodejs";
 
@@ -77,8 +83,8 @@ function normalizePayload(body: ContactPayload): ContactPayload {
     activity: sanitizeText(body.activity || "", 120),
     consent: body.consent === true,
     marketingConsent: body.marketingConsent === true,
-    retentionMonths: Number(body.retentionMonths || 0),
-    policyVersion: sanitizeText(body.policyVersion || "", 24),
+    retentionMonths: CONTACT_RETENTION_MONTHS,
+    policyVersion: PRIVACY_POLICY_VERSION,
     website: sanitizeText(body.website || "", 120),
     startedAt: Number(body.startedAt || 0),
   };
@@ -95,14 +101,6 @@ function validatePayload(payload: ContactPayload): string | null {
 
   if (!payload.consent) {
     return "Le consentement est obligatoire.";
-  }
-
-  if (!payload.policyVersion) {
-    return "La version de politique de confidentialité est manquante.";
-  }
-
-  if (!payload.retentionMonths || payload.retentionMonths < 1 || payload.retentionMonths > 120) {
-    return "Durée de conservation invalide.";
   }
 
   if (!payload.fullName || payload.fullName.length < 2) {
@@ -182,6 +180,25 @@ export async function POST(request: NextRequest) {
         }
       );
     }
+
+    const leadId = await storeContactLead({
+      contact_type: payload.contactType,
+      full_name: payload.fullName,
+      email: payload.email,
+      phone: payload.phone || null,
+      subject: payload.subject,
+      message: payload.message,
+      company_name: payload.companyName || null,
+      company_role: payload.companyRole || null,
+      siret: payload.siret || null,
+      activity: payload.activity || null,
+      consent: payload.consent,
+      marketing_consent: payload.marketingConsent === true,
+      retention_months: CONTACT_RETENTION_MONTHS,
+      policy_version: PRIVACY_POLICY_VERSION,
+      admin_email_sent: false,
+      acknowledgement_sent: false,
+    });
 
     let adminEmailSent = false;
     let acknowledgementSent = false;
@@ -309,32 +326,7 @@ Sphorix France`,
       console.warn("SMTP non configuré : le message de contact est enregistré en base sans envoi d'email.");
     }
 
-    let leadId: number | null = null;
-
-    try {
-      leadId = insertContactLead({
-        contactType: payload.contactType,
-        fullName: payload.fullName,
-        email: payload.email,
-        phone: payload.phone || "",
-        subject: payload.subject,
-        message: payload.message,
-        companyName: payload.companyName || "",
-        companyRole: payload.companyRole || "",
-        siret: payload.siret || "",
-        activity: payload.activity || "",
-        consent: payload.consent,
-        marketingConsent: payload.marketingConsent === true,
-        retentionMonths: payload.retentionMonths || 24,
-        policyVersion: payload.policyVersion || "2026-07",
-        sourceIp: clientIp,
-        userAgent: request.headers.get("user-agent") || "",
-        adminEmailSent,
-        acknowledgementSent,
-      });
-    } catch (dbError) {
-      console.warn("Échec de persistance du lead contact :", dbError);
-    }
+    await updateContactLeadDelivery(leadId, adminEmailSent, acknowledgementSent);
 
     return NextResponse.json({ success: true, leadId });
 

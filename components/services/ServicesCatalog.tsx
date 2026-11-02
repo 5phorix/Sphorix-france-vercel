@@ -126,7 +126,7 @@ export default function ServicesCatalog() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/#contact-form"
+                href="/contact#contact-form"
                 className="inline-flex items-center justify-center rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-400"
               >
                 Démarrer votre projet

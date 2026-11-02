@@ -1,13 +1,33 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+
+const navItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Méthode", href: "/methode" },
+  { label: "Contact", href: "/contact#contact-form" },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  const handleNavClick = (href: string, event: MouseEvent<HTMLAnchorElement>) => {
+    setOpen(false);
+
+    const [path, hash] = href.split("#", 2);
+
+    if (!hash && path === pathname) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,32 +75,25 @@ export default function Navbar() {
 
         {/* MENU DESKTOP */}
         <nav className="hidden flex-1 justify-center gap-6 md:flex">
-          {[
-            { label: "Nos solutions", href: "/services" },
-            { label: "Notre vision", href: "/a-propos" },
-            { label: "Méthode", href: "/methode" },
-          ].map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="relative rounded-md px-3 py-2 font-medium text-[#34443b] transition hover:bg-[#eef3ed] hover:text-[#c85332] md:text-[18px]"
+              onClick={(event) => handleNavClick(item.href, event)}
+              className={
+                item.label === "Contact"
+                  ? "inline-flex items-center gap-1.5 rounded-full bg-[#df6a43] px-5 py-2.5 font-semibold text-white shadow-md shadow-[#df6a43]/25 transition hover:-translate-y-0.5 hover:bg-[#c85332] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#df6a43] focus-visible:ring-offset-2 md:text-[18px]"
+                  : "relative rounded-md px-3 py-2 font-medium text-[#34443b] transition hover:bg-[#eef3ed] hover:text-[#c85332] md:text-[18px]"
+              }
             >
               {item.label}
+              {item.label === "Contact" && (
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              )}
             </Link>
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2">
-          <Link
-            href="/contact#contact-form"
-            className="group hidden shrink-0 items-center gap-3 rounded-lg border border-white/10 bg-[#172b27] py-1.5 pl-4 pr-1.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(23,43,39,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#24453a] hover:shadow-[0_12px_28px_rgba(23,43,39,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#df6a43] focus-visible:ring-offset-2 active:translate-y-0 md:flex md:text-[15px] lg:text-base"
-          >
-            Parler de votre système
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#df6a43] transition-colors duration-300 group-hover:bg-[#ee8059]">
-              <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-            </span>
-          </Link>
-        </div>
         {/* MENU MOBILE */}
         <button
           className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
@@ -96,35 +109,27 @@ export default function Navbar() {
         <div className="border-t border-slate-200 bg-white/95 backdrop-blur-xl p-4 text-sm sm:p-6 md:hidden animate-fade-in-down">
           
         <div className="flex flex-col gap-4 sm:gap-5">
-            {[
-              { label: "Nos solutions", href: "/services" },
-              { label: "Notre vision", href: "/a-propos" },
-              { label: "Méthode", href: "/methode" },
-            ].map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 font-medium text-[#34443b] transition hover:bg-[#eef3ed] hover:text-[#c85332]"
+                onClick={(event) => handleNavClick(item.href, event)}
+                className={
+                  item.label === "Contact"
+                    ? "inline-flex items-center justify-center gap-2 rounded-full bg-[#df6a43] px-5 py-3 font-semibold text-white shadow-md shadow-[#df6a43]/25 transition hover:bg-[#c85332] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#df6a43] focus-visible:ring-offset-2"
+                    : "rounded-md px-3 py-2 font-medium text-[#34443b] transition hover:bg-[#eef3ed] hover:text-[#c85332]"
+                }
               >
                 {item.label}
+                {item.label === "Contact" && (
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                )}
               </Link>
             ))}
 
-            <Link
-              href="/contact#contact-form"
-              onClick={() => setOpen(false)}
-              className="group flex items-center justify-center gap-3 rounded-lg border border-white/10 bg-[#172b27] py-1.5 pl-4 pr-1.5 text-center text-sm font-semibold text-white shadow-[0_8px_24px_rgba(23,43,39,0.2)] transition-all duration-300 hover:bg-[#24453a] hover:shadow-[0_12px_28px_rgba(23,43,39,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#df6a43] focus-visible:ring-offset-2 sm:py-2"
-            >
-              Parler de votre système
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#df6a43] transition-colors duration-300 group-hover:bg-[#ee8059]">
-                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
-              </span>
-            </Link>
           </div>
         </div>
       )}
     </header>
   );
 }
-

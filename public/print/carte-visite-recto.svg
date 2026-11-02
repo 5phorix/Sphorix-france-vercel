@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="97mm" height="67mm" viewBox="0 0 970 670">
+  <title>Carte de visite Sphorix France — recto</title>
+  <desc>Carte au format fini 85 × 55 mm, avec 3 mm de fond perdu et repères de coupe.</desc>
+  <defs>
+    <clipPath id="bleed">
+      <rect x="30" y="30" width="910" height="610"/>
+    </clipPath>
+  </defs>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <path d="M18 60h34M60 18v34M918 60h34M910 18v34M18 610h34M60 618v34M918 610h34M910 618v34"/>
+  </g>
+  <g clip-path="url(#bleed)">
+    <rect x="30" y="30" width="910" height="610" fill="#172b27"/>
+    <path d="M30 30h18v610H30z" fill="#d7f280"/>
+    <circle cx="238" cy="335" r="151" fill="#f6f7f1"/>
+    <image href="../logo/logo.png" x="101" y="198" width="274" height="274" preserveAspectRatio="xMidYMid meet"/>
+    <path d="M430 144h2v365h-2z" fill="#df6a43"/>
+    <text x="482" y="262" fill="#f6f7f1" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="700" letter-spacing="-2">Sphorix</text>
+    <text x="485" y="318" fill="#d7f280" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" letter-spacing="7">FRANCE</text>
+    <path d="M485 357h85" stroke="#df6a43" stroke-width="8"/>
+    <text x="485" y="417" fill="#f6f7f1" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="600">Des outils adaptés.</text>
+    <text x="485" y="461" fill="#d1ddd5" font-family="Arial, Helvetica, sans-serif" font-size="31">Une gestion plus claire.</text>
+    <text x="485" y="535" fill="#aebeb4" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="3">CONSEIL · ORGANISATION · OUTILS</text>
+  </g>
+</svg>

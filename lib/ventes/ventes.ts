@@ -2,6 +2,8 @@ import { buildPayment, buildSalesInvoice } from "@/lib/finance/documents";
 import { postEntry, reverseEntry } from "@/lib/finance/ledger";
 import type { Cents, FinanceConfig, JournalEntry } from "@/lib/finance/types";
 
+export type CustomerContact = { name: string; email: string; phone: string };
+
 export type Customer = {
   id: string;
   /** Code tiers : sert de clé de lettrage dans la comptabilité clients (compte 411). */
@@ -11,6 +13,26 @@ export type Customer = {
   address: string;
   vatNumber: string;
   paymentTermsDays: number;
+  active: boolean;
+  contactName?: string;
+  phone?: string;
+  postalCode?: string;
+  city?: string;
+  country?: string;
+  deliveryAddress?: string;
+  creditLimit?: Cents;
+  contacts?: CustomerContact[];
+};
+
+export type SalesProduct = {
+  id: string;
+  code: string;
+  label: string;
+  unit: string;
+  unitPrice: Cents;
+  taxCode: string;
+  account: string;
+  costCenter?: string;
   active: boolean;
 };
 
@@ -103,7 +125,19 @@ export function saveCustomer(customers: Customer[], customer: Customer): Custome
   if (!customer.code.trim() || !customer.name.trim()) throw new Error("Code et nom du client requis.");
   if (customers.some((item) => item.id !== customer.id && item.code.toLowerCase() === customer.code.toLowerCase())) throw new Error(`Le code client ${customer.code} existe déjà.`);
   if (!Number.isInteger(customer.paymentTermsDays) || customer.paymentTermsDays < 0) throw new Error("Délai de paiement invalide.");
+  if (customer.creditLimit !== undefined && (!Number.isInteger(customer.creditLimit) || customer.creditLimit < 0)) throw new Error("Plafond d'encours invalide.");
   return customers.some((item) => item.id === customer.id) ? customers.map((item) => (item.id === customer.id ? customer : item)) : [...customers, customer];
+}
+
+export function saveProduct(products: SalesProduct[], product: SalesProduct, config: FinanceConfig): SalesProduct[] {
+  if (!product.code.trim() || !product.label.trim()) throw new Error("Référence et désignation de l'article requises.");
+  if (products.some((item) => item.id !== product.id && item.code.toLowerCase() === product.code.toLowerCase())) throw new Error(`La référence ${product.code} existe déjà.`);
+  if (!Number.isInteger(product.unitPrice) || product.unitPrice < 0) throw new Error("Prix unitaire invalide.");
+  if (!config.vatCodes.some((item) => item.code === product.taxCode)) throw new Error("Code TVA inconnu.");
+  const account = config.accounts.find((item) => item.code === product.account);
+  if (!account || account.type !== "revenue" || !account.active) throw new Error("Compte de produit invalide.");
+  if (product.costCenter && !config.costCenters.some((item) => item.code === product.costCenter && item.active)) throw new Error("Centre de coûts inconnu.");
+  return products.some((item) => item.id === product.id) ? products.map((item) => item.id === product.id ? product : item) : [...products, product];
 }
 
 /** Un client référencé par un document ne se supprime pas : il s'archive (intégrité comptable). */

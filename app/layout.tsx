@@ -6,6 +6,8 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { CartProvider } from "@/components/cart/CartProvider";
+import ChatWidget from "@/components/chatbot/ChatWidget";
+import CookieConsent from "@/components/privacy/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -152,7 +154,11 @@ export default function RootLayout({
       <body className="min-h-full bg-slate-100 text-slate-900">
         <MotionConfig reducedMotion="user">
           <ThemeProvider>
-            <CartProvider>{children}</CartProvider>
+            <CartProvider>
+              {children}
+              <ChatWidget />
+              <CookieConsent />
+            </CartProvider>
           </ThemeProvider>
         </MotionConfig>
       </body>

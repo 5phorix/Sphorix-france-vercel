@@ -94,43 +94,116 @@ export function reverseEntry(existing: JournalEntry[], target: JournalEntry, dat
 }
 
 export const postedOnly = (entries: JournalEntry[]) => entries.filter((entry) => entry.status !== "draft");
-const inRange = (entry: JournalEntry, from?: string, to?: string) => (!from || entry.date >= from) && (!to || entry.date <= to);
 
 export type LedgerRow = { date: string; number?: string; label: string; debit: Cents; credit: Cents; balance: Cents; partnerId?: string; costCenter?: string };
+export type LedgerAccount = { accountCode: string; rows: LedgerRow[]; openingBalance: Cents; closingBalance: Cents };
+export type LedgerAccountRange =
+  | { mode: "root"; from: string; to: string }
+  | { mode: "account"; from: string; to: string };
+
+/** Filtre les comptes par classe PCG ou par intervalle de préfixes de compte. */
+export function accountsInLedgerRange(accounts: Account[], range: LedgerAccountRange): Account[] {
+  if (range.mode === "root") {
+    if (!/^[1-9]$/.test(range.from) || !/^[1-9]$/.test(range.to) || range.from > range.to) return [];
+    return accounts.filter((account) => account.code[0] >= range.from && account.code[0] <= range.to);
+  }
+  if (!/^\d{3,10}$/.test(range.from) || !/^\d{3,10}$/.test(range.to)) return [];
+  const from = range.from.padEnd(10, "0");
+  const to = range.to.padEnd(10, "9");
+  if (from > to) return [];
+  return accounts.filter((account) => {
+    const code = account.code.padEnd(10, "0");
+    return code >= from && code <= to;
+  });
+}
 
 /** Grand livre d'un compte avec solde cumulé (débit - crédit). */
 export function generalLedger(entries: JournalEntry[], accountCode: string, from?: string, to?: string): LedgerRow[] {
-  let balance = 0;
-  return postedOnly(entries)
-    .filter((entry) => inRange(entry, from, to))
-    .sort((x, y) => x.date.localeCompare(y.date) || (x.number ?? "").localeCompare(y.number ?? ""))
-    .flatMap((entry) =>
-      entry.lines
-        .filter((line) => line.accountCode === accountCode)
-        .map((line) => {
-          balance += line.debit - line.credit;
-          return { date: entry.date, number: entry.number, label: line.label ?? entry.label, debit: line.debit, credit: line.credit, balance, partnerId: line.partnerId, costCenter: line.costCenter };
-        }),
-    );
+  return generalLedgerByAccounts(entries, [accountCode], from, to)[0]?.rows ?? [];
 }
 
-export type TrialBalanceRow = { code: string; label: string; type: Account["type"]; debit: Cents; credit: Cents; balance: Cents };
+/** Soldes et mouvements de plusieurs comptes sur une même période. */
+export function generalLedgerByAccounts(entries: JournalEntry[], accountCodes: string[], from?: string, to?: string): LedgerAccount[] {
+  const selected = new Set(accountCodes);
+  const accounts = new Map(accountCodes.map((accountCode) => [accountCode, { rows: [] as LedgerRow[], balance: 0, openingBalance: 0 }]));
+  const ordered = postedOnly(entries)
+    .filter((entry) => !to || entry.date <= to)
+    .sort((x, y) => x.date.localeCompare(y.date) || (x.number ?? "").localeCompare(y.number ?? ""));
+  for (const entry of ordered) {
+    for (const line of entry.lines) {
+      if (!selected.has(line.accountCode)) continue;
+      const account = accounts.get(line.accountCode);
+      if (!account) continue;
+      account.balance += line.debit - line.credit;
+      if (from && entry.date < from) {
+        account.openingBalance = account.balance;
+        continue;
+      }
+      account.rows.push({
+        date: entry.date,
+        number: entry.number,
+        label: line.label ?? entry.label,
+        debit: line.debit,
+        credit: line.credit,
+        balance: account.balance,
+        partnerId: line.partnerId,
+        costCenter: line.costCenter,
+      });
+    }
+  }
+  return accountCodes.map((accountCode) => {
+    const account = accounts.get(accountCode);
+    const openingBalance = account?.openingBalance ?? 0;
+    return {
+      accountCode,
+      rows: account?.rows ?? [],
+      openingBalance,
+      closingBalance: account?.balance ?? openingBalance,
+    };
+  });
+}
+
+export type TrialBalanceRow = {
+  code: string;
+  label: string;
+  type: Account["type"];
+  openingBalance: Cents;
+  debit: Cents;
+  credit: Cents;
+  balance: Cents;
+  closingBalance: Cents;
+};
 
 export function trialBalance(entries: JournalEntry[], config: FinanceConfig, from?: string, to?: string) {
   const accounts = accountMap(config);
-  const totals = new Map<string, { debit: Cents; credit: Cents }>();
-  for (const entry of postedOnly(entries).filter((item) => inRange(item, from, to))) {
+  const totals = new Map<string, { openingBalance: Cents; debit: Cents; credit: Cents }>();
+  for (const entry of postedOnly(entries).filter((item) => !to || item.date <= to)) {
     for (const line of entry.lines) {
-      const current = totals.get(line.accountCode) ?? { debit: 0, credit: 0 };
-      current.debit += line.debit;
-      current.credit += line.credit;
+      const current = totals.get(line.accountCode) ?? { openingBalance: 0, debit: 0, credit: 0 };
+      if (from && entry.date < from) {
+        current.openingBalance += line.debit - line.credit;
+      } else {
+        current.debit += line.debit;
+        current.credit += line.credit;
+      }
       totals.set(line.accountCode, current);
     }
   }
   const rows: TrialBalanceRow[] = [...totals.entries()]
-    .map(([code, value]) => ({ code, label: accounts.get(code)?.label ?? "Compte inconnu", type: accounts.get(code)?.type ?? ("asset" as const), ...value, balance: value.debit - value.credit }))
+    .map(([code, value]) => ({
+      code,
+      label: accounts.get(code)?.label ?? "Compte inconnu",
+      type: accounts.get(code)?.type ?? ("asset" as const),
+      ...value,
+      balance: value.debit - value.credit,
+      closingBalance: value.openingBalance + value.debit - value.credit,
+    }))
     .sort((x, y) => x.code.localeCompare(y.code));
   const debit = rows.reduce((total, row) => total + row.debit, 0);
   const credit = rows.reduce((total, row) => total + row.credit, 0);
-  return { rows, debit, credit, balanced: debit === credit };
+  const openingDebit = rows.reduce((total, row) => total + Math.max(row.openingBalance, 0), 0);
+  const openingCredit = rows.reduce((total, row) => total + Math.max(-row.openingBalance, 0), 0);
+  const closingDebit = rows.reduce((total, row) => total + Math.max(row.closingBalance, 0), 0);
+  const closingCredit = rows.reduce((total, row) => total + Math.max(-row.closingBalance, 0), 0);
+  return { rows, openingDebit, openingCredit, debit, credit, closingDebit, closingCredit, balanced: debit === credit };
 }

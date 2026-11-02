@@ -6,8 +6,7 @@ import Footer from "@/sections/Footer";
 
 export const metadata: Metadata = {
   title: "Contact | Sphorix France",
-  description:
-    "Parlons des outils à connecter, des processus à automatiser et des informations dont votre PME a besoin pour décider.",
+  description: "Contactez-nous pour un premier diagnostic de votre commerce.",
   alternates: {
     canonical: "/contact",
   },

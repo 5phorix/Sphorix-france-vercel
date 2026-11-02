@@ -4,15 +4,14 @@ import Services from "@/sections/Services";
 import Footer from "@/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Nos solutions | Applications Sphorix pour PME",
-  description:
-    "Découvrez comment Sphorix connecte vos plateformes, automatise vos processus et transforme vos données en informations utiles pour votre PME.",
+  title: "Services | Sphorix France",
+  description: "Comptage des stocks, référencement des produits, fichier de stock sur mesure, repérage des écarts et suivi simple.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Nos solutions | Sphorix France",
-    description: "Des connecteurs, un moteur commun de données et une application conçue autour de votre activité.",
+    title: "Services | Sphorix France",
+    description: "Comptage des stocks, référencement des produits, fichier de stock sur mesure, repérage des écarts et suivi simple.",
     url: "/services",
     type: "website",
   },

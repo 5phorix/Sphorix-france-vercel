@@ -3,16 +3,14 @@ import Script from "next/script";
 
 import Navbar from "@/sections/Navbar";
 import Hero from "@/sections/Hero";
-import About from "@/sections/About";
-import Services from "@/sections/Services";
-import Projects from "@/sections/Approche";
-import Contact from "@/sections/Contact";
+import Pillars from "@/sections/Pillars";
+import HomeShowcase from "@/sections/HomeShowcase";
 import Footer from "@/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Applications sur mesure pour PME | Sphorix France",
+  title: "Inventaire et suivi de stock pour commerces | Sphorix France",
   description:
-    "Nous concevons des applications qui connectent vos outils, automatisent vos processus et transforment vos données en informations utiles pour piloter votre activité et prendre de meilleures décisions.",
+    "Comptage physique, référencement des produits, fichier de stock sur mesure et suivi simple pour artisans et petits commerces.",
   alternates: {
     canonical: "/",
   },
@@ -25,26 +23,18 @@ export default function Home() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "Quels outils Sphorix peut-il connecter ?",
+        name: "À qui s'adresse Sphorix ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Sphorix connecte les plateformes, logiciels comptables et banques via API, webhooks ou imports de fichiers, et automatise les échanges et processus adaptés à vos besoins.",
+          text: "Aux artisans, petites boutiques et commerces indépendants qui veulent connaître précisément leur stock.",
         },
       },
       {
         "@type": "Question",
-        name: "Comment les données sont-elles fiabilisées ?",
+        name: "Comment se déroule l'accompagnement ?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Le moteur commun normalise les données, détecte les doublons, applique des contrôles et conserve la traçabilité des échanges.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Que retrouve-t-on dans l’application Sphorix ?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "L’application rassemble dépenses, factures, échéances, alertes et indicateurs pour transformer les données en informations utiles et prendre de meilleures décisions.",
+          text: "Un comptage physique, le référencement de vos produits, un fichier de stock adapté, puis un outil de suivi simple.",
         },
       },
     ],
@@ -60,10 +50,8 @@ export default function Home() {
       />
       <Navbar />
       <Hero />
-      <Services summary />
-      <About summary />
-      <Projects summary />
-      <Contact />
+      <Pillars />
+      <HomeShowcase />
       <Footer />
     </main>
   );

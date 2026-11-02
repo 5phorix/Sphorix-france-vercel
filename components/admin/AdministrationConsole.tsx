@@ -2,12 +2,14 @@
 
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import {
   Activity,
   ArrowDownToLine,
   ArrowUpRight,
   BadgeCheck,
+  Bot,
   Building2,
   Check,
   CircleDollarSign,
@@ -396,6 +398,12 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
                   {id === "access" && pendingAccessCount > 0 && <span className="ml-auto rounded-full bg-[#f28c45] px-2 py-0.5 text-[10px] font-bold text-[#14213d]">{pendingAccessCount}</span>}
                 </button>
               ))}
+              <Link href="/administration/chatbot" className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-white">
+                <Bot className="h-4 w-4 text-slate-400" />Assistant conversationnel
+              </Link>
+              <Link href="/administration/suivi-clients" className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-white">
+                <Users className="h-4 w-4 text-slate-400" />Suivi des clients
+              </Link>
             </nav>
           </div>
           <div className="mt-auto border-t border-white/10 p-4">
@@ -433,6 +441,8 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
           <div className="border-b border-slate-200 bg-white px-3 py-2 lg:hidden">
             <nav className="flex gap-1 overflow-x-auto">
               {navigation.map(({ id, label, icon: Icon }) => <button key={id} type="button" onClick={() => setActiveTab(id)} className={`flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold ${activeTab === id ? "bg-[#14213d] text-white" : "text-slate-600 hover:bg-slate-100"}`}><Icon className="h-3.5 w-3.5" />{label}</button>)}
+              <Link href="/administration/chatbot" className="flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"><Bot className="h-3.5 w-3.5" />Assistant</Link>
+              <Link href="/administration/suivi-clients" className="flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"><Users className="h-3.5 w-3.5" />Suivi clients</Link>
             </nav>
           </div>
 

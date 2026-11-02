@@ -4,7 +4,7 @@ import Dexie, { type Table } from "dexie";
 
 import { createDefaultConfig } from "@/lib/finance/config";
 import type { Budget, FinanceConfig, JournalEntry } from "@/lib/finance/types";
-import type { Customer, Invoice, Quote } from "@/lib/ventes/ventes";
+import type { Customer, Invoice, Quote, SalesProduct } from "@/lib/ventes/ventes";
 
 type StoredConfig = FinanceConfig & { id: "primary" };
 type StoredBudget = Budget & { id: string };
@@ -16,12 +16,14 @@ class FinanceDatabase extends Dexie {
   customers!: Table<Customer, string>;
   quotes!: Table<Quote, string>;
   invoices!: Table<Invoice, string>;
+  products!: Table<SalesProduct, string>;
 
   constructor() {
     super("sadesk-finance-v1");
     this.version(1).stores({ config: "id", entries: "id, date, journal, status", budgets: "id, costCenter, period" });
     // Le module Ventes partage la base du noyau comptable pour garantir des transactions atomiques.
     this.version(2).stores({ customers: "id, code", quotes: "id, customerId, status", invoices: "id, customerId, status" });
+    this.version(3).stores({ products: "id, code, active" });
   }
 }
 
@@ -40,19 +42,21 @@ export const saveEntries = (entries: JournalEntry[]) => financeDb.entries.bulkPu
 export const saveBudget = (budget: Budget) => financeDb.budgets.put({ ...budget, id: `${budget.costCenter}:${budget.accountPrefix}:${budget.period}` });
 
 export async function chargerVentes() {
-  const [customers, quotes, invoices] = await Promise.all([financeDb.customers.toArray(), financeDb.quotes.toArray(), financeDb.invoices.toArray()]);
-  return { customers, quotes, invoices };
+  const [customers, quotes, invoices, products] = await Promise.all([financeDb.customers.toArray(), financeDb.quotes.toArray(), financeDb.invoices.toArray(), financeDb.products.toArray()]);
+  return { customers, quotes, invoices, products };
 }
 
 /** Écrit un document commercial et ses pièces comptables en une seule transaction. */
-export function enregistrerVentes(changes: { customers?: { put?: Customer[]; delete?: string[] }; quotes?: { put?: Quote[]; delete?: string[] }; invoices?: { put?: Invoice[]; delete?: string[] }; entries?: JournalEntry[] }) {
-  return financeDb.transaction("rw", [financeDb.customers, financeDb.quotes, financeDb.invoices, financeDb.entries], async () => {
+export function enregistrerVentes(changes: { customers?: { put?: Customer[]; delete?: string[] }; quotes?: { put?: Quote[]; delete?: string[] }; invoices?: { put?: Invoice[]; delete?: string[] }; products?: { put?: SalesProduct[]; delete?: string[] }; entries?: JournalEntry[] }) {
+  return financeDb.transaction("rw", [financeDb.customers, financeDb.quotes, financeDb.invoices, financeDb.products, financeDb.entries], async () => {
     if (changes.customers?.put) await financeDb.customers.bulkPut(changes.customers.put);
     if (changes.customers?.delete) await financeDb.customers.bulkDelete(changes.customers.delete);
     if (changes.quotes?.put) await financeDb.quotes.bulkPut(changes.quotes.put);
     if (changes.quotes?.delete) await financeDb.quotes.bulkDelete(changes.quotes.delete);
     if (changes.invoices?.put) await financeDb.invoices.bulkPut(changes.invoices.put);
     if (changes.invoices?.delete) await financeDb.invoices.bulkDelete(changes.invoices.delete);
+    if (changes.products?.put) await financeDb.products.bulkPut(changes.products.put);
+    if (changes.products?.delete) await financeDb.products.bulkDelete(changes.products.delete);
     if (changes.entries) await financeDb.entries.bulkPut(changes.entries);
   });
 }

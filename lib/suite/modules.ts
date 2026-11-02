@@ -20,10 +20,10 @@ export type ModuleSadesk = {
 
 /** Catalogue de la suite : ajouter un module = une entrée ici + une source de comptabilisation. */
 export const MODULES_SADESK: ModuleSadesk[] = [
-  { id: "compta", name: "Comptabilité", group: "Argent", description: "Journal, écritures, balance, états et fiscalité. Le grand livre et les clôtures restent à compléter.", href: "/produits/comptabilite", status: "partial", linkedTo: ["gestion", "ventes", "achats"] },
+  { id: "ventes", name: "Ventes", group: "Clients", description: "Clients, devis et factures reliés aux écritures comptables.", href: "/produits/commerce", status: "partial", linkedTo: ["compta", "gestion", "logistique", "clients"] },
+  { id: "compta", name: "Comptabilité", group: "Argent", description: "Journal, grand livre par compte, balance générale, bilan, compte de résultat et fiscalité.", href: "/produits/comptabilite", status: "partial", linkedTo: ["gestion", "ventes", "achats"] },
   { id: "gestion", name: "Gestion & Finance", group: "Argent", description: "Indicateurs, budgets et écarts à partir des écritures comptables.", href: "/produits/pilotage", status: "partial", linkedTo: ["compta", "ventes", "achats", "tresorerie"] },
   { id: "tresorerie", name: "Trésorerie", group: "Argent", description: "Suivi des flux et prévisions de trésorerie. Le rapprochement bancaire reste à intégrer.", href: "/produits/tresorerie", status: "partial", linkedTo: ["compta", "gestion", "ventes", "achats"] },
-  { id: "ventes", name: "Ventes", group: "Clients", description: "Clients, devis, factures et règlements reliés aux écritures comptables.", href: "/produits/commerce", status: "partial", linkedTo: ["compta", "gestion", "logistique", "clients"] },
   { id: "clients", name: "Créances", group: "Clients", description: "Suivi dédié des impayés, anciennetés, relances et litiges.", status: "planned", linkedTo: ["ventes", "compta", "tresorerie"] },
   { id: "achats", name: "Achats", group: "Opérations", description: "Fournisseurs, commandes, factures d'achat et dettes restent à intégrer.", status: "planned", linkedTo: ["compta", "gestion", "logistique", "qualite"] },
   { id: "depenses", name: "Suivi des dépenses", group: "Opérations", description: "Saisie et suivi local des dépenses et de leurs budgets, sans intégration comptable complète.", href: "/produits/depenses", status: "partial", linkedTo: ["compta", "gestion", "achats"] },

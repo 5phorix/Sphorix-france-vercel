@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import ClientWorkspace from "@/components/account/ClientWorkspace";
 import ProfileForm from "@/components/account/ProfileForm";
 import SignOutButton from "@/components/account/SignOutButton";
 import { formatPrice } from "@/lib/catalogue-format";
@@ -42,6 +43,8 @@ export default async function ComptePage() {
             </div>
           </div>
         </div>
+
+        <ClientWorkspace />
 
         {/* Formulaire de profil */}
         <ProfileForm profile={profile} userEmail={user.email ?? ""} />

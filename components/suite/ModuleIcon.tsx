@@ -9,21 +9,21 @@ export type IconId = ModuleId | "finance" | "tresorerie" | "fiscalite" | "parame
  * portant un glyphe blanc en trait uniforme. Style volontairement sobre et propre à la suite.
  */
 const TILE: Record<IconId, [string, string]> = {
-  compta: ["#16866b", "#116e58"],
-  finance: ["#102f2b", "#1a5145"],
-  tresorerie: ["#258b70", "#17684f"],
-  depenses: ["#3f8068", "#2c5e4c"],
-  fiscalite: ["#718c4d", "#516a38"],
-  gestion: ["#168b84", "#11665f"],
-  ventes: ["#17806f", "#126250"],
-  clients: ["#278b7c", "#17675b"],
-  achats: ["#3f8068", "#2c5e4c"],
-  production: ["#49645d", "#344a44"],
-  logistique: ["#287d83", "#1d5e64"],
+  compta: ["#40516d", "#2b3950"],
+  finance: ["#14213d", "#263b68"],
+  tresorerie: ["#397563", "#285a4b"],
+  depenses: ["#697586", "#4b5565"],
+  fiscalite: ["#b65322", "#8f3d18"],
+  gestion: ["#556578", "#3d4c60"],
+  ventes: ["#b65322", "#8f3d18"],
+  clients: ["#51657f", "#394d66"],
+  achats: ["#8b6b45", "#6b5135"],
+  production: ["#64748b", "#475569"],
+  logistique: ["#496d78", "#35535d"],
   qualite: ["#348568", "#25664e"],
-  maintenance: ["#8a7743", "#6b5b32"],
-  rh: ["#567b70", "#3d5e54"],
-  parametrage: ["#61736e", "#465751"],
+  maintenance: ["#a2762d", "#79561e"],
+  rh: ["#6b617d", "#50475f"],
+  parametrage: ["#667085", "#475467"],
 };
 
 const g = { fill: "none", stroke: "#fff", strokeWidth: 2.6, strokeLinecap: "round", strokeLinejoin: "round" } as const;

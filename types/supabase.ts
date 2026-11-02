@@ -23,6 +23,113 @@ export type Database = {
           }
         },"public": {
           Tables: {
+            "client_invitations": {
+                  Row: {
+                    "accepted_at": string | null,"created_at": string,"created_by": string | null,"expires_at": string,"id": string,"subscriber_id": string,"token_hash": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "accepted_at"?: string | null,"created_at"?: string,"created_by"?: string | null,"expires_at": string,"id"?: string,"subscriber_id": string,"token_hash": string
+                  }
+                  Update: {
+                    "accepted_at"?: string | null,"created_at"?: string,"created_by"?: string | null,"expires_at"?: string,"id"?: string,"subscriber_id"?: string,"token_hash"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "client_invitations_subscriber_id_fkey"
+      columns: ["subscriber_id"]
+isOneToOne: false
+      referencedRelation: "platform_subscribers"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"client_portal_documents": {
+                  Row: {
+                    "category": string,"created_at": string,"file_size": number,"id": string,"mime_type": string,"original_name": string,"project_id": string | null,"storage_path": string,"subscriber_id": string,"title": string,"uploaded_by": string | null
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "category": string,"created_at"?: string,"file_size": number,"id"?: string,"mime_type": string,"original_name": string,"project_id"?: string | null,"storage_path": string,"subscriber_id": string,"title": string,"uploaded_by"?: string | null
+                  }
+                  Update: {
+                    "category"?: string,"created_at"?: string,"file_size"?: number,"id"?: string,"mime_type"?: string,"original_name"?: string,"project_id"?: string | null,"storage_path"?: string,"subscriber_id"?: string,"title"?: string,"uploaded_by"?: string | null
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "client_portal_documents_project_owner"
+      columns: ["project_id", "subscriber_id"]
+isOneToOne: false
+      referencedRelation: "client_projects"
+      referencedColumns: ["id", "subscriber_id"]
+    },{
+      foreignKeyName: "client_portal_documents_subscriber_id_fkey"
+      columns: ["subscriber_id"]
+isOneToOne: false
+      referencedRelation: "platform_subscribers"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"client_project_steps": {
+                  Row: {
+                    "created_at": string,"id": string,"project_id": string,"sort_order": number,"status": string,"title": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"id"?: string,"project_id": string,"sort_order"?: number,"status"?: string,"title": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "created_at"?: string,"id"?: string,"project_id"?: string,"sort_order"?: number,"status"?: string,"title"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "client_project_steps_project_id_fkey"
+      columns: ["project_id"]
+isOneToOne: false
+      referencedRelation: "client_projects"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"client_project_updates": {
+                  Row: {
+                    "author_role": string,"author_user_id": string | null,"body": string,"created_at": string,"id": string,"project_id": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "author_role": string,"author_user_id"?: string | null,"body": string,"created_at"?: string,"id"?: string,"project_id": string
+                  }
+                  Update: {
+                    "author_role"?: string,"author_user_id"?: string | null,"body"?: string,"created_at"?: string,"id"?: string,"project_id"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "client_project_updates_project_id_fkey"
+      columns: ["project_id"]
+isOneToOne: false
+      referencedRelation: "client_projects"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"client_projects": {
+                  Row: {
+                    "created_at": string,"created_by": string | null,"description": string,"due_at": string | null,"id": string,"status": string,"subscriber_id": string,"title": string,"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "created_at"?: string,"created_by"?: string | null,"description"?: string,"due_at"?: string | null,"id"?: string,"status"?: string,"subscriber_id": string,"title": string,"updated_at"?: string
+                  }
+                  Update: {
+                    "created_at"?: string,"created_by"?: string | null,"description"?: string,"due_at"?: string | null,"id"?: string,"status"?: string,"subscriber_id"?: string,"title"?: string,"updated_at"?: string
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "client_projects_subscriber_id_fkey"
+      columns: ["subscriber_id"]
+isOneToOne: false
+      referencedRelation: "platform_subscribers"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },
             "categories": {
                   Row: {
                     "created_at": string,"description": string | null,"id": string,"name": string,"slug": string,"sort_order": number
@@ -37,6 +144,60 @@ export type Database = {
                   Relationships: [
                     
                   ]
+                },"chatbot_settings": {
+                  Row: {
+                    "assistant_name": string,"enabled": boolean,"greeting": string,"id": number,"indexed_page_count": number,"knowledge_synced_at": string | null,"personality": string,"suggested_questions": string[],"updated_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "assistant_name"?: string,"enabled"?: boolean,"greeting"?: string,"id"?: number,"indexed_page_count"?: number,"knowledge_synced_at"?: string | null,"personality"?: string,"suggested_questions"?: string[],"updated_at"?: string
+                  }
+                  Update: {
+                    "assistant_name"?: string,"enabled"?: boolean,"greeting"?: string,"id"?: number,"indexed_page_count"?: number,"knowledge_synced_at"?: string | null,"personality"?: string,"suggested_questions"?: string[],"updated_at"?: string
+                  }
+                  Relationships: []
+                },"chat_conversations": {
+                  Row: {
+                    "category": string | null,"created_at": string,"expires_at": string,"id": string,"interested_services": string[],"lead_details": Json,"lead_request_type": string | null,"primary_need": string | null,"status": string,"summary": string | null,"unresolved_question": boolean,"updated_at": string,"visitor_token_hash": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "category"?: string | null,"created_at"?: string,"expires_at"?: string,"id"?: string,"interested_services"?: string[],"lead_details"?: Json,"lead_request_type"?: string | null,"primary_need"?: string | null,"status"?: string,"summary"?: string | null,"unresolved_question"?: boolean,"updated_at"?: string,"visitor_token_hash": string
+                  }
+                  Update: {
+                    "category"?: string | null,"created_at"?: string,"expires_at"?: string,"id"?: string,"interested_services"?: string[],"lead_details"?: Json,"lead_request_type"?: string | null,"primary_need"?: string | null,"status"?: string,"summary"?: string | null,"unresolved_question"?: boolean,"updated_at"?: string,"visitor_token_hash"?: string
+                  }
+                  Relationships: []
+                },"chat_messages": {
+                  Row: {
+                    "content": string,"conversation_id": string,"created_at": string,"id": string,"role": string,"sources": Json
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "content": string,"conversation_id": string,"created_at"?: string,"id"?: string,"role": string,"sources"?: Json
+                  }
+                  Update: {
+                    "content"?: string,"conversation_id"?: string,"created_at"?: string,"id"?: string,"role"?: string,"sources"?: Json
+                  }
+                  Relationships: [{
+                    foreignKeyName: "chat_messages_conversation_id_fkey",
+                    columns: ["conversation_id"],
+                    isOneToOne: false,
+                    referencedRelation: "chat_conversations",
+                    referencedColumns: ["id"]
+                  }]
+                },"chat_rate_limits": {
+                  Row: {
+                    "request_count": number,"visitor_key_hash": string,"window_started_at": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "request_count": number,"visitor_key_hash": string,"window_started_at"?: string
+                  }
+                  Update: {
+                    "request_count"?: number,"visitor_key_hash"?: string,"window_started_at"?: string
+                  }
+                  Relationships: []
                 },"contact_leads": {
                   Row: {
                     "acknowledgement_sent": boolean,"activity": string | null,"admin_email_sent": boolean,"company_name": string | null,"company_role": string | null,"consent": boolean,"contact_type": string,"created_at": string,"email": string,"full_name": string,"id": string,"marketing_consent": boolean,"message": string,"phone": string | null,"policy_version": string,"retention_months": number,"siret": string | null,"source_ip": string | null,"subject": string,"user_agent": string | null
@@ -239,14 +400,14 @@ isOneToOne: false
                   ]
                 },"platform_subscribers": {
                   Row: {
-                    "company_name": string,"contact_name": string,"created_at": string,"email": string,"id": string,"notes": string,"phone": string,"status": string,"updated_at": string
+                    "company_name": string,"contact_name": string,"created_at": string,"email": string,"id": string,"notes": string,"phone": string,"status": string,"updated_at": string,"user_id": string | null
                   }
                   ComputedFields: never
                   Insert: {
-                    "company_name": string,"contact_name"?: string,"created_at"?: string,"email": string,"id"?: string,"notes"?: string,"phone"?: string,"status"?: string,"updated_at"?: string
+                    "company_name": string,"contact_name"?: string,"created_at"?: string,"email": string,"id"?: string,"notes"?: string,"phone"?: string,"status"?: string,"updated_at"?: string,"user_id"?: string | null
                   }
                   Update: {
-                    "company_name"?: string,"contact_name"?: string,"created_at"?: string,"email"?: string,"id"?: string,"notes"?: string,"phone"?: string,"status"?: string,"updated_at"?: string
+                    "company_name"?: string,"contact_name"?: string,"created_at"?: string,"email"?: string,"id"?: string,"notes"?: string,"phone"?: string,"status"?: string,"updated_at"?: string,"user_id"?: string | null
                   }
                   Relationships: [
                     
@@ -369,6 +530,15 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
+            "create_client_portal_subscriber":
+{ Args: { "target_actor_user_id": string,"target_company_name": string,"target_contact_name": string,"target_email": string,"target_phone": string }; Returns: string
+                           },
+            "client_owns_project":
+{ Args: { "target_project_id": string }; Returns: boolean
+                           },
+            "client_owns_subscriber":
+{ Args: { "target_subscriber_id": string }; Returns: boolean
+                           },
             "create_platform_plan":
 { Args: { "target_amount_cents": number,"target_interval": string,"target_name": string,"target_notes"?: string,"target_product_code": string }; Returns: string
                            },
@@ -380,6 +550,12 @@ isOneToOne: false
                            },
 "is_platform_admin":
 { Args: Record<PropertyKey, never>; Returns: boolean
+                           },
+"consume_chat_rate_limit":
+{ Args: { "max_requests": number,"target_key_hash": string,"window_seconds": number }; Returns: boolean
+                           },
+"chatbot_admin_stats":
+{ Args: Record<PropertyKey, never>; Returns: Json
                            },
 "update_platform_access":
 { Args: { "target_access_id": string,"target_external_reference"?: string,"target_external_tenant_id"?: string,"target_status": string }; Returns: undefined

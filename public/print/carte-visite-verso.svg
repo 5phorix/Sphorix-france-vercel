@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="97mm" height="67mm" viewBox="0 0 970 670">
+  <title>Carte de visite Sphorix France — verso</title>
+  <desc>Carte au format fini 85 × 55 mm, avec 3 mm de fond perdu et repères de coupe.</desc>
+  <defs>
+    <clipPath id="bleed">
+      <rect x="30" y="30" width="910" height="610"/>
+    </clipPath>
+  </defs>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <path d="M18 60h34M60 18v34M918 60h34M910 18v34M18 610h34M60 618v34M918 610h34M910 618v34"/>
+  </g>
+  <g clip-path="url(#bleed)">
+    <rect x="30" y="30" width="910" height="610" fill="#f6f7f1"/>
+    <rect x="30" y="30" width="910" height="14" fill="#d7f280"/>
+    <text x="100" y="161" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="43" font-weight="700">Sphorix France</text>
+    <text x="100" y="207" fill="#66756c" font-family="Arial, Helvetica, sans-serif" font-size="25">Des solutions utiles, pensées pour votre activité.</text>
+    <path d="M100 245h770" stroke="#d8dfd8" stroke-width="2"/>
+    <text x="100" y="296" fill="#355c4b" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" letter-spacing="2">PARLONS DE VOTRE ENTREPRISE</text>
+
+    <circle cx="116" cy="353" r="8" fill="#df6a43"/>
+    <text x="145" y="362" fill="#17231f" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="600">+33 7 81 52 53 93</text>
+
+    <circle cx="116" cy="414" r="8" fill="#df6a43"/>
+    <text x="145" y="423" fill="#17231f" font-family="Arial, Helvetica, sans-serif" font-size="29">contact@sphorix.fr</text>
+
+    <circle cx="116" cy="475" r="8" fill="#df6a43"/>
+    <text x="145" y="484" fill="#17231f" font-family="Arial, Helvetica, sans-serif" font-size="29">www.sphorix.fr</text>
+
+    <rect x="100" y="524" width="770" height="76" rx="12" fill="#172b27"/>
+    <text x="132" y="572" fill="#d7f280" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">Stocks · données · factures électroniques</text>
+  </g>
+</svg>

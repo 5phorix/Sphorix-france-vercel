@@ -7,6 +7,21 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
 const sendMail = vi.hoisted(() => vi.fn().mockResolvedValue({}));
 
+vi.mock("@/lib/supabase/admin", () => ({
+  createSupabaseAdminClient: () => ({
+    from: () => ({
+      insert: () => ({
+        select: () => ({
+          single: async () => ({ data: { id: "lead-test" }, error: null }),
+        }),
+      }),
+      update: () => ({
+        eq: async () => ({ error: null }),
+      }),
+    }),
+  }),
+}));
+
 vi.mock("nodemailer", () => ({
   default: {
     createTransport: vi.fn(() => ({ sendMail })),

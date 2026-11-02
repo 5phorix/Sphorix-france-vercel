@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160mm" height="222mm" viewBox="0 0 1600 2220">
+  <title>Flyer A5 — Sphorix France</title>
+  <desc>Flyer au format fini A5 (148 × 210 mm), avec 3 mm de fond perdu et repères de coupe.</desc>
+  <defs>
+    <clipPath id="bleed">
+      <rect x="30" y="30" width="1540" height="2160"/>
+    </clipPath>
+  </defs>
+  <g fill="none" stroke="#111" stroke-width="2">
+    <path d="M18 60h34M60 18v34M1548 60h34M1540 18v34M18 2160h34M60 2168v34M1548 2160h34M1540 2168v34"/>
+  </g>
+  <g clip-path="url(#bleed)">
+    <rect x="30" y="30" width="1540" height="2160" fill="#f6f7f1"/>
+    <rect x="30" y="30" width="1540" height="735" fill="#172b27"/>
+    <circle cx="1460" cy="132" r="286" fill="#355c4b" opacity=".56"/>
+    <circle cx="1500" cy="105" r="175" fill="none" stroke="#d7f280" stroke-width="4" opacity=".65"/>
+
+    <rect x="125" y="100" width="132" height="132" rx="18" fill="#f6f7f1"/>
+    <image href="../logo/logo.png" x="135" y="110" width="112" height="112" preserveAspectRatio="xMidYMid meet"/>
+    <text x="290" y="153" fill="#f6f7f1" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Sphorix <tspan fill="#d7f280">France</tspan></text>
+    <text x="292" y="199" fill="#d1ddd5" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="4">CONSEIL · ORGANISATION · OUTILS</text>
+
+    <text x="125" y="369" fill="#d7f280" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="4">POUR LES ARTISANS ET LES COMMERCES INDÉPENDANTS</text>
+    <text x="120" y="486" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="90" font-weight="700" letter-spacing="-2">Une gestion plus claire</text>
+    <text x="120" y="588" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="90" font-weight="700" letter-spacing="-2">pour votre entreprise.</text>
+    <path d="M125 632h140" stroke="#df6a43" stroke-width="12"/>
+    <text x="125" y="699" fill="#e4ece7" font-family="Arial, Helvetica, sans-serif" font-size="34">Sphorix France vous accompagne partout en France :</text>
+    <text x="125" y="744" fill="#e4ece7" font-family="Arial, Helvetica, sans-serif" font-size="34">diagnostic, données organisées et outils adaptés à votre activité.</text>
+
+    <text x="125" y="865" fill="#c85332" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" letter-spacing="4">DES SOLUTIONS CONCRÈTES POUR VOTRE QUOTIDIEN</text>
+
+    <g>
+      <rect x="125" y="910" width="420" height="390" rx="22" fill="#fff" stroke="#e0e6e0" stroke-width="2"/>
+      <circle cx="180" cy="977" r="27" fill="#d7f280"/>
+      <text x="171" y="987" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">1</text>
+      <text x="160" y="1054" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Stocks maîtrisés</text>
+      <text x="160" y="1113" fill="#52635a" font-family="Arial, Helvetica, sans-serif" font-size="29">
+        <tspan x="160" dy="0">Référencement des</tspan>
+        <tspan x="160" dy="41">produits, inventaires</tspan>
+        <tspan x="160" dy="41">et suivi de vos stocks.</tspan>
+      </text>
+      <path d="M160 1250h80" stroke="#df6a43" stroke-width="7"/>
+    </g>
+    <g>
+      <rect x="590" y="910" width="420" height="390" rx="22" fill="#fff" stroke="#e0e6e0" stroke-width="2"/>
+      <circle cx="645" cy="977" r="27" fill="#d7f280"/>
+      <text x="636" y="987" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">2</text>
+      <text x="625" y="1054" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">Données utiles</text>
+      <text x="625" y="1113" fill="#52635a" font-family="Arial, Helvetica, sans-serif" font-size="29">
+        <tspan x="625" dy="0">Achats, ventes et</tspan>
+        <tspan x="625" dy="41">dépenses : comprenez</tspan>
+        <tspan x="625" dy="41">vos résultats et anticipez.</tspan>
+      </text>
+      <path d="M625 1250h80" stroke="#df6a43" stroke-width="7"/>
+    </g>
+    <g>
+      <rect x="1055" y="910" width="420" height="390" rx="22" fill="#fff" stroke="#e0e6e0" stroke-width="2"/>
+      <circle cx="1110" cy="977" r="27" fill="#d7f280"/>
+      <text x="1101" y="987" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">3</text>
+      <text x="1090" y="1054" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="35" font-weight="700">Factures organisées</text>
+      <text x="1090" y="1113" fill="#52635a" font-family="Arial, Helvetica, sans-serif" font-size="29">
+        <tspan x="1090" dy="0">Classement, sauvegarde</tspan>
+        <tspan x="1090" dy="41">et archivage de vos</tspan>
+        <tspan x="1090" dy="41">factures électroniques.</tspan>
+      </text>
+      <path d="M1090 1250h80" stroke="#df6a43" stroke-width="7"/>
+    </g>
+
+    <rect x="125" y="1370" width="1350" height="205" rx="22" fill="#e9eee7"/>
+    <text x="170" y="1446" fill="#355c4b" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="3">UNE APPROCHE ADAPTÉE À VOTRE ACTIVITÉ</text>
+    <text x="170" y="1512" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="37" font-weight="600">On fait le point, on organise vos données,</text>
+    <text x="170" y="1558" fill="#172b27" font-family="Arial, Helvetica, sans-serif" font-size="37" font-weight="600">puis on choisit les outils qui vous sont utiles.</text>
+
+    <rect x="30" y="1635" width="1540" height="555" fill="#172b27"/>
+    <path d="M125 1713h96" stroke="#df6a43" stroke-width="10"/>
+    <text x="125" y="1792" fill="#d7f280" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" letter-spacing="4">UN BESOIN, UNE QUESTION ?</text>
+    <text x="125" y="1890" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="69" font-weight="700">Parlons de votre activité.</text>
+
+    <text x="125" y="1980" fill="#e4ece7" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="600">+33 7 81 52 53 93</text>
+    <text x="605" y="1980" fill="#e4ece7" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="600">contact@sphorix.fr</text>
+    <text x="125" y="2053" fill="#d7f280" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">www.sphorix.fr</text>
+    <path d="M125 2101h1350" stroke="#ffffff" stroke-width="2" opacity=".18"/>
+    <text x="125" y="2150" fill="#aebeb4" font-family="Arial, Helvetica, sans-serif" font-size="23">Sphorix France · Des outils adaptés. Une gestion plus claire.</text>
+  </g>
+</svg>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 interface StepEstimateProps {
@@ -338,7 +339,13 @@ export default function StepEstimate({
               className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-orange-400"
             />
 
-
+            <p className="text-sm leading-relaxed text-slate-600">
+              Vos informations servent à traiter votre demande d&apos;estimation et à vous recontacter.
+              Consultez notre{" "}
+              <Link href="/politique-confidentialite" target="_blank" rel="noopener noreferrer" className="font-semibold text-orange-700 underline underline-offset-2">
+                politique de confidentialité
+              </Link>.
+            </p>
 
             <button
               type="submit"

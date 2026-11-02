@@ -5,9 +5,9 @@ import Projects from "@/sections/Approche";
 import Footer from "@/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "Notre méthode | Sphorix France",
+  title: "Méthode | Sphorix France",
   description:
-    "Les étapes Sphorix pour comprendre vos outils, connecter vos sources, construire votre application et faire évoluer votre système.",
+    "Découvrez les étapes de l’accompagnement Sphorix : diagnostic, organisation des stocks, outils adaptés et suivi dans la durée.",
   alternates: {
     canonical: "/methode",
   },

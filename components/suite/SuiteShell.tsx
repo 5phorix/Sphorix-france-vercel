@@ -29,7 +29,10 @@ export default function SuiteShell({ children }: { children: ReactNode }) {
       <div className="mx-auto flex min-h-screen max-w-[96rem] flex-col lg:flex-row">
         <aside className="sd-noprint shrink-0 bg-[var(--sd-navy)] p-3 lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:overflow-y-auto lg:p-4" aria-label="Navigation de la suite">
           <Link href="/produits/pilotage" aria-label="Accueil Sadesk" className="mb-4 flex items-center gap-3 rounded-xl px-2 py-2 text-lg font-semibold text-white lg:mb-7">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#16866b] text-base font-bold shadow-inner">S</span>
+            <span className="sd-logo-mark relative grid h-10 w-10 place-items-center rounded-xl text-base font-bold">
+              S
+              <span aria-hidden="true" className="absolute inset-x-2 bottom-1 h-0.5 rounded-full bg-[var(--sd-accent)]" />
+            </span>
             <span className="leading-tight">Sadesk<span className="mt-1 block text-[.65rem] font-medium uppercase tracking-[.18em] text-white/55">Gestion d’entreprise</span></span>
           </Link>
           <nav className="flex gap-4 overflow-x-auto lg:flex-col lg:gap-5">

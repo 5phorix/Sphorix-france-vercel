@@ -1,30 +1,10 @@
 import "server-only";
 
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 
 import Database from "better-sqlite3";
-
-interface ContactLeadRecord {
-  contactType: "particulier" | "entreprise";
-  fullName: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
-  companyName: string;
-  companyRole: string;
-  siret: string;
-  activity: string;
-  consent: boolean;
-  marketingConsent: boolean;
-  retentionMonths: number;
-  policyVersion: string;
-  sourceIp: string;
-  userAgent: string;
-  adminEmailSent: boolean;
-  acknowledgementSent: boolean;
-}
 
 type ContactDb = Database.Database;
 
@@ -36,7 +16,9 @@ function getDatabasePath(): string {
     return configuredPath;
   }
 
-  const dataDir = path.join(process.cwd(), "data");
+  const dataDir = process.env.VERCEL
+    ? os.tmpdir()
+    : path.join(process.cwd(), "data");
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });
   }
@@ -102,6 +84,15 @@ export function consumeRateLimit(
 ): boolean {
   const db = getDb();
   const now = Date.now();
+  db.prepare("DELETE FROM rate_limit_entries WHERE window_start < ?").run(now - windowMs);
+  db.prepare(`
+    DELETE FROM contact_leads
+    WHERE julianday(created_at) <= julianday(
+      'now',
+      '-' || retention_months || ' months'
+    )
+  `).run();
+
   const current = db
     .prepare("SELECT count, window_start FROM rate_limit_entries WHERE key = ?")
     .get(key) as { count: number; window_start: number } | undefined;
@@ -123,76 +114,4 @@ export function consumeRateLimit(
     "UPDATE rate_limit_entries SET count = count + 1 WHERE key = ?"
   ).run(key);
   return true;
-}
-
-export function insertContactLead(record: ContactLeadRecord): number {
-  const db = getDb();
-
-  const statement = db.prepare(`
-    INSERT INTO contact_leads (
-      created_at,
-      contact_type,
-      full_name,
-      email,
-      phone,
-      subject,
-      message,
-      company_name,
-      company_role,
-      siret,
-      activity,
-      consent,
-      marketing_consent,
-      retention_months,
-      policy_version,
-      source_ip,
-      user_agent,
-      admin_email_sent,
-      acknowledgement_sent
-    ) VALUES (
-      @createdAt,
-      @contactType,
-      @fullName,
-      @email,
-      @phone,
-      @subject,
-      @message,
-      @companyName,
-      @companyRole,
-      @siret,
-      @activity,
-      @consent,
-      @marketingConsent,
-      @retentionMonths,
-      @policyVersion,
-      @sourceIp,
-      @userAgent,
-      @adminEmailSent,
-      @acknowledgementSent
-    )
-  `);
-
-  const result = statement.run({
-    createdAt: new Date().toISOString(),
-    contactType: record.contactType,
-    fullName: record.fullName,
-    email: record.email,
-    phone: record.phone,
-    subject: record.subject,
-    message: record.message,
-    companyName: record.companyName,
-    companyRole: record.companyRole,
-    siret: record.siret,
-    activity: record.activity,
-    consent: record.consent ? 1 : 0,
-    marketingConsent: record.marketingConsent ? 1 : 0,
-    retentionMonths: record.retentionMonths,
-    policyVersion: record.policyVersion,
-    sourceIp: record.sourceIp,
-    userAgent: record.userAgent,
-    adminEmailSent: record.adminEmailSent ? 1 : 0,
-    acknowledgementSent: record.acknowledgementSent ? 1 : 0,
-  });
-
-  return Number(result.lastInsertRowid);
 }
