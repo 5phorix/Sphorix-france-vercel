@@ -10,7 +10,7 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 export default function ConnexionForm({ linkExpired }: { linkExpired: boolean }) {
   const router = useRouter();
-  const [authMode, setAuthMode] = useState<"magic-link" | "password">("magic-link");
+  const [authMode, setAuthMode] = useState<"magic-link" | "password">("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -68,9 +68,10 @@ export default function ConnexionForm({ linkExpired }: { linkExpired: boolean })
         <p className="mt-3 text-sm leading-relaxed text-slate-600">Connectez-vous pour retrouver votre espace ou administrer les produits selon vos droits.</p>
 
         <div className="mt-6 flex rounded-2xl bg-slate-100 p-1 text-sm font-semibold">
-          <button type="button" onClick={() => { setAuthMode("magic-link"); setError(""); setMessage(""); }} className={`flex-1 rounded-xl py-2.5 transition ${authMode === "magic-link" ? "bg-white text-slate-950 shadow-sm" : "text-slate-600 hover:text-slate-950"}`}>Lien magique</button>
           <button type="button" onClick={() => { setAuthMode("password"); setError(""); setMessage(""); }} className={`flex-1 rounded-xl py-2.5 transition ${authMode === "password" ? "bg-white text-slate-950 shadow-sm" : "text-slate-600 hover:text-slate-950"}`}>Mot de passe</button>
+          <button type="button" onClick={() => { setAuthMode("magic-link"); setError(""); setMessage(""); }} className={`flex-1 rounded-xl py-2.5 transition ${authMode === "magic-link" ? "bg-white text-slate-950 shadow-sm" : "text-slate-600 hover:text-slate-950"}`}>Première connexion</button>
         </div>
+        {authMode === "magic-link" && <p className="mt-3 text-xs text-slate-500">Un lien unique vous est envoyé, puis vous choisissez votre mot de passe. Les connexions suivantes se font avec ce mot de passe.</p>}
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>

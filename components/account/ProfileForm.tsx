@@ -4,13 +4,15 @@ import { useState } from "react";
 
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import type { AccountProfile } from "@/lib/account";
+import AvatarUploader from "@/components/account/AvatarUploader";
 
 interface ProfileFormProps {
   profile: AccountProfile;
   userEmail: string;
+  avatarUrl: string | null;
 }
 
-export default function ProfileForm({ profile, userEmail }: ProfileFormProps) {
+export default function ProfileForm({ profile, userEmail, avatarUrl }: ProfileFormProps) {
   const [fullName, setFullName] = useState(profile.fullName ?? "");
   const [companyName, setCompanyName] = useState(profile.companyName ?? "");
   const [phone, setPhone] = useState(profile.phone ?? "");
@@ -52,6 +54,10 @@ export default function ProfileForm({ profile, userEmail }: ProfileFormProps) {
     <div className="rounded-[2rem] bg-white p-7 shadow-sm sm:p-10">
       <h2 className="text-2xl font-bold text-slate-950">Informations personnelles</h2>
       <p className="mt-1 text-sm text-slate-600">Gérez vos coordonnées pour vos factures et échanges.</p>
+
+      <div className="mt-6">
+        <AvatarUploader userId={profile.id} initialUrl={avatarUrl} initials={(profile.fullName || userEmail).slice(0, 2).toUpperCase()} />
+      </div>
 
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
         <div>

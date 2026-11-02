@@ -37,17 +37,7 @@ export default function CookieConsent() {
     setIsCustomizing(true);
   };
 
-  if (consent && !isCustomizing) {
-    return (
-      <button
-        type="button"
-        onClick={customize}
-        className="fixed bottom-4 right-4 z-40 rounded-full border border-[#172b27]/20 bg-white px-4 py-2.5 text-sm font-semibold text-[#172b27] shadow-lg transition hover:bg-[#f4f0e9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#df6a43]"
-      >
-        Préférences cookies
-      </button>
-    );
-  }
+  if (consent) return null;
 
   return (
     <aside

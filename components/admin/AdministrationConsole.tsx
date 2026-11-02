@@ -36,6 +36,7 @@ import {
   YAxis,
 } from "recharts";
 
+import UserMenu from "@/components/account/UserMenu";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import type { Database } from "@/types/supabase";
 
@@ -427,7 +428,7 @@ export default function AdministrationConsole({ userEmail, role }: { userEmail: 
                 <input aria-label="Rechercher une société ou un abonnement" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher une société…" className="h-9 w-[240px] rounded-lg border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm outline-none focus:border-[#168a79] focus:bg-white" />
               </label>
               <span className="hidden items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700 sm:inline-flex"><span className="h-1.5 w-1.5 rounded-full bg-slate-500" /> Gestion manuelle</span>
-              <button type="button" onClick={signOut} aria-label="Déconnexion" className="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 lg:hidden"><LogOut className="h-4 w-4" /></button>
+              <UserMenu guestLabel={null} />
             </div>
           </header>
 

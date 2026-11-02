@@ -83,13 +83,14 @@ export default function ResetPasswordPage() {
     try {
       const { error: updateError } = await supabase.auth.updateUser({
         password,
+        data: { password_set: true },
       });
 
       if (updateError) throw updateError;
 
       setMessage("Votre mot de passe a été mis à jour avec succès ! Redirection...");
       setTimeout(() => {
-        window.location.href = "/compte";
+        window.location.href = "/connexion";
       }, 1500);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erreur lors de la mise à jour du mot de passe.");

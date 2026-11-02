@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
+import UserMenu from "@/components/account/UserMenu";
+
 const navItems = [
   { label: "Accueil", href: "/" },
   { label: "Services", href: "/services" },
@@ -94,6 +96,8 @@ export default function Navbar() {
           ))}
         </nav>
 
+        <div className="hidden shrink-0 md:block"><UserMenu /></div>
+
         {/* MENU MOBILE */}
         <button
           className="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
@@ -126,7 +130,7 @@ export default function Navbar() {
                 )}
               </Link>
             ))}
-
+            <div className="flex justify-start"><UserMenu /></div>
           </div>
         </div>
       )}

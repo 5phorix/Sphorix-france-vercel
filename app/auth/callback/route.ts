@@ -21,6 +21,9 @@ export async function GET(request: Request) {
     }
 
     const { data: { user } } = await supabase.auth.getUser();
+    if (user && !invitationNext && user.user_metadata?.password_set !== true) {
+      return NextResponse.redirect(new URL("/auth/reset-password", request.url));
+    }
     const { data: platformAdmin } = user
       ? await supabase.from("platform_admins").select("role, is_active").eq("user_id", user.id).maybeSingle()
       : { data: null };

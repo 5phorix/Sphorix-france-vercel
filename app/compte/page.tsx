@@ -17,6 +17,8 @@ export default async function ComptePage() {
   if (!user) redirect("/connexion");
 
   const { profile, orders, downloads } = await prepareAccountData(user.id, user.email ?? "");
+  const rawAvatar = user.user_metadata?.avatar_url ?? user.user_metadata?.picture;
+  const avatarUrl = typeof rawAvatar === "string" && rawAvatar.startsWith("https://") ? rawAvatar : null;
 
   return (
     <main className="min-h-screen bg-[#f4f0e9] px-4 pb-20 pt-32 sm:px-6 lg:px-8">
@@ -47,7 +49,7 @@ export default async function ComptePage() {
         <ClientWorkspace />
 
         {/* Formulaire de profil */}
-        <ProfileForm profile={profile} userEmail={user.email ?? ""} />
+        <ProfileForm profile={profile} userEmail={user.email ?? ""} avatarUrl={avatarUrl} />
 
         {/* Commandes et téléchargements */}
         <section className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">

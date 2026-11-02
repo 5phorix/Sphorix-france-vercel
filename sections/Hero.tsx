@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const series = [42, 55, 48, 63, 58, 72, 68, 81, 77, 90, 86, 96, 64, 70, 84, 61, 92, 78, 88, 99, 73, 82, 94, 87];
 
@@ -74,13 +74,6 @@ export default function Hero() {
             >
               Nous contacter
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
-            </Link>
-            <Link
-              href="/methode"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/25 px-6 py-3.5 font-semibold text-white transition hover:bg-white/10"
-            >
-              <PlayCircle className="h-5 w-5" aria-hidden="true" />
-              Voir la démo
             </Link>
           </div>
         </motion.div>
