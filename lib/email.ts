@@ -124,7 +124,7 @@ export async function sendConfirmationEmail(order: OrderData) {
                 <a href="${siteUrl}/compte" style="color: #f97316; text-decoration: none;">Consulter votre espace client</a> pour accéder à vos fichiers.
               </p>
               <p style="margin: 16px 0 0 0; font-size: 12px; color: #999;">
-                Des questions ? <a href="mailto:contact@sphorix-france.fr" style="color: #f97316; text-decoration: none;">Contactez-nous</a>
+                Des questions ? <a href="mailto:contact@sphorix.fr" style="color: #f97316; text-decoration: none;">Contactez-nous</a>
               </p>
             </div>
           </div>
@@ -137,7 +137,7 @@ export async function sendConfirmationEmail(order: OrderData) {
       to: order.customer_email,
       subject: `Confirmation de commande #${order.id}`,
       html,
-      replyTo: "contact@sphorix-france.fr",
+      replyTo: "contact@sphorix.fr",
     });
 
     return true;
@@ -188,7 +188,7 @@ export async function sendPasswordResetEmail(
 
             <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee;">
               <p style="margin: 0; font-size: 12px; color: #999;">
-                Des questions ? <a href="mailto:contact@sphorix-france.fr" style="color: #f97316; text-decoration: none;">Contactez-nous</a>
+                Des questions ? <a href="mailto:contact@sphorix.fr" style="color: #f97316; text-decoration: none;">Contactez-nous</a>
               </p>
             </div>
           </div>
@@ -201,7 +201,7 @@ export async function sendPasswordResetEmail(
       to: email,
       subject: "Réinitialiser votre mot de passe Sphorix",
       html,
-      replyTo: "contact@sphorix-france.fr",
+      replyTo: "contact@sphorix.fr",
     });
 
     return true;
@@ -248,7 +248,7 @@ export async function sendWelcomeEmail(email: string, name: string = "") {
 
             <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee;">
               <p style="margin: 0; font-size: 12px; color: #999;">
-                Des questions ? <a href="mailto:contact@sphorix-france.fr" style="color: #f97316; text-decoration: none;">Contactez-nous</a>
+                Des questions ? <a href="mailto:contact@sphorix.fr" style="color: #f97316; text-decoration: none;">Contactez-nous</a>
               </p>
             </div>
           </div>
@@ -261,7 +261,7 @@ export async function sendWelcomeEmail(email: string, name: string = "") {
       to: email,
       subject: "Bienvenue chez Sphorix France",
       html,
-      replyTo: "contact@sphorix-france.fr",
+      replyTo: "contact@sphorix.fr",
     });
 
     return true;

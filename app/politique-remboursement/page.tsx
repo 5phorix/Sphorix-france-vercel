@@ -79,8 +79,8 @@ export default function PolitiqueRemboursementPage() {
             </p>
             <ul>
               <li>Être le client d’origine (adresse email d’achat)</li>
-              <li>Contacter <a href="mailto:contact@sphorix-france.fr"
-                className="text-orange-600 hover:text-orange-700">contact@sphorix-france.fr</a> avec votre
+              <li>Contacter <a href="mailto:contact@sphorix.fr"
+                className="text-orange-600 hover:text-orange-700">contact@sphorix.fr</a> avec votre
                 <strong> numéro de commande</strong></li>
               <li>Fournir une <strong>raison claire</strong> du remboursement</li>
               <li>Respecter les délais (14 jours avant accès, 7 jours après pour défaut)</li>
@@ -96,7 +96,7 @@ export default function PolitiqueRemboursementPage() {
               <strong>Étape 1 : Demande</strong>
             </p>
             <p>
-              Envoyez un email à contact@sphorix-france.fr avec :
+              Envoyez un email à contact@sphorix.fr avec :
             </p>
             <ul>
               <li>Votre numéro de commande</li>
@@ -184,8 +184,8 @@ export default function PolitiqueRemboursementPage() {
               Si vous contestez un refus de remboursement :
             </p>
             <ul>
-              <li>Contactez directement <a href="mailto:contact@sphorix-france.fr"
-                className="text-orange-600 hover:text-orange-700">contact@sphorix-france.fr</a></li>
+              <li>Contactez directement <a href="mailto:contact@sphorix.fr"
+                className="text-orange-600 hover:text-orange-700">contact@sphorix.fr</a></li>
               <li>Fournissez tous les détails et preuves supplémentaires</li>
               <li>Nous vous répondrons sous <strong>7 jours</strong></li>
             </ul>
@@ -236,7 +236,7 @@ export default function PolitiqueRemboursementPage() {
             <p>
               <strong>Q : Que se passe-t-il si j’ai des questions sur mon remboursement ?</strong>
               <br />
-              R : Contactez contact@sphorix-france.fr avec votre numéro de commande.
+              R : Contactez contact@sphorix.fr avec votre numéro de commande.
             </p>
             <p>
               <strong>Q : Puis-je demander un remboursement après avoir téléchargé le produit ?</strong>
@@ -259,8 +259,8 @@ export default function PolitiqueRemboursementPage() {
               Pour toute question concernant les remboursements :
             </p>
             <ul>
-              <li><strong>Email :</strong> <a href="mailto:contact@sphorix-france.fr"
-                className="text-orange-600 hover:text-orange-700">contact@sphorix-france.fr</a></li>
+              <li><strong>Email :</strong> <a href="mailto:contact@sphorix.fr"
+                className="text-orange-600 hover:text-orange-700">contact@sphorix.fr</a></li>
               <li><strong>Site :</strong> https://sphorix-france.fr</li>
               <li><strong>Temps de réponse :</strong> 1 à 3 jours ouvrables</li>
             </ul>

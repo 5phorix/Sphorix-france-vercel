@@ -49,9 +49,9 @@ export default function Footer() {
             <h2 className="text-lg font-semibold text-white">Écrire ou échanger</h2>
             <ul className="mt-4 space-y-3 text-base text-[#d1ddd5]">
               <li>
-                <a href="mailto:contact@sphorix-france.fr" className="inline-flex items-center gap-2.5 transition hover:text-[#d7f280]">
+                <a href="mailto:contact@sphorix.fr" className="inline-flex items-center gap-2.5 transition hover:text-[#d7f280]">
                   <Mail aria-hidden="true" size={18} />
-                  contact@sphorix-france.fr
+                  contact@sphorix.fr
                 </a>
               </li>
               <li>

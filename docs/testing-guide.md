@@ -223,7 +223,7 @@ Ce guide couvre tous les tests manuels et automatisés pour valider l'intégrati
   - [ ] 14 jours avant accès
   - [ ] 7 jours après accès pour défaut
 - [ ] Processus remboursement expliqué
-- [ ] Email de contact: contact@sphorix-france.fr
+- [ ] Email de contact: contact@sphorix.fr
 - [ ] FAQ section présente
 
 ---
